@@ -1,5 +1,6 @@
 import { Suspense } from 'react';
-// import 
+
+import styles from "../../styles/dashboard.module.css";
 
 /**
  * Dashboard page
@@ -13,6 +14,8 @@ export default function Page() {
     return (
         <section>
             <h1>Hello, Dashboard Page!</h1>
+            
+            <p className={styles.description}>This is the dashboard page description</p>
             
             {/* Feed */}
             <Suspense fallback={
