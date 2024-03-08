@@ -1,7 +1,7 @@
 'use client';
 
-import { authenticate } from "@/app/lib/actions";
-import { useFormState, useFormStatus } from 'react-dom';
+import { authenticate } from "@/app/lib/auth/login";
+import { useFormStatus } from 'react-dom';
 
 /**
  * Page
@@ -9,8 +9,6 @@ import { useFormState, useFormStatus } from 'react-dom';
  * @returns 
  */
 export default function Page() {
-    // const [errorMessage, dispatch] = useFormState(authenticate, undefined);
-    
     return (
         <form id="loginForm">
             <div>
@@ -39,16 +37,6 @@ function LoginButton() {
     
     const onClick = async (event: any) => {
         event.preventDefault();
-        
-        // const loginFormElement: HTMLElement | null = document.getElementById("loginForm");
-        
-        // // Unnecessary, how can I cast it
-        // if(!(loginFormElement instanceof HTMLFormElement) || !loginFormElement) {
-        //     console.error("Form element not found");
-        //     return;
-        // }
-        
-        // const loginForm = loginFormElement;
         
         const emailEl: any = document.getElementById("email");
         if(!emailEl) return console.error("No email element");
