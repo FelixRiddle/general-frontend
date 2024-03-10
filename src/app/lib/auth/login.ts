@@ -3,6 +3,8 @@
 import queryString from "query-string";
 import { cookies } from "next/headers";
 
+import API from "good-roots-ts-api/src/index";
+
 import { data } from "@/api/auth/user/data";
 import { login } from "@/api/auth/login";
 import LoginInputType from "@/types/auth/LoginInputType";
@@ -41,6 +43,9 @@ function getFirstCookieByName(name: string, response: Response) {
  */
 export async function authenticate(userData: LoginInputType) {
     try {
+        const auth = new API.ExpressAuthentication();
+        console.log(`Authentication api: `, auth);
+        
         console.log(`Data: `, userData);
         const loginResponse = await login(userData);
         
@@ -48,13 +53,22 @@ export async function authenticate(userData: LoginInputType) {
         const token = getFirstCookieByName('_token', loginResponse);
         console.log(`Token: '${token}'`);
         
+        // Narrow it down
+        if(!(typeof token === 'string')) {
+            console.log(`Token not found our couldn't be parsed`);
+            return;
+        }
+        
         // Get cookie
         const cookieStore = cookies();
+        cookieStore.set("_token", token);
         
         // Access protected endpoint
-        const dataResponse = await data();
-        console.log(`Data response: `, dataResponse);
-        console.log(`User data: `, dataResponse.body);
+        const dataResponse = await data(token);
+        
+        // Get response
+        const responseUserData = await dataResponse.json();
+        console.log(`User data: `, responseUserData);
         
     } catch(error: any) {
         console.error(error);
