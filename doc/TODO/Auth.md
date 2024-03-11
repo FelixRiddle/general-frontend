@@ -1,4 +1,6 @@
 # Authentication TODO
 
 - [x] Login
-- [ ] Store cookie
+    - [x] Store cookie
+    - [ ] Read cookie
+- [ ] Register

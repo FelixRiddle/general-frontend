@@ -4,11 +4,7 @@ import queryString from "query-string";
 import { cookies } from "next/headers";
 
 import API from "good-roots-ts-api/src/index";
-
-import { data } from "@/api/auth/user/data";
-import { login } from "@/api/auth/login";
 import LoginInputType from "@/types/auth/LoginInputType";
-import DataResultType from "@/types/auth/user/DataResultType";
 
 /**
  * Get the first of all cookies by a given name
@@ -36,39 +32,30 @@ function getFirstCookieByName(name: string, response: Response) {
 /**
  * Function to authenticate
  * 
- * A little redudant
- * 
- * @param _currentState 
  * @param formData 
  */
-export async function authenticate(userData: LoginInputType) {
+export async function login(userData: LoginInputType) {
     try {
-        const auth = new API.ExpressAuthentication();
-        console.log(`Authentication api: `, auth);
+        const api = new API.ExpressAuthentication();
+        console.log(`App api: `, api);
         
-        console.log(`Data: `, userData);
-        const loginResponse = await login(userData);
+        const authApi = api.authApi(userData);
+        console.log(`Auth api: `, authApi);
+        const loginResponse = await authApi.loginGetJwt();
+        console.log(`Login response: `, loginResponse);
         
-        // Get token
-        const token = getFirstCookieByName('_token', loginResponse);
-        console.log(`Token: '${token}'`);
-        
-        // Narrow it down
-        if(!(typeof token === 'string')) {
-            console.log(`Token not found our couldn't be parsed`);
-            return;
+        if(!loginResponse) {
+            throw Error("Login response, not given");
         }
         
         // Get cookie
         const cookieStore = cookies();
-        cookieStore.set("_token", token);
+        const tokenKeyword = "_token";
+        cookieStore.set(tokenKeyword, loginResponse.token);
         
-        // Access protected endpoint
-        const dataResponse = await data(token);
+        const token = cookieStore.get(tokenKeyword);
+        console.log(`Token from Next store: `, token);
         
-        // Get response
-        const responseUserData = await dataResponse.json();
-        console.log(`User data: `, responseUserData);
         
     } catch(error: any) {
         console.error(error);
