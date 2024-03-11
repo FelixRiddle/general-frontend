@@ -1,10 +1,5 @@
 'use server';
 
-import { cookies } from "next/headers";
-
-import { data } from "@/api/auth/user/data";
-import { login } from "@/api/auth/login";
-import LoginInputType from "@/types/auth/LoginInputType";
 import { RegisterInputType } from "good-roots-ts-api";
 import API from "good-roots-ts-api/src/index";
 

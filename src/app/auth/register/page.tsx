@@ -11,7 +11,7 @@ import { RegisterInputType } from "good-roots-ts-api"
  */
 export default function Register() {
     return (
-        <form id="loginForm">
+        <form>
             <div>
                 <label htmlFor="name">Name</label>
                 <input type="text" id="name" name="name" placeholder="Name" required />
@@ -76,7 +76,7 @@ function LoginButton() {
     
     return (
         <button aria-disabled={pending} type="submit" onClick={onClick}>
-            Login
+            Register
         </button>
     );
 }
