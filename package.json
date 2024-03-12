@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "cookie-parser": "^1.4.6",
-        "good-roots-ts-api": "github:FelixRiddle/good-roots-ts-api",
+        "felixriddle.good-roots-ts-api": "^1.0.1",
         "next": "14.1.0",
         "query-string": "^9.0.0",
         "react": "^18",

@@ -2,7 +2,8 @@
 
 import { register } from '@/app/lib/auth/register';
 import { useFormStatus } from 'react-dom';
-import { RegisterInputType } from "good-roots-ts-api"
+import styles from "./styles.module.css";
+import { RegisterInputType } from 'felixriddle.good-roots-ts-api';
 
 /**
  * Register
@@ -10,29 +11,42 @@ import { RegisterInputType } from "good-roots-ts-api"
  * @returns 
  */
 export default function Register() {
+    const inputTailwindClasses = "rounded";
+    
     return (
         <form>
-            <div>
-                <label htmlFor="name">Name</label>
-                <input type="text" id="name" name="name" placeholder="Name" required />
-            </div>
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required />
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password"
-                    name="password" placeholder="Password" required />
-            </div>
-            <div>
-                <label htmlFor="confirmPassword">Confirm password</label>
-                <input type="password" id="confirmPassword"
-                    name="confirmPassword" placeholder="Confirm password" required />
+            <div className={`${styles.container} ${styles.general}`}>
+                <h1>Register</h1>
+                <p>Fill this formulary to create an account.</p>
+                <hr className={`${styles.hr} ${styles.general}`} />
+                
+                <div>
+                    <label htmlFor="name">Name</label>
+                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="text" id="name" name="name" placeholder="Name" required />
+                </div>
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="email" id="email" name="email" placeholder="Email" required />
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="password" id="password"
+                        name="password" placeholder="Password" required />
+                </div>
+                <div>
+                    <label htmlFor="confirmPassword">Confirm password</label>
+                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="password" id="confirmPassword"
+                        name="confirmPassword" placeholder="Confirm password" required />
+                </div>
+                <hr className={`${styles.hr} ${styles.general}`} />
+                
+                {/* Button */}
+                <RegisterButton />
             </div>
             
-            {/* Button */}
-            <LoginButton />
+            <div className={`${styles.container} ${styles.signin}`}>
+                <p>Already have an account? <a className={`${styles.link}`} href="/auth/login">Sign in</a></p>
+            </div>
         </form>
     );
 }
@@ -40,7 +54,7 @@ export default function Register() {
 /**
  * Login button
  */
-function LoginButton() {
+function RegisterButton() {
     const { pending } = useFormStatus();
     
     const onClick = async (event: any) => {
@@ -75,7 +89,9 @@ function LoginButton() {
     }
     
     return (
-        <button aria-disabled={pending} type="submit" onClick={onClick}>
+        <button
+            className={`${styles.registerBtn} bg-slate-800 p-3 m-1 hover:bg-slate-500 rounded`}
+            aria-disabled={pending} type="submit" onClick={onClick}>
             Register
         </button>
     );

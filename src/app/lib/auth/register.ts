@@ -1,7 +1,6 @@
 'use server';
 
-import { RegisterInputType } from "good-roots-ts-api";
-import API from "good-roots-ts-api/src/index";
+import API, { RegisterInputType } from "felixriddle.good-roots-ts-api";
 
 /**
  * Function to authenticate

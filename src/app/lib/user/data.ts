@@ -2,7 +2,7 @@
 'use server';
 
 import UserData from "@/types/UserData";
-import ExpressAuthentication from "good-roots-ts-api/src/api/auth/ExpressAuthentication";
+import API from "felixriddle.good-roots-ts-api";
 import { cookies } from "next/headers";
 
 /**
@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
  */
 export default async function userDataRoute(): Promise<UserData | undefined> {
     try {
-        const api = new ExpressAuthentication();
+        const api = new API.ExpressAuthentication();
         
         const cookieStore = cookies();
         const userCookie = cookieStore.get("_token");

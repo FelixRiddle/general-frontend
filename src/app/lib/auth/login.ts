@@ -3,7 +3,7 @@
 import queryString from "query-string";
 import { cookies } from "next/headers";
 
-import API from "good-roots-ts-api/src/index";
+import API from "felixriddle.good-roots-ts-api";
 import LoginInputType from "@/types/auth/LoginInputType";
 
 /**
