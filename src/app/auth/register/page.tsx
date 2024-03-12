@@ -1,9 +1,11 @@
 'use client';
 
-import { register } from '@/app/lib/auth/register';
 import { useFormStatus } from 'react-dom';
-import styles from "./styles.module.css";
+
+import { register } from '@/app/lib/auth/register';
 import { RegisterInputType } from 'felixriddle.good-roots-ts-api';
+import { buttonClasses, formAlternativeFormsContainerClasses,
+    formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
 
 /**
  * Register
@@ -11,41 +13,39 @@ import { RegisterInputType } from 'felixriddle.good-roots-ts-api';
  * @returns 
  */
 export default function Register() {
-    const inputTailwindClasses = "rounded";
-    
     return (
         <form>
-            <div className={`${styles.container} ${styles.general}`}>
-                <h1>Register</h1>
-                <p>Fill this formulary to create an account.</p>
-                <hr className={`${styles.hr} ${styles.general}`} />
+            <div className={formContainerClasses}>
+                <h1>Login</h1>
+                <p>Login formulary</p>
+                <hr className={hrClasses} />
                 
                 <div>
                     <label htmlFor="name">Name</label>
-                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="text" id="name" name="name" placeholder="Name" required />
+                    <input className={fullwidthInputClasses} type="text" id="name" name="name" placeholder="Name" required />
                 </div>
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="email" id="email" name="email" placeholder="Email" required />
+                    <input className={fullwidthInputClasses} type="email" id="email" name="email" placeholder="Email" required />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
-                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="password" id="password"
+                    <input className={fullwidthInputClasses} type="password" id="password"
                         name="password" placeholder="Password" required />
                 </div>
                 <div>
                     <label htmlFor="confirmPassword">Confirm password</label>
-                    <input className={`${styles.fullWidthInput} ${inputTailwindClasses}`} type="password" id="confirmPassword"
+                    <input className={fullwidthInputClasses} type="password" id="confirmPassword"
                         name="confirmPassword" placeholder="Confirm password" required />
                 </div>
-                <hr className={`${styles.hr} ${styles.general}`} />
+                <hr className={hrClasses} />
                 
                 {/* Button */}
                 <RegisterButton />
             </div>
             
-            <div className={`${styles.container} ${styles.signin}`}>
-                <p>Already have an account? <a className={`${styles.link}`} href="/auth/login">Sign in</a></p>
+            <div className={formAlternativeFormsContainerClasses}>
+                <p>Already have an account? <a className={linkClasses} href="/auth/login">Sign in</a></p>
             </div>
         </form>
     );
@@ -90,7 +90,7 @@ function RegisterButton() {
     
     return (
         <button
-            className={`${styles.registerBtn} bg-slate-800 p-3 m-1 hover:bg-slate-500 rounded`}
+            className={buttonClasses}
             aria-disabled={pending} type="submit" onClick={onClick}>
             Register
         </button>

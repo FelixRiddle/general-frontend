@@ -3,6 +3,8 @@
 import { useFormStatus } from 'react-dom';
 
 import { login } from "@/app/lib/auth/login";
+import { buttonClasses, formAlternativeFormsContainerClasses,
+    formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
 
 /**
  * Page
@@ -11,18 +13,30 @@ import { login } from "@/app/lib/auth/login";
  */
 export default function Page() {
     return (
-        <form id="loginForm">
-            <div>
-                <label htmlFor="email">Email</label>
-                <input type="email" id="email" name="email" placeholder="Email" required />
-            </div>
-            <div>
-                <label htmlFor="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password" required />
+        <form>
+            <div className={formContainerClasses}>
+                <h1>Register</h1>
+                <p>Fill this formulary to create an account.</p>
+                <hr className={hrClasses} />
+                
+                <div>
+                    <label htmlFor="email">Email</label>
+                    <input className={fullwidthInputClasses} type="email" id="email" name="email" placeholder="Email" required />
+                </div>
+                <div>
+                    <label htmlFor="password">Password</label>
+                    <input className={fullwidthInputClasses} type="password" id="password"
+                        name="password" placeholder="Password" required />
+                </div>
+                <hr className={hrClasses} />
+                
+                {/* Button */}
+                <LoginButton />
             </div>
             
-            {/* Button */}
-            <LoginButton />
+            <div className={formAlternativeFormsContainerClasses}>
+                <p>Already have an account? <a className={linkClasses} href="/auth/login">Sign in</a></p>
+            </div>
         </form>
     );
 }
@@ -57,7 +71,7 @@ function LoginButton() {
     }
     
     return (
-        <button aria-disabled={pending} type="submit" onClick={onClick}>
+        <button aria-disabled={pending} type="submit" onClick={onClick} className={buttonClasses}>
             Login
         </button>
     )

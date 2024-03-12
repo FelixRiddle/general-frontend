@@ -15,12 +15,12 @@
     margin: 5px 0 22px 0;
     display: inline-block;
     border: none;
-    background: #f1f1f1;
+    /* background: #f1f1f1; */
 }
 
 /* input[type=text]:focus, input[type=password]:focus { */
 .fullWidthInput:focus {
-    background-color: #ddd;
+    /* background-color: #ddd; */
     outline: none;
 }
 
@@ -31,7 +31,7 @@
 }
 
 /* Set a style for the submit/register button */
-.registerbtn {
+.button {
     background-color: #04AA6D;
     color: white;
     padding: 16px 20px;

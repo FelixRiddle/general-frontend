@@ -1,7 +1,7 @@
 'use server';
 
 import userDataRoute from "@/app/lib/user/data";
-import UserData from "good-roots-ts-api/src/types/UserData";
+import { UserData } from "felixriddle.good-roots-ts-api";
 import Link from "next/link";
 import React, { useEffect } from "react";
 
