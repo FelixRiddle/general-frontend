@@ -1,7 +1,5 @@
 'use client';
 
-import { useFormStatus } from 'react-dom';
-
 import { login } from "@/app/api/auth/login";
 import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
@@ -19,6 +17,7 @@ export default function Page() {
                 <p>Log in to an existing account</p>
                 <hr className={hrClasses} />
                 
+                {/* Remember to use this instead */}
                 <div>
                     <label htmlFor="email">Email</label>
                     <input className={fullwidthInputClasses} type="email" id="email" name="email" placeholder="Email" required />
@@ -45,11 +44,8 @@ export default function Page() {
  * Login button
  */
 function LoginButton() {
-    const { pending } = useFormStatus();
-    
     const onClick = async (event: any) => {
         event.preventDefault();
-        console.log(`User trying to login`);
         
         const emailEl: any = document.getElementById("email");
         if(!emailEl) return console.error("No email element");
@@ -72,7 +68,7 @@ function LoginButton() {
     }
     
     return (
-        <button aria-disabled={pending} type="submit" onClick={onClick} className={buttonClasses}>
+        <button type="submit" onClick={onClick} className={buttonClasses}>
             Login
         </button>
     )

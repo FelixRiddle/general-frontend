@@ -2,7 +2,7 @@
 
 - [x] Login
     - [x] Store cookie
-    - [ ] Read cookie
+    - [x] Read cookie
 - [x] Register
 
 # User routes

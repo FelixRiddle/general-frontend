@@ -12,13 +12,11 @@ import LoginInputType from "@/types/auth/LoginInputType";
  */
 export async function login(userData: LoginInputType) {
     try {
-        console.log(`Login function`);
         
         const api = new API.ExpressAuthentication();
         
         const authApi = api.authApi(userData);
         const loginResponse = await authApi.loginGetJwt();
-        console.log(`Login response: `, loginResponse);
         
         if(!loginResponse) {
             throw Error("Login response, not given");
@@ -34,8 +32,8 @@ export async function login(userData: LoginInputType) {
         const tokenKeyword = "_token";
         cookieStore.set(tokenKeyword, loginResponse.token);
         
-        const token = cookieStore.get(tokenKeyword);
-        console.log(`Token from Next store: `, token);
+        // const token = cookieStore.get(tokenKeyword);
+        // console.log(`Token from Next store: `, token);
     } catch(error: any) {
         console.log(`Error when trying to log in`);
         console.error(error);

@@ -24,7 +24,6 @@ export default async function userDataRoute(): Promise<UserData | undefined> {
         
         const authApi = await api.userApi(token);
         const userData = authApi.userData;
-        console.log(`Got user: `, userData);
         
         return userData;
     } catch(err) {
