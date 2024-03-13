@@ -3,10 +3,10 @@
 /* .lia {
     display: inline;
     color: #000;
-}
+} */
 
 /* Change the link color on hover */
-.lia:hover {
+/* .lia:hover {
     background-color: #ff3aa3;
     color: white;
 }
@@ -14,5 +14,4 @@
 .lia:active {
     background-color: #ff0084;
     color: white;
-}
- */
+} */
