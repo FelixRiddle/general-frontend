@@ -1,33 +1,9 @@
 'use server';
 
-import queryString from "query-string";
 import { cookies } from "next/headers";
 
 import API from "felixriddle.good-roots-ts-api";
 import LoginInputType from "@/types/auth/LoginInputType";
-
-/**
- * Get the first of all cookies by a given name
- * 
- * Utility because getting a cookie involes so many turns
- * 
- * @param name 
- * @param request 
- */
-function getFirstCookieByName(name: string, response: Response) {
-    const headers: Headers = response.headers;
-    
-    // Al these turns to get a single cookie
-    const headerCookies = headers.getSetCookie();
-    if(headerCookies.length === 0) {
-        throw Error("No cookie received");
-    }
-    const unparsedCookie = headerCookies[0].split(";")[0];
-    const cookieParsed = queryString.parse(unparsedCookie);
-    const cookie = cookieParsed[name];
-    
-    return cookie;
-}
 
 /**
  * Function to authenticate
@@ -36,10 +12,13 @@ function getFirstCookieByName(name: string, response: Response) {
  */
 export async function login(userData: LoginInputType) {
     try {
+        console.log(`Login function`);
+        
         const api = new API.ExpressAuthentication();
         
         const authApi = api.authApi(userData);
         const loginResponse = await authApi.loginGetJwt();
+        console.log(`Login response: `, loginResponse);
         
         if(!loginResponse) {
             throw Error("Login response, not given");
@@ -58,6 +37,7 @@ export async function login(userData: LoginInputType) {
         const token = cookieStore.get(tokenKeyword);
         console.log(`Token from Next store: `, token);
     } catch(error: any) {
+        console.log(`Error when trying to log in`);
         console.error(error);
         
         if (error) {

@@ -2,7 +2,7 @@
 
 import { useFormStatus } from 'react-dom';
 
-import { login } from "@/app/lib/auth/login";
+import { login } from "@/app/api/auth/login";
 import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
 
@@ -49,6 +49,7 @@ function LoginButton() {
     
     const onClick = async (event: any) => {
         event.preventDefault();
+        console.log(`User trying to login`);
         
         const emailEl: any = document.getElementById("email");
         if(!emailEl) return console.error("No email element");

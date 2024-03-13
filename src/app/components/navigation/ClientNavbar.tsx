@@ -37,7 +37,7 @@ export default async function ClientNavbar({
                 </div>
             ) || (
                 <div>
-                    <span>Welcome {user.name}</span>
+                    <span>Welcome {user && user.name}</span>
                 </div>
             )}
         </span>

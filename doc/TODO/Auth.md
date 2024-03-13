@@ -3,4 +3,8 @@
 - [x] Login
     - [x] Store cookie
     - [ ] Read cookie
-- [ ] Register
+- [x] Register
+
+# User routes
+
+- [x] Get user data

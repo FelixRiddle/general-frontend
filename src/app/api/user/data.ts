@@ -16,14 +16,17 @@ export default async function userDataRoute(): Promise<UserData | undefined> {
         const userCookie = cookieStore.get("_token");
         
         if(!userCookie) {
+            console.log(`No user cookie found!`);
             return undefined;
         }
         
         const token = userCookie.value;
         
         const authApi = await api.userApi(token);
+        const userData = authApi.userData;
+        console.log(`Got user: `, userData);
         
-        return authApi.userData;
+        return userData;
     } catch(err) {
         console.error(err);
         return undefined;
