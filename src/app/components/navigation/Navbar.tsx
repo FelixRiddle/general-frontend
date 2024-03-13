@@ -4,6 +4,7 @@ import userDataRoute from "@/app/lib/user/data";
 import { UserData } from "felixriddle.good-roots-ts-api";
 import Link from "next/link";
 import React, { useEffect } from "react";
+import styles from "@/tailwindStyles/index";
 
 /**
  * Get authenticated user data
@@ -40,14 +41,21 @@ export default async function Navbar() {
     return (
         <nav className="flex">
             {!user && (
-                <span>
-                    <Link href="/auth/login">Login</Link>
-                    <Link href="/auth/register">Register</Link>
-                </span>
+                <div>
+                    <ul className={styles.navbarUlClasses}>
+                        <li className={styles.navbar_liaClasses}>
+                            <Link className={styles.navLinkClasses} href="/auth/login">Login</Link>
+                        </li>
+                        
+                        <li className={styles.navbar_liaClasses}>
+                            <Link className={styles.navLinkClasses} href="/auth/register">Register</Link>
+                        </li>
+                    </ul>
+                </div>
             ) || (
-                <span>
+                <div>
                     <span>Welcome {user.name}</span>
-                </span>
+                </div>
             )}
         </nav>
     );

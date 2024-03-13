@@ -15,8 +15,8 @@ export default function Page() {
     return (
         <form>
             <div className={formContainerClasses}>
-                <h1>Register</h1>
-                <p>Fill this formulary to create an account.</p>
+                <h1>Login</h1>
+                <p>Log in to an existing account</p>
                 <hr className={hrClasses} />
                 
                 <div>

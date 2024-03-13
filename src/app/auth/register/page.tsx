@@ -16,8 +16,8 @@ export default function Register() {
     return (
         <form>
             <div className={formContainerClasses}>
-                <h1>Login</h1>
-                <p>Login formulary</p>
+                <h1>Register</h1>
+                <p>Fill this formulary to create an account.</p>
                 <hr className={hrClasses} />
                 
                 <div>

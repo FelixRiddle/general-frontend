@@ -37,26 +37,26 @@ function getFirstCookieByName(name: string, response: Response) {
 export async function login(userData: LoginInputType) {
     try {
         const api = new API.ExpressAuthentication();
-        console.log(`App api: `, api);
         
         const authApi = api.authApi(userData);
-        console.log(`Auth api: `, authApi);
         const loginResponse = await authApi.loginGetJwt();
-        console.log(`Login response: `, loginResponse);
         
         if(!loginResponse) {
             throw Error("Login response, not given");
         }
         
         // Get cookie
+        if(!loginResponse.token) {
+            console.log(`Couldn't log in`);
+            return loginResponse;
+        }
+        
         const cookieStore = cookies();
         const tokenKeyword = "_token";
         cookieStore.set(tokenKeyword, loginResponse.token);
         
         const token = cookieStore.get(tokenKeyword);
         console.log(`Token from Next store: `, token);
-        
-        
     } catch(error: any) {
         console.error(error);
         
