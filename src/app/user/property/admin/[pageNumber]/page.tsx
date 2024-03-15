@@ -1,28 +1,30 @@
 'use server';
 
+import Link from "next/link";
+import { redirect } from "next/navigation";
+
 import PageTitle from "@/app/components/PageTitle";
 import Navbar from "@/app/components/navigation/Navbar";
-import Link from "next/link";
 
 /**
  * Admin page
  * 
  * @returns 
  */
-export default async function Admin({ params }: { params: { slug: string } }) {
+export default async function Admin({ params }: { params: { pageNumber: string } }) {
     console.log(`Params: `, params);
     
     const properties = [];
     // Query parameters
-    // const { page } = req.query;
+    const pageNumber = params.pageNumber;
     const pageExpression = /^[0-9]$/;
     
-    // // Check that validation passes
-    // if(!pageExpression.test(page)) {
-    //     // Show the first page then
-    //     console.log(`Didn't pass expression validation, redirecting to first page!`);
-    //     return res.redirect(`/user/property/admin?page=1`);
-    // }
+    // Check that validation passes
+    if(!pageExpression.test(pageNumber)) {
+        // Show the first page then
+        console.log(`Didn't pass expression validation, redirecting to first page!`);
+        redirect(`/user/property/admin`);
+    }
     
     // // User data
     // const { id: userId } = req.user;
