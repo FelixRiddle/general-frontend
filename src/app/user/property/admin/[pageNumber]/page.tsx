@@ -1,10 +1,11 @@
 'use server';
 
 import Link from "next/link";
-import { redirect } from "next/navigation";
 
 import PageTitle from "@/app/components/PageTitle";
 import Navbar from "@/app/components/navigation/Navbar";
+import { pageNumberOrRedirectTo } from "@/lib/router/path/pageNumber";
+import { userVanguard } from "@/lib/router/userVanguard";
 
 /**
  * Admin page
@@ -12,19 +13,17 @@ import Navbar from "@/app/components/navigation/Navbar";
  * @returns 
  */
 export default async function Admin({ params }: { params: { pageNumber: string } }) {
+    // Get user or redirect somewhere else, this is private property.
+    const user = await userVanguard();
+    
     console.log(`Params: `, params);
     
     const properties = [];
-    // Query parameters
-    const pageNumber = params.pageNumber;
-    const pageExpression = /^[0-9]$/;
     
-    // Check that validation passes
-    if(!pageExpression.test(pageNumber)) {
-        // Show the first page then
-        console.log(`Didn't pass expression validation, redirecting to first page!`);
-        redirect(`/user/property/admin`);
-    }
+    const failureRedirect = `/user/property/admin`;
+    
+    // Get page number
+    const pageNumber = pageNumberOrRedirectTo(params, failureRedirect);
     
     // // User data
     // const { id: userId } = req.user;

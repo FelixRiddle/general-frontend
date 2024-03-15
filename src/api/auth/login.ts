@@ -15,8 +15,8 @@ export async function login(userData: LoginInputType) {
         
         const api = new API.ExpressAuthentication();
         
-        const authApi = api.authApi(userData);
-        const loginResponse = await authApi.loginGetJwt();
+        const authApi = api.authApi();
+        const loginResponse = await authApi.loginGetJwt(userData);
         
         if(!loginResponse) {
             throw Error("Login response, not given");

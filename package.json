@@ -10,7 +10,7 @@
     },
     "dependencies": {
         "cookie-parser": "^1.4.6",
-        "felixriddle.good-roots-ts-api": "^1.0.1",
+        "felixriddle.good-roots-ts-api": "^1.0.5",
         "next": "14.1.0",
         "query-string": "^9.0.0",
         "react": "^18",

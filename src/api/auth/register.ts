@@ -11,9 +11,9 @@ export async function register(userData: RegisterInputType) {
         const api = new API.ExpressAuthentication();
         console.log(`Express authentication API: `, api);
         
-        const authApi = api.authApi(userData);
+        const authApi = api.authApi();
         
-        const registerResponse = await authApi.registerUser();
+        const registerResponse = await authApi.registerUser(userData);
         console.log(`Register: `, registerResponse);
         
         return registerResponse;

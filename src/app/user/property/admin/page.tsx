@@ -2,6 +2,7 @@
 
 import PageTitle from "@/app/components/PageTitle";
 import Navbar from "@/app/components/navigation/Navbar";
+import { userVanguard } from "@/lib/router/userVanguard";
 
 /**
  * Admin page
@@ -9,9 +10,11 @@ import Navbar from "@/app/components/navigation/Navbar";
  * @returns 
  */
 export default async function Admin() {
+    const user = await userVanguard();
+    
     return (
         <div>
-            <Navbar />
+            <Navbar userData={user} />
             <PageTitle />
             
             <div>Admin page</div>

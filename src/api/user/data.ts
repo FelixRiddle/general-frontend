@@ -1,14 +1,13 @@
 // Get user data endpoint
 'use server';
 
-import UserData from "@/types/UserData";
-import API from "felixriddle.good-roots-ts-api";
+import API, { CompleteUserData } from "felixriddle.good-roots-ts-api";
 import { cookies } from "next/headers";
 
 /**
  * Get user data
  */
-export default async function userDataRoute(): Promise<UserData | undefined> {
+export default async function userDataRoute(): Promise<CompleteUserData | undefined> {
     try {
         const api = new API.ExpressAuthentication();
         
@@ -22,8 +21,8 @@ export default async function userDataRoute(): Promise<UserData | undefined> {
         
         const token = userCookie.value;
         
-        const authApi = await api.userApi(token);
-        const userData = authApi.userData;
+        const userAPI = await api.userApi(token);
+        const userData: CompleteUserData = await userAPI.getUserData();
         
         return userData;
     } catch(err) {

@@ -1,38 +1,21 @@
 'use server';
 
-import { UserData } from "felixriddle.good-roots-ts-api";
+import { CompleteUserData } from "felixriddle.good-roots-ts-api";
 import userDataRoute from "@/api/user/data";
 import ClientNavbar from "./ClientNavbar";
 
 /**
- * Get authenticated user data
- */
-async function getUserData(): Promise<UserData | undefined> {
-    
-    const userData = await userDataRoute()
-        .then((userData) => {
-            return userData;
-        })
-        .catch((err) => {
-            console.error(err);
-            return undefined;
-        });
-    
-    return userData;
-}
-
-/**
  * Navbar
  */
-export default async function Navbar() {
-    let user = undefined;
-    
+export default async function Navbar({ userData }: { userData?: CompleteUserData | undefined }) {
+    // You may give the user, so there's no need to make two requests
+    let user = userData;
     if(!user) {
         // Get authenticated user
-        const userData = await getUserData();
+        const newUserData = await userDataRoute();
         
-        if(userData) {
-            user = userData;
+        if(newUserData) {
+            user = newUserData;
         }
     }
     
