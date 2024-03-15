@@ -9,7 +9,7 @@ import { UserData } from "felixriddle.good-roots-ts-api";
 /**
  * Navbar
  */
-export default async function ClientNavbar({
+export default function ClientNavbar({
     user
 }: Readonly<{
     user: UserData | undefined;
@@ -38,6 +38,19 @@ export default async function ClientNavbar({
             ) || (
                 <div>
                     <span>Welcome {user && user.name}</span>
+                    
+                    {/* User navbar */}
+                    <ul className={styles.navbarUlClasses}>
+                        <li className={styles.navbar_liaClasses}>
+                            <Link className={`${pathname === "/user" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
+                                href="/user">Profile</Link>
+                        </li>
+                        
+                        <li className={styles.navbar_liaClasses}>
+                            <Link className={`${pathname === "/user/property/admin" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
+                                href="/user/property/admin">My properties</Link>
+                        </li>
+                    </ul>
                 </div>
             )}
         </span>
