@@ -2,7 +2,7 @@
 
 import { useFormStatus } from 'react-dom';
 
-import { register } from '@/app/api/auth/register';
+import { register } from '@/api/auth/register';
 import { RegisterInputType } from 'felixriddle.good-roots-ts-api';
 import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';

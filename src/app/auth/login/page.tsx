@@ -1,6 +1,6 @@
 'use client';
 
-import { login } from "@/app/api/auth/login";
+import { login } from "@/api/auth/login";
 import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
 

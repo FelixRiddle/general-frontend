@@ -1,22 +1,25 @@
 
-// /**
-//  * 
-//  * 
-//  * @param param0 
-//  * @returns 
-//  */
-// export default function ClientAdmin({
+/**
+ * 
+ * 
+ * @param param0 
+ * @returns 
+ */
+export default function ClientAdmin(
+//     {
 //     properties
 // }: {
 //     properties: 
-// }) {
-//     return (
-//         <div>
-//         {/* //     if properties && properties.length
-//         //         include ../../components/property/property-list/index
-//         //     else
-//         //         p.text-center There are no properties */}
-            
-//         </div>
-//     );
 // }
+) {
+    return (
+        <div>
+            <p>Client admin</p>
+        {/* //     if properties && properties.length
+        //         include ../../components/property/property-list/index
+        //     else
+        //         p.text-center There are no properties */}
+            
+        </div>
+    );
+}

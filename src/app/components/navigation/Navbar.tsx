@@ -1,7 +1,7 @@
 'use server';
 
 import { UserData } from "felixriddle.good-roots-ts-api";
-import userDataRoute from "@/app/api/user/data";
+import userDataRoute from "@/api/user/data";
 import ClientNavbar from "./ClientNavbar";
 
 /**
