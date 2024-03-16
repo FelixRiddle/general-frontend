@@ -57,12 +57,15 @@ function LoginButton() {
             email: emailEl.value,
             password: passwordEl.value,
         }
+        console.log(`User data: `, userData);
         
         await login(userData)
             .then((res) => {
                 console.log(`Success`);
+                console.log(`Response: `, res);
             })
             .catch((err) => {
+                console.log(`Error when trying to log in(1).`);
                 console.error(err);
             });
     }

@@ -11,13 +11,19 @@ export default async function Navbar({ userData }: { userData?: CompleteUserData
     // You may give the user, so there's no need to make two requests
     let user = userData;
     if(!user) {
-        // Get authenticated user
-        const newUserData = await userDataRoute();
-        
-        if(newUserData) {
-            user = newUserData;
+        try {
+            // Get authenticated user
+            const newUserData = await userDataRoute();
+            
+            if(newUserData) {
+                user = newUserData;
+            }
+        } catch(err) {
+            // This can fail.
+            console.error("Error in the frontend: ", err);
         }
     }
+    console.log(`User found: `, user);
     
     return (
         <nav className="flex">
