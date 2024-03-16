@@ -33,12 +33,12 @@ export default async function Admin({ params }: { params: { pageNumber: string }
     const properties = pageData.properties;
     const { pages, currentPage, limit, offset, total } = pageData;
     
+    console.log(`First property: `, properties[0]);
     const pagesComponents = () => {
         let components = [];
         for(let n = 1; n <= pages; n++) {
-            // const pageComponentNumber = n + 1;
             components.push(
-                <div>
+                <div key={n}>
                     <a href={`/user/property/admin/${n}`}
                         className={`${currentPage == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'} relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
                     >
@@ -68,7 +68,7 @@ export default async function Admin({ params }: { params: { pageNumber: string }
                         {properties.map((property) => {
                             
                             return (
-                                <li>
+                                <li key={property.id}>
                                     <PropertyRow property={property} />
                                 </li>
                             );
