@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 
 import styles from "@/tailwindStyles/index";
 import { UserData } from "felixriddle.good-roots-ts-api";
+import logout from "@/api/auth/logout";
 
 /**
  * Navbar
@@ -18,6 +19,13 @@ export default function ClientNavbar({
     
     const activeLoginClasses = pathname === "/auth/login" ? styles.navbar_liaActiveClasses : "";
     const activeRegisterClasses = pathname === "/auth/register" ? styles.navbar_liaActiveClasses : "";
+    
+    // When logout is clicked, remove the token cookie
+    const logoutOnClick = (event: any) => {
+        event.preventDefault();
+        
+        const res = logout();
+    }
     
     return (
         <span className="flex">
@@ -49,6 +57,10 @@ export default function ClientNavbar({
                         <li className={styles.navbar_liaClasses}>
                             <Link className={`${pathname === "/user/property/admin" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
                                 href="/user/property/admin">My properties</Link>
+                        </li>
+                        
+                        <li className={styles.navbar_liaClasses}>
+                            <a className={styles.navbar_liaClasses} onClick={logoutOnClick}>Logout</a>
                         </li>
                     </ul>
                 </div>

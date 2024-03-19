@@ -22,6 +22,7 @@
     "include": [
         "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts",
         // I couldn't make it work because I forgot to put *
+        // WARNING: This doesn't work, the project was built and then published to npm
         "node_modules/good-roots-ts-api/**/*.ts"
     ],
     "exclude": ["node_modules"]
