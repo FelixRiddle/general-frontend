@@ -1,6 +1,7 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
+import { useState } from 'react';
 
 import { register } from '@/api/auth/register';
 import { RegisterInputType, Status } from 'felixriddle.good-roots-ts-api';
@@ -8,7 +9,6 @@ import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
 import RegisterResultType from '@/types/auth/RegisterResultType';
 import StatusMessage from '@/app/components/feedback/StatusMessage/StatusMessage';
-import { SetStateAction, useState } from 'react';
 
 /**
  * Field status messages
@@ -123,6 +123,7 @@ export default function RegisterClient() {
         setFieldMessages(newfieldMessages);
     }
     
+    // Not gonna lie, this looks kinda... ABSTRACTABLE
     return (
         <form>
             <div className={formContainerClasses}>
@@ -198,16 +199,16 @@ function RegisterButton({ resultCb }: { resultCb: (res: RegisterResultType | und
         console.log(`Register was clicked`);
         event.preventDefault();
         
-        const nameEl: any = document.getElementById("name");
+        const nameEl = document.getElementById("name") as HTMLInputElement;
         if(!nameEl) return console.error("No name element");
         
-        const emailEl: any = document.getElementById("email");
+        const emailEl = document.getElementById("email") as HTMLInputElement;
         if(!emailEl) return console.error("No email element");
         
-        const passwordEl: any = document.getElementById("password");
+        const passwordEl = document.getElementById("password") as HTMLInputElement;
         if(!passwordEl) return console.error("No password element");
         
-        const confirmPasswordEl: any = document.getElementById("confirmPassword");
+        const confirmPasswordEl = document.getElementById("confirmPassword") as HTMLInputElement;
         if(!confirmPasswordEl) return console.error("No confirm password element");
         
         const userData: RegisterInputType = {
