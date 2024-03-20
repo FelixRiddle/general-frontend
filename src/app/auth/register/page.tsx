@@ -6,6 +6,7 @@ import { register } from '@/api/auth/register';
 import { RegisterInputType } from 'felixriddle.good-roots-ts-api';
 import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
+import RegisterResultType from '@/types/auth/RegisterResultType';
 
 /**
  * Register
@@ -13,6 +14,15 @@ import { buttonClasses, formAlternativeFormsContainerClasses,
  * @returns 
  */
 export default function Register() {
+    const resultCb = (registerResult: RegisterResultType | undefined) => {
+        if(!registerResult) {
+            console.error(`Something went wrong!`);
+            return;
+        }
+        
+        console.log(`(Cb)Register result: `, registerResult);
+    }
+    
     return (
         <form>
             <div className={formContainerClasses}>
@@ -41,7 +51,8 @@ export default function Register() {
                 <hr className={hrClasses} />
                 
                 {/* Button */}
-                <RegisterButton />
+                {/* <RegisterButton resultCb={resultCb} /> */}
+                <RegisterButtonA />
             </div>
             
             <div className={formAlternativeFormsContainerClasses}>
@@ -54,7 +65,7 @@ export default function Register() {
 /**
  * Login button
  */
-function RegisterButton() {
+function RegisterButtonA() {
     const { pending } = useFormStatus();
     
     const onClick = async (event: any) => {
@@ -82,16 +93,78 @@ function RegisterButton() {
         await register(userData)
             .then((res) => {
                 console.log(`Success`);
+                return res;
             })
             .catch((err) => {
                 console.error(err);
+                return undefined;
             });
     }
     
     return (
         <button
             className={buttonClasses}
-            aria-disabled={pending} type="submit" onClick={onClick}>
+            aria-disabled={pending}
+            type="submit"
+            onClick={onClick}
+        >
+            Register
+        </button>
+    );
+}
+
+/**
+ * Login button
+ */
+function RegisterButton({ resultCb }: { resultCb: (res: RegisterResultType | undefined) => void }) {
+    const { pending } = useFormStatus();
+    
+    const onClick = async (event: any) => {
+        console.log(`Register was clicked`);
+        event.preventDefault();
+        
+        const nameEl: any = document.getElementById("name");
+        if(!nameEl) return console.error("No name element");
+        
+        const emailEl: any = document.getElementById("email");
+        if(!emailEl) return console.error("No email element");
+        
+        const passwordEl: any = document.getElementById("password");
+        if(!passwordEl) return console.error("No password element");
+        
+        const confirmPasswordEl: any = document.getElementById("confirmPassword");
+        if(!confirmPasswordEl) return console.error("No confirm password element");
+        
+        const userData: RegisterInputType = {
+            name: nameEl.value,
+            email: emailEl.value,
+            password: passwordEl.value,
+            confirmPassword: confirmPasswordEl.value,
+        };
+        
+        console.log(`Registering user`);
+        const registerResult = await register(userData)
+            .then((res) => {
+                console.log(`Success`);
+                return res;
+            })
+            .catch((err) => {
+                console.error(err);
+                return undefined;
+            });
+        
+        console.log(`Register result: `, registerResult);
+        
+        resultCb(registerResult);
+    }
+    
+    return (
+        <button
+            className={buttonClasses}
+            aria-disabled={pending}
+            type="submit"
+            onClick={onClick}
+        >
             Register
         </button>
     );

@@ -59,7 +59,7 @@ function LoginButton() {
         }
         console.log(`User data: `, userData);
         
-        await login(userData)
+        const result = await login(userData)
             .then((res) => {
                 console.log(`Success`);
                 console.log(`Response: `, res);
@@ -68,6 +68,8 @@ function LoginButton() {
                 console.log(`Error when trying to log in(1).`);
                 console.error(err);
             });
+        
+        console.log(`Result: `, result);
     }
     
     return (

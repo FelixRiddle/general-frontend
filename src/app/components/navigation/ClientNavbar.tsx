@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 import styles from "@/tailwindStyles/index";
-import { UserData } from "felixriddle.good-roots-ts-api";
+import { CompleteUserData } from "felixriddle.good-roots-ts-api";
 import logout from "@/api/auth/logout";
 
 /**
@@ -13,7 +13,7 @@ import logout from "@/api/auth/logout";
 export default function ClientNavbar({
     user
 }: Readonly<{
-    user: UserData | undefined;
+    user: CompleteUserData | undefined;
 }>) {
     const pathname = usePathname();
     

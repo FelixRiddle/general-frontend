@@ -15,7 +15,10 @@ export default async function userDataRoute(): Promise<CompleteUserData | undefi
         const userCookie = cookieStore.get("_token");
         
         if(!userCookie) {
-            console.log(`No user cookie found!`);
+            // This is executed each time, debug only what doesn't happen frequently
+            // console.log(`No user cookie found!`);
+            
+            
             return undefined;
         }
         

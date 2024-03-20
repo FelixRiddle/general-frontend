@@ -23,7 +23,6 @@ export default async function Navbar({ userData }: { userData?: CompleteUserData
             console.error("Error in the frontend: ", err);
         }
     }
-    console.log(`User found: `, user);
     
     return (
         <nav className="flex">
