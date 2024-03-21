@@ -1,7 +1,7 @@
 'use client';
 
 import { useFormStatus } from 'react-dom';
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 
 import { register } from '@/api/auth/register';
 import { RegisterInputType, Status } from 'felixriddle.good-roots-ts-api';
@@ -26,11 +26,22 @@ interface FieldStatusMessages {
  * One of each
  * We may have more than one message for the same field that's what this function filters
  */
-function getStatusMessages(messages: Array<Status>) {
+function getStatusMessages(messages: Array<Status>, options: {
+    removeItems: boolean,
+    setFieldMessages: Dispatch<SetStateAction<FieldStatusMessagesResult>> | undefined,
+} = {
+    removeItems: false,
+    setFieldMessages: undefined,
+}) {
     let nameStatus: Status | undefined = undefined;
     let passwordStatus: Status | undefined = undefined;
     let confirmPasswordStatus: Status | undefined = undefined;
     let emailStatus: Status | undefined = undefined;
+    
+    // Store index of items that we've taken
+    let index = 0;
+    const popItems: Array<number> = [];
+    
     for(const msg of messages) {
         // Skip those that don't have the field
         if(!msg.field) {
@@ -49,6 +60,9 @@ function getStatusMessages(messages: Array<Status>) {
                 // Name status
                 if(!nameStatus) {
                     nameStatus = msg;
+                    
+                    // Item to push
+                    popItems.push(index);
                 }
                 break label1;
             }
@@ -56,6 +70,9 @@ function getStatusMessages(messages: Array<Status>) {
                 // Password status
                 if(!passwordStatus) {
                     passwordStatus = msg;
+                    
+                    // Item to push
+                    popItems.push(index);
                 }
                 break label1;
             }
@@ -63,6 +80,9 @@ function getStatusMessages(messages: Array<Status>) {
                 // Confirm password status
                 if(!confirmPasswordStatus) {
                     confirmPasswordStatus = msg;
+                    
+                    // Item to push
+                    popItems.push(index);
                 }
                 break label1;
             }
@@ -70,11 +90,31 @@ function getStatusMessages(messages: Array<Status>) {
                 // Email status
                 if(!emailStatus) {
                     emailStatus = msg;
+                    
+                    // Item to push
+                    popItems.push(index);
                 }
                 break label1;
             }
         }
+        
+        index++;
     }
+    
+    // I wanted to remove the items but I don't remember why
+    // // Remove items
+    // if(options.removeItems && options.setFieldMessages) {
+    //     if(popItems.length > 0) {
+    //         // Sort from greater to lower
+    //         const popIndexes = popItems.sort((a, b) => b - a);
+    //         console.log(`Pop indexes: `, popIndexes);
+    //         for(const index of popIndexes) {
+    //             options.setFieldMessages((msgs) => {
+    //                 return msgs.
+    //             })
+    //         }
+    //     }
+    // }
     
     const statusMessages: FieldStatusMessages = {
         name: nameStatus,
@@ -111,13 +151,21 @@ export default function RegisterClient() {
             console.error(`Something went wrong!`);
             return;
         }
+        // console.log(`Register result: `, registerResult);
+        if(registerResult.userRegistered) {
+            // Successfully registered the user
+            location.href = "/auth/login";
+        }
         
         // Get messages
         const messages = registerResult.messages;
         
         // Take a single message for each field
-        const newfieldMessages = getStatusMessages(messages);
-        console.log(`Field messages: `, fieldMessages);
+        const newfieldMessages = getStatusMessages(messages, {
+            removeItems: true,
+            setFieldMessages,
+        });
+        // console.log(`Field messages: `, fieldMessages);
         
         // Update field messages state with the new messages
         setFieldMessages(newfieldMessages);
