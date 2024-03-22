@@ -11,11 +11,11 @@ import adminRangedFetch from "@/api/user/property/admin";
 import PropertyRow from "@/app/components/property/property-list/display/PropertyRow";
 
 /**
- * Admin page
+ * Properties admin page
  * 
  * @returns 
  */
-export default async function Admin({ params }: { params: { pageNumber: string } }) {
+export default async function MyProperties({ params }: { params: { pageNumber: string } }) {
     // Get user or redirect somewhere else, this is private property.
     const user = await userVanguard();
     
@@ -33,13 +33,13 @@ export default async function Admin({ params }: { params: { pageNumber: string }
     const properties = pageData.properties;
     const { pages, currentPage, limit, offset, total } = pageData;
     
-    console.log(`First property: `, properties[0]);
+    // console.log(`First property: `, properties[0]);
     const pagesComponents = () => {
         let components = [];
         for(let n = 1; n <= pages; n++) {
             components.push(
                 <div key={n}>
-                    <a href={`/user/property/admin/${n}`}
+                    <a href={`/user/property/list/${n}`}
                         className={`${currentPage == n ? 'bg-indigo-50 border-indigo-500 text-indigo-600' : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'} relative inline-flex items-center px-4 py-2 border text-sm font-medium`}
                     >
                         {n}
@@ -84,10 +84,10 @@ export default async function Admin({ params }: { params: { pageNumber: string }
             <div className="bg-white px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
                 {/* For mobile */}
                 <div className="flex-1 flex justify-between sm:hidden">
-                    <a href={`/user/property/admin?page=${currentPage - 1}`}
+                    <a href={`/user/property/list/${currentPage - 1}`}
                         className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${currentPage === 1 ? 'pointer-events-none bg-gray-200' : ''}`}
                     >Previous</a>
-                    <a href={`/user/property/admin?page=${currentPage + 1}`}
+                    <a href={`/user/property/list/${currentPage + 1}`}
                         className={`relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 ${currentPage === pages ? 'pointer-events-none bg-gray-200' : ''}`}
                     >
                         Next

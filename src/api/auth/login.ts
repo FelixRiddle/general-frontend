@@ -3,6 +3,8 @@
 import { cookies } from "next/headers";
 
 import API from "felixriddle.good-roots-ts-api";
+import { LoginGetJwtResultType } from "felixriddle.my-types";
+
 import LoginInputType from "@/types/auth/LoginInputType";
 
 /**
@@ -10,7 +12,7 @@ import LoginInputType from "@/types/auth/LoginInputType";
  * 
  * @param formData 
  */
-export async function login(userData: LoginInputType) {
+export async function login(userData: LoginInputType): Promise<LoginGetJwtResultType> {
     try {
         const api = new API.ExpressAuthentication();
         

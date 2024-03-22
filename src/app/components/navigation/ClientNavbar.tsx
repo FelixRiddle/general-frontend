@@ -55,8 +55,8 @@ export default function ClientNavbar({
                         </li>
                         
                         <li className={styles.navbar_liaClasses}>
-                            <Link className={`${pathname === "/user/property/admin" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
-                                href="/user/property/admin">My properties</Link>
+                            <Link className={`${pathname === "/user/property/list/1" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
+                                href="/user/property/list/1">My properties</Link>
                         </li>
                         
                         <li className={styles.navbar_liaClasses}>

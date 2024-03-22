@@ -57,19 +57,17 @@ function LoginButton() {
             email: emailEl.value,
             password: passwordEl.value,
         }
-        console.log(`User data: `, userData);
         
         const result = await login(userData)
             .then((res) => {
-                console.log(`Success`);
-                console.log(`Response: `, res);
+                if(res.token) {
+                    location.href = "/";
+                }
             })
             .catch((err) => {
                 console.log(`Error when trying to log in(1).`);
                 console.error(err);
             });
-        
-        console.log(`Result: `, result);
     }
     
     return (

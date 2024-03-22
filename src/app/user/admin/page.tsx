@@ -19,6 +19,7 @@ export default async function Admin() {
             
             <div>Admin page</div>
             
+             
             {/* This should be like a dashboard */}
         </div>
     );

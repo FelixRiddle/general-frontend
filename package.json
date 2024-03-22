@@ -12,6 +12,7 @@
         "cookie-parser": "^1.4.6",
         "felixriddle.configuration-mappings": "^1.0.5",
         "felixriddle.good-roots-ts-api": "^1.0.13",
+        "felixriddle.my-types": "^1.0.2",
         "next": "14.1.0",
         "query-string": "^9.0.0",
         "react": "^18",
