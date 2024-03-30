@@ -17,8 +17,8 @@ export default function ClientNavbar({
 }>) {
     const pathname = usePathname();
     
-    const activeLoginClasses = pathname === "/auth/login" ? styles.navbar_liaActiveClasses : "";
-    const activeRegisterClasses = pathname === "/auth/register" ? styles.navbar_liaActiveClasses : "";
+    const activeLoginClasses = pathname === "/auth/login" ? styles.navbarButtonActiveClasses : "";
+    const activeRegisterClasses = pathname === "/auth/register" ? styles.navbarButtonActiveClasses : "";
     
     // When logout is clicked, remove the token cookie
     const logoutOnClick = (event: any) => {
@@ -32,13 +32,13 @@ export default function ClientNavbar({
             {!user && (
                 <div>
                     <ul className={styles.navbarUlClasses}>
-                        <li className={styles.navbar_liaClasses}>
-                            <Link className={`${activeLoginClasses} ${styles.navLinkClasses}`}
+                        <li>
+                            <Link className={`${styles.navbarButtonClasses} mr-2 ${activeLoginClasses}`}
                                 href="/auth/login">Login</Link>
                         </li>
                         
-                        <li className={styles.navbar_liaClasses}>
-                            <Link className={`${activeRegisterClasses} ${styles.navLinkClasses}`}
+                        <li>
+                            <Link className={`${styles.navbarButtonClasses} ${activeRegisterClasses}`}
                                 href="/auth/register">Register</Link>
                         </li>
                     </ul>
@@ -47,20 +47,23 @@ export default function ClientNavbar({
                 <div>
                     <span>Welcome {user && user.name}</span>
                     
+                    {/* Required tailwind style, because you can't add it dynamically */}
+                    <div hidden className={`bg-pink-500 border-solid border border-pink-600`}></div>
+                    
                     {/* User navbar */}
                     <ul className={styles.navbarUlClasses}>
-                        <li className={styles.navbar_liaClasses}>
-                            <Link className={`${pathname === "/user" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
+                        <li>
+                            <Link className={`${styles.navbarButtonClasses} mr-2 ${pathname === "/user" ? styles.navbarButtonActiveClasses : ""}`}
                                 href="/user">Profile</Link>
                         </li>
                         
-                        <li className={styles.navbar_liaClasses}>
-                            <Link className={`${pathname === "/user/property/list/1" ? styles.navbar_liaActiveClasses : ""} ${styles.navLinkClasses}`}
+                        <li>
+                            <Link className={`${styles.navbarButtonClasses} mr-2 ${pathname.startsWith("/user/property/list") ? styles.navbarButtonActiveClasses : ""}`}
                                 href="/user/property/list/1">My properties</Link>
                         </li>
                         
-                        <li className={styles.navbar_liaClasses}>
-                            <a className={styles.navbar_liaClasses} onClick={logoutOnClick}>Logout</a>
+                        <li>
+                            <a className={`${styles.navbarButtonClasses}`} onClick={logoutOnClick}>Logout</a>
                         </li>
                     </ul>
                 </div>

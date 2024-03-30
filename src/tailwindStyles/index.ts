@@ -20,12 +20,9 @@ export const formContainerClasses = `${styles.general} ${styles.container}`;
 export const formAlternativeFormsContainerClasses = `${styles.container} ${styles.signin}`;
 
 // --- Navbar ---
-export const navbarUlClasses = `bg-slate-800 p-2 m-1 rounded`;
-// This active part should be used conditionally in the frontend.
-export const navbar_liaActiveClasses = `inline p-2 m-1 rounded hover:bg-pink-600 hover:cursor-pointer bg-pink-500`;
-// Note: The active part with 'active:*', works only when clicking the item.
-export const navbar_liaClasses = `inline p-2 m-1 rounded hover:bg-pink-600 hover:cursor-pointer active:bg-pink-500`;
-export const navLinkClasses = ``;
+export const navbarButtonActiveClasses = `border-solid border-2 border-pink-600 bg-pink-500`;
+export const navbarButtonClasses = `p-2 rounded bg-pink-200 hover:bg-pink-400 hover:cursor-pointer`;
+export const navbarUlClasses = `bg-slate-800 p-2 pb-3 pt-3 m-1 rounded flex`;
 
 export default {
     buttonClasses,
@@ -34,8 +31,7 @@ export default {
     linkClasses,
     formContainerClasses,
     formAlternativeFormsContainerClasses,
+    navbarButtonActiveClasses,
+    navbarButtonClasses,
     navbarUlClasses,
-    navbar_liaActiveClasses,
-    navbar_liaClasses,
-    navLinkClasses,
 };
