@@ -2,7 +2,7 @@
 
 import { cookies } from "next/headers";
 
-import API from "felixriddle.good-roots-ts-api";
+import { ExpressAuthentication } from "felixriddle.good-roots-ts-api";
 import { LoginGetJwtResultType } from "felixriddle.my-types";
 
 import LoginInputType from "@/types/auth/LoginInputType";
@@ -14,7 +14,7 @@ import LoginInputType from "@/types/auth/LoginInputType";
  */
 export async function login(userData: LoginInputType): Promise<LoginGetJwtResultType> {
     try {
-        const api = new API.ExpressAuthentication();
+        const api = new ExpressAuthentication();
         
         const authApi = api.authApi();
         
@@ -42,9 +42,9 @@ export async function login(userData: LoginInputType): Promise<LoginGetJwtResult
         if (error) {
             switch (error.type) {
             case 'CredentialsSignin':
-                return 'Invalid credentials.'
+                throw Error('Invalid credentials.');
             default:
-                return 'Something went wrong.'
+                throw Error('Something went wrong.');
             }
         }
         

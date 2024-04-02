@@ -233,37 +233,33 @@ export default function CreateClient(props: CreateClientProperties) {
                         
                         {/* Location information */}
                         <div className="border-gray-200 border-t py-5 space-y-5">
+                            {/* Information */}
+                            <h3 className="text-lg leading-6 font-medium text-gray-900">Location</h3>
+                            <p className="text-gray-600">Locate this property on the map</p>
                             
+                            {/* Show map */}
+                            <div id="map" className="h-96">
+                            </div>
+                            
+                            {/* Show the user current street */}
+                            {/* p#show_street.street=property ? property.street : "" */}
+                            <div id="show_street" className="street"></div>
+                            
+                            {/* Send information about the pin location to the backend */}
+                            <input type="hidden" defaultValue="" id="street" name="street"/>
+                            <input type="hidden" defaultValue="" id="latitude" name="latitude"/>
+                            <input type="hidden" defaultValue="" id="longitude" name="longitude"/>
                         </div>
+                        
+                        <input
+                            className="w-full py-3 bg-pink-400 hover:bg-pink-600 rounded text-white font-bold uppercase cursor-pointer"
+                            id="createProperty"
+                            type="submit"
+                            defaultValue="Publish property"
+                        />
                     </div>
                 </form>
             </div>
-            {/*
-                        //- Location information
-                        div.border-gray-200.border-t.py-5.space-y-5
-                            //- Information
-                            h3.text-lg.leading-6.font-medium.text-gray-900 Location
-                            p.text-gray-600 Locate the property on the map
-                            
-                            //- Show map
-                            #map.h-96
-                            
-                            //- Show the user the current street
-                            div 
-                                p#show_street.street=property ? property.street : ""
-                            
-                            //- Send information about the pin location to the backend
-                            input(type="hidden" value=property ? property.street : "" name="street" id="street")
-                            input(type="hidden" value=property ? property.latitude : "" name="latitude" id="latitude")
-                            input(type="hidden" value=property ? property.longitude : "" name="longitude" id="longitude")
-                        
-                        //- Add image
-                        input(
-                            class="w-full py-3 bg-indigo-600 hover:bg-indigo-700 rounded text-white font-bold uppercase cursor-pointer"
-                            id="createProperty"
-                            type="submit"
-                            value="Add image"
-                        ) */}
         </div>
     )
 }

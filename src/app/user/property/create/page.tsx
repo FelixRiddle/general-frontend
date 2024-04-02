@@ -1,9 +1,12 @@
 'use server';
 
+import { redirect } from "next/navigation";
+
 import Navbar from "@/app/components/navigation/Navbar";
 import PageTitle from "@/app/components/PageTitle";
 
 import CreateClient from "./CreateClient";
+import getAttributes from "@/api/property/getAttributes";
 
 /**
  * User profile
@@ -11,8 +14,14 @@ import CreateClient from "./CreateClient";
  * @returns 
  */
 export default async function Page() {
-    const categories: Array<Object> = [];
-    const prices: Array<Object> = [];
+    const attributes = await getAttributes();
+    
+    if(!attributes) {
+        console.error("Couldn't fetch attributes!");
+        
+        // Later on, redirect to wherever the user was last
+        redirect("/");
+    }
     
     return (
         <div>
@@ -25,8 +34,8 @@ export default async function Page() {
             
             {/* To add functionality we have to use a client component */}
             <CreateClient
-                categories={categories}
-                prices={prices}
+                categories={attributes.categories}
+                prices={attributes.prices}
             />
         </div>
     );

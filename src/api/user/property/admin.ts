@@ -1,7 +1,7 @@
 // Get user data endpoint
 'use server';
 
-import API, { MyPropertiesPageResultType } from "felixriddle.good-roots-ts-api";
+import { ExpressAuthentication, MyPropertiesPageResultType } from "felixriddle.good-roots-ts-api";
 
 import { cookies } from "next/headers";
 
@@ -10,7 +10,7 @@ import { cookies } from "next/headers";
  */
 export default async function adminRangedFetch(pageNumber: number = 1): Promise<MyPropertiesPageResultType | undefined> {
     try {
-        const api = new API.ExpressAuthentication();
+        const api = new ExpressAuthentication();
         
         const cookieStore = cookies();
         const userCookie = cookieStore.get("_token");

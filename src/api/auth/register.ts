@@ -1,7 +1,7 @@
 'use server';
 
 import RegisterResultType from "@/types/auth/RegisterResultType";
-import API, { RegisterInputType } from "felixriddle.good-roots-ts-api";
+import { ExpressAuthentication, RegisterInputType } from "felixriddle.good-roots-ts-api";
 
 /**
  * Function to authenticate
@@ -9,7 +9,7 @@ import API, { RegisterInputType } from "felixriddle.good-roots-ts-api";
  */
 export async function register(userData: RegisterInputType): Promise<RegisterResultType> {
     try {
-        const api = new API.ExpressAuthentication();
+        const api = new ExpressAuthentication();
         
         const authApi = api.authApi();
         
