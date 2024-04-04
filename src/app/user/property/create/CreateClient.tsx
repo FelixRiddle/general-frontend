@@ -34,6 +34,8 @@ export default function CreateClient(props: CreateClientProperties) {
     
     return (
         <div>
+            {/* TODO: Property draft table, in which drafts are created and updated each time the form changes.
+            Maybe add a little delay between actions to prevent many requests */}
             {/* Actual formulary */}
             <div className="bg-white shadow py-8 px-4 rounded mx-auto max-width max-w-2xl my-10 md:px-10">
                 <form action="space-y-8">
@@ -259,6 +261,60 @@ export default function CreateClient(props: CreateClientProperties) {
                         />
                     </div>
                 </form>
+            </div>
+            
+            {/* Images */}
+            <div className="bg-white shadow py-8 px-4 rounded mx-auto max-width max-w-2xl my-10 md:px-10">
+                <form
+                    id="publishImage"
+                    className="m-4 p-4 border-dashed border-2 w-full min:h-96 h-auto rounded flex-col justify-center items-center"
+                    method="POST"
+                    action={`/user/property/images/set_image/${"PROPERTY_ID"}`}
+                    encType="multipart/form-data"
+                >
+                    {/* Information */}
+                    <div className="space-y-8">
+                        <h3 className="text-lg leading-6 font-medium text-gray-900">
+                            Select images
+                        </h3>
+                        <p className="text-gray-600">Select one or more images for the property</p>
+                    </div>
+                    
+                    {/* Why there are two inputs is beyond me */}
+                    {/* Input */}
+                    <input
+                        type="file"
+                        multiple={true}
+                        id="images"
+                        name="images"
+                        accept="image/jpeg, image/png, image/jpg"
+                    />
+                    
+                    {/* Images preview */}
+                    <h3 className="text-lg leading-6 font-medium text-gray-900">Images</h3>
+                    <div id="imagesView">
+                        
+                    </div>
+                </form>
+                {/*
+                        h3.text-lg.leading-6.font-medium.text-gray-900 Images
+                        div#imagesView
+                            - for (var x = 0; x < 10; x++)
+                                div(class="rounded")
+                                    //- Remove icon(a cross)
+                                    img(id=`image_${x}_remove_icon` src="" hidden
+                                        class=`remove_icon absolute hover:cursor-pointer`
+                                        )
+                                    
+                                    img(class="image" id=`image_${x}` src="" hidden)
+                        
+                        //- Add image
+                        input(
+                            id="publish"
+                            class="w-full mt-5 py-3 rounded text-white font-bold uppercase enabled:bg-indigo-600 enabled:hover:bg-indigo-700 enabled:cursor-pointer disabled:bg-gray-400"
+                            type="submit"
+                            value="Publish property"
+                        ) */}
             </div>
         </div>
     )
