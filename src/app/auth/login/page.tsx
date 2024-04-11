@@ -1,5 +1,6 @@
 'use client';
 
+import styles from "./login.module.css";
 import { login } from "@/api/auth/login";
 import { buttonClasses, formAlternativeFormsContainerClasses,
     formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
@@ -20,12 +21,25 @@ export default function Page() {
                 {/* Remember to use this instead */}
                 <div>
                     <label htmlFor="email">Email</label>
-                    <input className={fullwidthInputClasses} type="email" id="email" name="email" placeholder="Email" required />
+                    <input
+                        className={fullwidthInputClasses}
+                        // className={`${styles.fullWidthInput}`}
+                        // All these are so similar is actually funny
+                        type="email"
+                        id="email"
+                        name="email"
+                        placeholder="Email"
+                        required
+                    />
                 </div>
                 <div>
                     <label htmlFor="password">Password</label>
-                    <input className={fullwidthInputClasses} type="password" id="password"
-                        name="password" placeholder="Password" required />
+                    <input
+                        className={fullwidthInputClasses}
+                        // className={styles.fullWidthInput}
+                        type="password" id="password"
+                        name="password" placeholder="Password"
+                        required />
                 </div>
                 <hr className={hrClasses} />
                 

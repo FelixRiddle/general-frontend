@@ -1,5 +1,4 @@
 import styles from "./styles.module.css";
-import navbarStyles from "./navbar.module.css";
 
 // Buttons
 export const buttonClasses = "bg-slate-800 p-3 m-1 hover:bg-slate-500 rounded";
@@ -8,7 +7,9 @@ export const buttonClasses = "bg-slate-800 p-3 m-1 hover:bg-slate-500 rounded";
 export const hrClasses = `${styles.hr} ${styles.general}`;
 
 // Inputs
-export const fullwidthInputClasses = `${styles.fullWidthInput} rounded border-2 border-sky-500 border-solid text-black`;
+export const inputBorder = `border-2 border-pink-500 border-solid rounded`;
+export const activeInputBorder = `active:border-pink-500`;
+export const fullwidthInputClasses = `${styles.fullWidthInput} ${inputBorder} text-black ${activeInputBorder}`;
 
 // Links
 export const linkClasses = `${styles.link}`
