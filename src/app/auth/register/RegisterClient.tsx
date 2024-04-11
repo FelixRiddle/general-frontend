@@ -6,7 +6,8 @@ import { Dispatch, SetStateAction, useState } from 'react';
 import { register } from '@/api/auth/register';
 import { RegisterInputType, Status } from 'felixriddle.good-roots-ts-api';
 import { buttonClasses, formAlternativeFormsContainerClasses,
-    formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
+    formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses, 
+    navbarButtonClasses} from '@/tailwindStyles';
 import RegisterResultType from '@/types/auth/RegisterResultType';
 import StatusMessage from '@/app/components/feedback/StatusMessage/StatusMessage';
 
@@ -23,7 +24,7 @@ interface FieldStatusMessages {
 /**
  * Get field status messages
  * 
- * One of each
+ * One of each type
  * We may have more than one message for the same field that's what this function filters
  */
 function getStatusMessages(messages: Array<Status>, options: {
@@ -171,7 +172,6 @@ export default function RegisterClient() {
         setFieldMessages(newfieldMessages);
     }
     
-    // Not gonna lie, this looks kinda... ABSTRACTABLE
     return (
         <form>
             <div className={formContainerClasses}>
@@ -243,8 +243,8 @@ export default function RegisterClient() {
 function RegisterButton({ resultCb }: { resultCb: (res: RegisterResultType | undefined) => void }) {
     const { pending } = useFormStatus();
     
+    // On register button click
     const onClick = async (event: any) => {
-        console.log(`Register was clicked`);
         event.preventDefault();
         
         const nameEl = document.getElementById("name") as HTMLInputElement;
@@ -280,7 +280,7 @@ function RegisterButton({ resultCb }: { resultCb: (res: RegisterResultType | und
     
     return (
         <button
-            className={buttonClasses}
+            className={navbarButtonClasses}
             aria-disabled={pending}
             type="submit"
             onClick={onClick}

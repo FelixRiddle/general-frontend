@@ -21,7 +21,7 @@ export const formContainerClasses = `${styles.general} ${styles.container}`;
 export const formAlternativeFormsContainerClasses = `${styles.container} ${styles.signin}`;
 
 // --- Navbar ---
-export const navbarButtonActiveClasses = `border-solid border-2 border-pink-600 bg-pink-500`;
+export const navbarButtonActiveClasses = `border-solid border-2 border-pink-500 bg-pink-300`;
 export const navbarButtonClasses = `p-2 rounded bg-pink-200 hover:bg-pink-400 hover:cursor-pointer`;
 export const navbarUlClasses = `bg-slate-800 p-2 pb-3 pt-3 m-1 rounded flex`;
 

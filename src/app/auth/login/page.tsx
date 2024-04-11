@@ -3,7 +3,8 @@
 import styles from "./login.module.css";
 import { login } from "@/api/auth/login";
 import { buttonClasses, formAlternativeFormsContainerClasses,
-    formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses } from '@/tailwindStyles';
+    formContainerClasses, fullwidthInputClasses, hrClasses, linkClasses, 
+    navbarButtonClasses} from '@/tailwindStyles';
 
 /**
  * Page
@@ -48,7 +49,7 @@ export default function Page() {
             </div>
             
             <div className={formAlternativeFormsContainerClasses}>
-                <p>Already have an account? <a className={linkClasses} href="/auth/login">Sign in</a></p>
+                <p>Don't have an account? <a className={linkClasses} href="/auth/register">Sign up</a></p>
             </div>
         </form>
     );
@@ -85,8 +86,8 @@ function LoginButton() {
     }
     
     return (
-        <button type="submit" onClick={onClick} className={buttonClasses}>
+        <button type="submit" onClick={onClick} className={navbarButtonClasses}>
             Login
         </button>
-    )
+    );
 }
