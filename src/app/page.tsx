@@ -1,13 +1,10 @@
-import Link from "next/link";
-import Navbar from "./components/navigation/Navbar";
-
+/**
+ * Home component
+ * 
+ * @returns 
+ */
 export default function Home() {
     return (
-        <main>
-            <Navbar />
-            
-            <div>Next.js</div>
-            <Link href="/dashboard">Dashboard</Link>
-        </main>
+        <div>Home</div>
     );
 }
