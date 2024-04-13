@@ -1,0 +1,14 @@
+.container {
+    /* bg-slate-800 p-2 pb-3 pt-3 m-1 rounded flex */
+    background-color: var(--slate-800);
+    display: flex;
+    
+    padding: var(--p-2);
+    padding-bottom: 0.75rem;
+    padding-top: 0.75rem;
+    margin: 0.25rem;
+    
+    border-radius: var(--rounded);
+    
+}
+

@@ -1,3 +1,24 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+:root {
+  --bg: white;
+  --textColor: black;
+  --softBg: #f0f0f0;
+  --softTextColor: #626262;
+  
+  /* Tailwind colors */
+  /* Only those I use */
+  --slate-300: rgb(203 213 225);
+  --slate-800: rgb(30 41 59);
+  --pink-200: rgb(251 207 232);
+  --pink-300: rgb(249 168 212);
+  --pink-400: rgb(244 114 182);
+  --pink-500: rgb(236 72 153);
+  --pink-600: rgb(219 39 119);
+  --pink-700: rgb(190 24 93);
+  
+  --rounded: 0.25rem;
+  --p-2: 0.5rem;
+}

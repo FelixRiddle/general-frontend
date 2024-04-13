@@ -1,0 +1,24 @@
+/* Navbar styles */
+.navbar {
+    padding: var(--p-2);
+    border-style: solid;
+    border-radius: var(--rounded);
+    background-color: var(--pink-200);
+}
+
+.navbar:active {
+    border: 2px solid var(--pink-500);
+    background-color: var(--pink-300);
+}
+
+.navbar:hover {
+    background-color: var(--pink-400);
+    cursor: pointer;
+}
+
+/* Sometimes I want to call active even when it's not */
+.navbarActive {
+    border: 2px solid var(--pink-500);
+    background-color: var(--pink-300);
+}
+
