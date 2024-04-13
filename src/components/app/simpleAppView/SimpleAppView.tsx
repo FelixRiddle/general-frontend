@@ -17,13 +17,30 @@ export default function SimpleAppView({ app }: { app: AppData }) {
     
     const arrowClasses = "mt-1 mr-2";
     return (
-        <div key={app.path} className={"bg-green-300 rounded border-2 border-green-400 p-2 m-2"}>
+        <div key={app.path} className={"bg-gray-300 rounded border-2 border-gray-400 p-2 m-2"}>
             {app.packageJson && (
                 <div>
                     <div className="flex">
-                        {/* Div acts as an anchor */}
-                        {showMore ? <SlArrowUp className={arrowClasses} /> : <SlArrowDown className={arrowClasses} /> }
-                        <h1 className="cursor-pointer" onClick={switchShowMore}>{app.packageJson.name}</h1>
+                        {/* Name and toggle */}
+                        <div className="flex flex-1">
+                            {showMore ? <SlArrowUp className={arrowClasses} /> : <SlArrowDown className={arrowClasses} /> }
+                            <h1 className="cursor-pointer" onClick={switchShowMore}>{app.packageJson.name}</h1>
+                        </div>
+                        
+                        {/* Is it running */}
+                        <div className="ml-auto flex-1">
+                            {false ? (
+                                <span className="text-green-500">
+                                    <strong>Running</strong>
+                                </span>
+                            ) : (
+                                <span className="text-gray-500">
+                                    Not running
+                                </span>
+                            )}
+                        </div> 
+                        
+                        <div className="flex-1"></div>
                     </div>
                     {showMore && (
                         <div>
@@ -31,6 +48,10 @@ export default function SimpleAppView({ app }: { app: AppData }) {
                                 <div>
                                     <h3>Description</h3>
                                     <p>{app.packageJson.description}</p>
+                                </div>
+                            ) || (
+                                <div>
+                                    No description
                                 </div>
                             )}
                         </div>
