@@ -28,6 +28,14 @@ export default function ClientApp({ apps }: { apps: AppData[] }) {
         console.error(`App start error: `, err);
     });
     
+    socket.on('out', (out) => {
+        console.log(`out: `, out);
+    });
+    
+    socket.on('err', (err) => {
+        console.log(`err: `, err);
+    });
+    
     return (
         <div>
             {apps.map(app => {

@@ -72,8 +72,11 @@ export default function SimpleAppActions({ app, socket }: { app: AppData, socket
                             <button
                                 className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
                                 onClick={() => {
+                                    const appName = app.packageJson.name;
+                                    console.log(`Running app: `, appName);
+                                    
                                     socket.emit("run", {
-                                        name: app.packageJson.name,
+                                        name: appName,
                                         command,
                                         path: app.path,
                                     });
