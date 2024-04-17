@@ -6,11 +6,18 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 import SimpleAppActions from "./actions/SimpleAppActions";
+import { AppOutput } from "@/lib/app/appOutput";
 
 /**
  * Simple app view
  */
-export default function SimpleAppView({ app, socket }: { app: AppData, socket: Socket }) {
+export default function SimpleAppView({
+    app, socket, appOutput,
+}: {
+    app: AppData,
+    socket: Socket,
+    appOutput: AppOutput,
+}) {
     const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
     
@@ -18,24 +25,7 @@ export default function SimpleAppView({ app, socket }: { app: AppData, socket: S
         setShowMore(!showMore);
     }
     
-    // Start app
-    const startApp = async (event: any) => {
-        console.log(`Running app: `, app.packageJson.name);
-        try {
-            const devScript = app.packageJson.scripts["dev"];
-            console.log(`Dev script: `, devScript);
-            socket.emit("run", {
-                name: app.packageJson.name,
-                command: devScript,
-                path: app.path,
-            });
-        } catch(err) {
-            console.log(`Error when emitting run, couldn't get dev script`);
-        }
-    }
-    
     // Classes
-    const disabledClasses = "disabled:bg-gray-500";
     const arrowClasses = "mt-1 mr-2";
     
     return (
@@ -83,6 +73,21 @@ export default function SimpleAppView({ app, socket }: { app: AppData, socket: S
                             
                             {/* Actions */}
                             <SimpleAppActions app={app} socket={socket} />
+                            
+                            {/* Output */}
+                            {/* If the app is running show the output */}
+                            <div>
+                                {appOutput && (
+                                    <div>
+                                        <h3>Output</h3>
+                                        <pre>{appOutput.output}</pre>
+                                    </div>
+                                ) || (
+                                    <div>
+                                        No output
+                                    </div>
+                                )}
+                            </div>
                         </div>
                     )}
                 </div>

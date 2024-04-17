@@ -7,4 +7,6 @@ export default interface AppData {
     packageJson: any;
     running?: boolean;
     name?: string;
+    // App output
+    out?: string;
 }
