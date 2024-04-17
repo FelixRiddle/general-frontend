@@ -14,12 +14,22 @@ async function getAppsData(): Promise<AppData[]> {
         return [];
     };
     
+    // Get array of apps data
     let appsData: Array<AppData> = [];
     for(let app of apps.apps) {
+        // App path
         const appPath = `${apps.path}/${app}`;
-        const appData = await getAppData(appPath);
-        if(appData) {
-            appsData.push(appData);
+        
+        try {
+            // Get app data
+            const appData = await getAppData(appPath);
+            
+            if(appData) {
+                appsData.push(appData);
+            }
+        } catch(err) {
+            // Ignore errors
+            continue;
         }
     }
     

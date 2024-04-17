@@ -16,7 +16,6 @@ export interface ServerResponse {
 export async function getApps(): Promise<ServerResponse | undefined> {
     try {
         const res = await fetch('http://localhost:24000/apps');
-        console.log(`Response: `, res);
         const data = await res.json();
         return data;
     } catch(error: any) {

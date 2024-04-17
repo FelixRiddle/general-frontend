@@ -15,7 +15,7 @@ export interface AppResponse {
  */
 export async function getAppData(appPath: string): Promise<AppData | undefined> {
     try {
-        console.log(`Seding request with path: `, appPath);
+        // console.log(`Sending request with path: `, appPath);
         const res = await fetch('http://localhost:24000/app', {
             method: 'POST',
             headers: {
@@ -26,8 +26,9 @@ export async function getAppData(appPath: string): Promise<AppData | undefined> 
             })
         });
         const data: AppResponse = await res.json();
+        const app = data.app;
         
-        return data.app;
+        return app;
     } catch(error: any) {
         console.log(`[GET App] Error when trying to fetch data`);
         console.error(error);
