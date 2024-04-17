@@ -66,6 +66,8 @@ export default function SimpleAppView({ app, socket }: { app: AppData, socket: S
                     </div>
                     {showMore && (
                         <div>
+                            <p>App path: {app.path}</p>
+                            
                             {/* Show description */}
                             {app.packageJson.description && (
                                 <div>

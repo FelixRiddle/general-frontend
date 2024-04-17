@@ -7,12 +7,8 @@ import { Socket } from "socket.io-client";
  * Simple app actions
  */
 export default function SimpleAppActions({ app, socket }: { app: AppData, socket: Socket }) {
-    const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
-    
-    const switchShowMore = () => {
-        setShowMore(!showMore);
-    }
+    const [showOtherActions, setShowOtherActions] = useState(false);
     
     // Start app
     const startApp = async (event: any) => {
@@ -50,7 +46,13 @@ export default function SimpleAppActions({ app, socket }: { app: AppData, socket
             </div>
         
             {/* Other actions */}
-            {app.packageJson.scripts ? Object.entries(app.packageJson.scripts).map(([commandKey, value], index) => {
+            <button
+                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-3 rounded ${disabledClasses}`}
+                onClick={() => setShowOtherActions(!showOtherActions)}
+            >
+                Show other actions
+            </button>
+            {showOtherActions && app.packageJson.scripts ? Object.entries(app.packageJson.scripts).map(([commandKey, value], index) => {
                 if(typeof(value) !== 'string') {
                     return (
                         <div>
