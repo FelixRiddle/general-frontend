@@ -15,6 +15,7 @@ export default function ClientApp({ apps }: { apps: AppData[] }) {
     
     // On app start
     socket.on('app start', (appName: string) => {
+        console.log(`App ${appName} started`);
         for (const app of apps) {
             if (app.name === appName) {
                 app.running = true;

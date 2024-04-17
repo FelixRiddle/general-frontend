@@ -5,6 +5,7 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
+import SimpleAppActions from "./actions/SimpleAppActions";
 
 /**
  * Simple app view
@@ -77,19 +78,9 @@ export default function SimpleAppView({ app, socket }: { app: AppData, socket: S
                                 </div>
                             )}
                             
+                            
                             {/* Actions */}
-                            <div className="flex justify-start">
-                                <button
-                                    className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
-                                    disabled={isRunning}
-                                    onClick={startApp}
-                                >
-                                    Start
-                                </button>
-                                <button
-                                    className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
-                                    disabled={!isRunning}>Stop</button>
-                            </div>
+                            <SimpleAppActions app={app} socket={socket} />
                         </div>
                     )}
                 </div>
