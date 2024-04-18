@@ -9,7 +9,10 @@
         "lint": "next lint"
     },
     "dependencies": {
+        "@xterm/xterm": "^5.5.0",
+        "anser": "^2.1.1",
         "cookie-parser": "^1.4.6",
+        "escape-carriage": "^1.3.1",
         "felixriddle.configuration-mappings": "^1.0.5",
         "felixriddle.good-roots-ts-api": "^1.0.13",
         "felixriddle.my-types": "^1.0.9",

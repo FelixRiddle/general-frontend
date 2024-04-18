@@ -7,6 +7,7 @@ import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 import SimpleAppActions from "./actions/SimpleAppActions";
 import { AppOutput } from "@/lib/app/appOutput";
+import SimpleAppOutputD from "./SimpleAppOutput";
 
 /**
  * Simple app view
@@ -77,16 +78,7 @@ export default function SimpleAppView({
                             {/* Output */}
                             {/* If the app is running show the output */}
                             <div>
-                                {appOutput && (
-                                    <div>
-                                        <h3>Output</h3>
-                                        <pre>{appOutput.output}</pre>
-                                    </div>
-                                ) || (
-                                    <div>
-                                        No output
-                                    </div>
-                                )}
+                                <SimpleAppOutputD appOutput={appOutput} />
                             </div>
                         </div>
                     )}
