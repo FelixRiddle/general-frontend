@@ -1,0 +1,24 @@
+
+
+@media screen and (max-width: 1920px) {
+    .view {
+        /* max-width: 1080px;
+        max-height: 768px; */
+    }
+    
+    .outputContainer {
+        /* max-width: 1080px;
+        max-height: 768px; */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+    
+    /* This doesn't work because I'm using an ANSI parser */
+    .output {
+        /* max-width: 1080px;
+        max-height: 768px; */
+        word-wrap: break-word;
+        overflow-wrap: break-word;
+    }
+}
+
