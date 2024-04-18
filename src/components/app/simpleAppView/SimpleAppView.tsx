@@ -7,7 +7,8 @@ import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 import SimpleAppActions from "./actions/SimpleAppActions";
 import { AppOutput } from "@/lib/app/appOutput";
-import SimpleAppOutputD from "./SimpleAppOutput";
+import SimpleAppOutput from "./SimpleAppOutput";
+import TerminalView from "@/components/terminalView/TerminalView";
 
 /**
  * Simple app view
@@ -28,9 +29,19 @@ export default function SimpleAppView({
     
     // Classes
     const arrowClasses = "mt-1 mr-2";
+    const appColor = (() => {
+        if(appOutput.output) {
+            return "bg-lime-300 border-lime-400";
+        } else {
+            return "bg-gray-300 border-gray-400";
+        }
+    })();
     
     return (
-        <div className={"bg-gray-300 rounded border-2 border-gray-400 p-2 m-2"}>
+        <div className={`rounded border-2 p-2 m-2 ${appColor}`}>
+            {/* Generate tailwind classes, because dynamic code doesn't */}
+            <div hidden={true} className={""}></div>
+            
             {app.packageJson && (
                 <div>
                     <div className="flex">
@@ -78,7 +89,7 @@ export default function SimpleAppView({
                             {/* Output */}
                             {/* If the app is running show the output */}
                             <div>
-                                <SimpleAppOutputD appOutput={appOutput} />
+                                <TerminalView output={appOutput.output} />
                             </div>
                         </div>
                     )}
