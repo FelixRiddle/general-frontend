@@ -1,7 +1,7 @@
-
-import AppData from "@/types/AppData";
 import { useState } from "react";
 import { Socket } from "socket.io-client";
+
+import AppData from "@/types/AppData";
 
 /**
  * Simple app actions

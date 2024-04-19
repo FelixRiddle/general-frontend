@@ -6,19 +6,16 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 import SimpleAppActions from "./actions/SimpleAppActions";
-import { AppOutput } from "@/lib/app/appOutput";
-import SimpleAppOutput from "./SimpleAppOutput";
 import TerminalView from "@/components/terminalView/TerminalView";
 
 /**
  * Simple app view
  */
 export default function SimpleAppView({
-    app, socket, appOutput,
+    app, socket
 }: {
     app: AppData,
-    socket: Socket,
-    appOutput: AppOutput,
+    socket: Socket
 }) {
     const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
@@ -30,7 +27,8 @@ export default function SimpleAppView({
     // Classes
     const arrowClasses = "mt-1 mr-2";
     const appColor = (() => {
-        if(appOutput.output) {
+        // console.log(`App out: `, app.out);
+        if(app.out) {
             return "bg-lime-300 border-lime-400";
         } else {
             return "bg-gray-300 border-gray-400";
@@ -89,7 +87,7 @@ export default function SimpleAppView({
                             {/* Output */}
                             {/* If the app is running show the output */}
                             <div>
-                                <TerminalView output={appOutput.output} />
+                                <TerminalView output={app.out ? app.out : ""} />
                             </div>
                         </div>
                     )}
