@@ -1,4 +1,5 @@
 import Navbar from "@/components/navbar/Navbar";
+import Link from "next/link";
 
 /**
  * Home component
@@ -8,7 +9,19 @@ import Navbar from "@/components/navbar/Navbar";
 export default function Home() {
     return (
         <div>
-            Home
+            <h1>Home</h1>
+            
+            {/* Links */}
+            <h2>
+                Links
+            </h2>
+            <nav>
+                <ul>
+                    <li>
+                        <Link href="/doc">Documentation</Link>
+                    </li>
+                </ul>
+            </nav>
         </div>
     );
 }

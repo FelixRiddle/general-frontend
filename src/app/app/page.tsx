@@ -44,7 +44,8 @@ export default async function App() {
     
     return(
         <div>
-            App manager
+            <h1>Node app manager</h1>
+            
             <ClientApp apps={apps}></ClientApp>
         </div>
     );
