@@ -17,6 +17,7 @@
         "felixriddle.configuration-mappings": "^1.0.5",
         "felixriddle.good-roots-ts-api": "^1.0.13",
         "felixriddle.my-types": "^1.0.9",
+        "felixriddle.pid-discovery": "^1.0.0",
         "leaflet": "^1.9.4",
         "leaflet-defaulticon-compatibility": "^0.1.2",
         "next": "14.1.0",
