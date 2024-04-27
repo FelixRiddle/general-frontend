@@ -1,13 +1,30 @@
 "use client";
 
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
+import { useSearchParams, usePathname, useRouter } from "next/navigation";
+
+import { useDebouncedCallback } from "use-debounce";
 
 export default function Search({ placeholder }: {
     placeholder?: string,
 }) {
-    function handleSearch(term: string) {
+    const searchParams = useSearchParams();
+    const pathname = usePathname();
+    const { replace } = useRouter();
+    
+    // Use debounced callback
+    const handleSearch = useDebouncedCallback((term: string) => {
         console.log(`Term: ${term}`);
-    }
+        const params = new URLSearchParams(searchParams);
+        
+        if(term) {
+            params.set("query", term);
+        } else {
+            params.delete('query');
+        }
+        
+        replace(`${pathname}?${params.toString()}`);
+    }, 300);
     
     return (
         <div className={"p-1 m-1 relative flex flex-1 flex-shrink-0"}>
@@ -22,6 +39,7 @@ export default function Search({ placeholder }: {
                     // Send input to handle search
                     handleSearch(e.target.value);
                 }}
+                defaultValue={searchParams.get("query")?.toString()}
             />
             <MagnifyingGlassIcon
                 className={"absolute left-3 top-1/2 h-[18px] w-[18px] -translate-y-1/2 text-gray-500 peer-focus:text-gray-900"}

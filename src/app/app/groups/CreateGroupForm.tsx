@@ -1,27 +1,31 @@
 "use client";
 
-import { useState } from "react"
+import { Suspense, useState } from "react"
 
 import navbarStyles from "@/styles/navbar.module.css";
 import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
+import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 
 /**
  * Create group form
  */
-export default function CreateGroupForm() {
+export default function CreateGroupForm({
+    searchParams,
+}: {
+    searchParams: {
+        query?: string;
+        page?: string;
+    }
+}) {
+    const query = searchParams?.query || "";
+    const currentPage = Number(searchParams?.page) || 1;
+    
     const [groupApps, setGroupApps] = useState([]);
     const [show, setShow] = useState(false);
     
     return (
         <div>
-            {/* <button
-                onClick={() => setShow(!show)}
-                className={`${navbarStyles.navbar} mr-2 ${show ? navbarStyles.navbarActive : ""}`}
-            >
-                Create group
-            </button> */}
-            
             {/* Toggle show */}
             <Button
                 onClick={() => setShow(!show)}
@@ -43,11 +47,12 @@ export default function CreateGroupForm() {
                         {/* This one take it lightly, because it will take a while to make it actually pleasingly functional */}
                         <label htmlFor="selectedApps" className="m-1">Select apps in the group</label>
                         <input type="text" className="m-1 border rounded border-gray-900 p-1" />
-                        <Search />
+                        <Search placeholder="Search apps" />
+                        <Suspense key={query + currentPage} fallback={<TableAppsSkeleton />}>
+                        </Suspense>
                         
                         {/* Show apps here */}
                     </div>
-                    {/* <button type="submit">Create group</button> */}
                     <Button>Create group</Button>
                 </form>
             ) || (
