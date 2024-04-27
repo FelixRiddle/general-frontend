@@ -10,13 +10,13 @@ export default function Search({ placeholder }: {
     }
     
     return (
-        <div className={"relative flex flex-1 flex-shrink-0"}>
+        <div className={"p-1 m-1 relative flex flex-1 flex-shrink-0"}>
             <label htmlFor="search" className="sr-only">
                 Search
             </label>
             <input
                 type="text"
-                className="peer block w-full rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
+                className="peer block w-1/4 rounded-md border border-gray-200 py-[9px] pl-10 text-sm outline-2 placeholder:text-gray-500"
                 placeholder={placeholder}
                 onChange={(e) => {
                     // Send input to handle search
