@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import navbarStyles from "@/styles/navbar.module.css";
 import navbarContainer from "@/styles/navbarContainer.module.css";
 
-
 /**
  * Navbar
  */

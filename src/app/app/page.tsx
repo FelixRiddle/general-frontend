@@ -2,6 +2,10 @@ import AppData from "@/types/AppData";
 import { getApps } from "@/api/appManager/apps";
 import ClientApp from "./ClientApp";
 import { getAppData } from "@/api/appManager/app";
+import { io } from "socket.io-client";
+import useApps from "@/hooks/app/useApps";
+import Link from "next/link";
+import CustomNavbar from "@/components/customNavbar/CustomNavbar";
 
 /**
  * Get apps
@@ -40,13 +44,9 @@ async function getAppsData(): Promise<AppData[]> {
  * App manager
  */
 export default async function App() {
-    const apps = await getAppsData();
-    
     return(
         <div>
-            <h1>Node app manager</h1>
-            
-            <ClientApp apps={apps}></ClientApp>
+            <ClientApp apps={await getAppsData()}></ClientApp>
         </div>
     );
 }
