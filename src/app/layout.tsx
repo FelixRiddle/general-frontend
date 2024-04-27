@@ -1,11 +1,11 @@
 'use client';
 
-import { Inter } from "next/font/google";
+// import { Inter } from "next/font/google";
 
 import "./globals.css";
 import Navbar from "@/components/navbar/Navbar";
 
-const inter = Inter({ subsets: ["latin"] });
+// const inter = Inter({ subsets: ["latin"] });
 
 /**
  * Root layout
@@ -20,7 +20,9 @@ export default function RootLayout({
 }>) {
     return (
         <html lang="en">
-            <body className={inter.className}>
+            <body
+            // className={inter.className}
+            >
                 <main>
                     <Navbar></Navbar>
                     {children}
