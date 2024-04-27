@@ -2,6 +2,7 @@
 
 import AppData from "@/types/AppData";
 import { Status } from "felixriddle.good-roots-ts-api";
+import { getApps } from "./apps";
 
 export interface AppResponse {
     app: AppData;
@@ -35,3 +36,37 @@ export async function getAppData(appPath: string): Promise<AppData | undefined> 
         return undefined;
     }
 }
+
+/**
+ * Get apps
+ * 
+ * Do get all apps
+ */
+export async function getAppsData(): Promise<AppData[]> {
+    const apps = await getApps();
+    if(!apps) {
+        return [];
+    };
+    
+    // Get array of apps data
+    let appsData: Array<AppData> = [];
+    for(let app of apps.apps) {
+        // App path
+        const appPath = `${apps.path}/${app}`;
+        
+        try {
+            // Get app data
+            const appData = await getAppData(appPath);
+            
+            if(appData) {
+                appsData.push(appData);
+            }
+        } catch(err) {
+            // Ignore errors
+            continue;
+        }
+    }
+    
+    return appsData;
+}
+

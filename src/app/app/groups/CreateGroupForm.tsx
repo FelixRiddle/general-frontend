@@ -2,17 +2,28 @@
 
 import { Suspense, useState } from "react"
 
-import navbarStyles from "@/styles/navbar.module.css";
 import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
+import { getApps } from "@/api/appManager/apps";
+import Pagination from "./Pagination";
+
+/**
+ * Page length
+ */
+function totalPages(apps: any[], query: string): number {
+    // Of course it's math.roof
+    return Math.ceil(apps.length / 5);
+}
 
 /**
  * Create group form
  */
-export default function CreateGroupForm({
+export default async function CreateGroupForm({
+    apps,
     searchParams,
 }: {
+    apps: any[];
     searchParams: {
         query?: string;
         page?: string;
@@ -23,6 +34,9 @@ export default function CreateGroupForm({
     
     const [groupApps, setGroupApps] = useState([]);
     const [show, setShow] = useState(false);
+    
+    // Fetch apps
+    const pages = totalPages(apps, query);
     
     return (
         <div>
@@ -51,6 +65,7 @@ export default function CreateGroupForm({
                         <Suspense key={query + currentPage} fallback={<TableAppsSkeleton />}>
                         </Suspense>
                         
+                        <Pagination totalPages={pages} />
                         {/* Show apps here */}
                     </div>
                     <Button>Create group</Button>
