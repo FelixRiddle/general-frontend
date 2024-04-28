@@ -10,14 +10,7 @@ import Pagination from "./Pagination";
 import { io } from "socket.io-client";
 import SimpleAppView from "@/components/app/simpleAppView/SimpleAppView";
 import ShowApps from "@/components/app/simpleAppView/ShowApps";
-
-/**
- * Page length
- */
-function totalPages(apps: any[], query: string, perPage: number = 5): number {
-    // Of course it's math.roof
-    return Math.ceil(apps.length / perPage);
-}
+import { itemsWindow, totalPages } from "@/lib/pagination";
 
 /**
  * Create group form
@@ -32,21 +25,27 @@ export default async function CreateGroupForm({
         page?: string;
     }
 }) {
+    console.log(`Apps: `, apps);
     
     const socket = io(`http://localhost:${24000}`);
     
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
+    console.log(`Query: `, query);
+    console.log(`Current page: `, currentPage);
     
     const [groupApps, setGroupApps] = useState([]);
     const [show, setShow] = useState(false);
     
     // Fetch apps
-    const pages = totalPages(apps, query);
-    console.log(`Query: `, query);
-    console.log(`Current page: `, currentPage);
-    console.log(`Apps: `, apps);
+    const pages = totalPages(apps.length);
     console.log(`Pages: `, pages);
+    
+    const itemsWindowInfo = itemsWindow(apps.length, currentPage);
+    console.log(`Items window info: `, itemsWindowInfo);
+    
+    const lastWindowInfo = itemsWindow(apps.length, 7);
+    console.log(`Last window info: `, lastWindowInfo);
     
     return (
         <div>
