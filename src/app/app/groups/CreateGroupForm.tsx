@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 
 import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
@@ -34,6 +34,9 @@ export default async function CreateGroupForm({
     console.log(`Query: `, query);
     console.log(`Current page: `, currentPage);
     
+    // Items window
+    const [itemsWindowInfo, setItemsWindowInfo] = useState(itemsWindow(apps.length, currentPage));
+    
     const [groupApps, setGroupApps] = useState([]);
     const [show, setShow] = useState(false);
     
@@ -41,11 +44,14 @@ export default async function CreateGroupForm({
     const pages = totalPages(apps.length);
     console.log(`Pages: `, pages);
     
-    const itemsWindowInfo = itemsWindow(apps.length, currentPage);
-    console.log(`Items window info: `, itemsWindowInfo);
-    
-    const lastWindowInfo = itemsWindow(apps.length, 7);
-    console.log(`Last window info: `, lastWindowInfo);
+    useEffect(() => {
+        setItemsWindowInfo(itemsWindow(apps.length, currentPage));
+        
+        console.log(`Items window info: `, itemsWindowInfo);
+        
+        const lastWindowInfo = itemsWindow(apps.length, 7);
+        console.log(`Last window info: `, lastWindowInfo);
+    }, [apps, currentPage]);
     
     return (
         <div>
