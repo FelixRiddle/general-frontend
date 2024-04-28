@@ -7,13 +7,16 @@ import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import { getApps } from "@/api/appManager/apps";
 import Pagination from "./Pagination";
+import { io } from "socket.io-client";
+import SimpleAppView from "@/components/app/simpleAppView/SimpleAppView";
+import ShowApps from "@/components/app/simpleAppView/ShowApps";
 
 /**
  * Page length
  */
-function totalPages(apps: any[], query: string): number {
+function totalPages(apps: any[], query: string, perPage: number = 5): number {
     // Of course it's math.roof
-    return Math.ceil(apps.length / 5);
+    return Math.ceil(apps.length / perPage);
 }
 
 /**
@@ -29,6 +32,9 @@ export default async function CreateGroupForm({
         page?: string;
     }
 }) {
+    
+    const socket = io(`http://localhost:${24000}`);
+    
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
     
@@ -37,6 +43,10 @@ export default async function CreateGroupForm({
     
     // Fetch apps
     const pages = totalPages(apps, query);
+    console.log(`Query: `, query);
+    console.log(`Current page: `, currentPage);
+    console.log(`Apps: `, apps);
+    console.log(`Pages: `, pages);
     
     return (
         <div>
@@ -61,12 +71,15 @@ export default async function CreateGroupForm({
                         {/* This one take it lightly, because it will take a while to make it actually pleasingly functional */}
                         <label htmlFor="selectedApps" className="m-1">Select apps in the group</label>
                         <input type="text" className="m-1 border rounded border-gray-900 p-1" />
+                        
+                        {/* Search and select an app */}
                         <Search placeholder="Search apps" />
                         <Suspense key={query + currentPage} fallback={<TableAppsSkeleton />}>
+                            {/* Show apps here */}
+                            <ShowApps apps={apps} socket={socket} />
                         </Suspense>
                         
                         <Pagination totalPages={pages} />
-                        {/* Show apps here */}
                     </div>
                     <Button>Create group</Button>
                 </form>

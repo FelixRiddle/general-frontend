@@ -8,6 +8,7 @@ import AppData from "@/types/AppData";
 import CustomNavbar from "@/components/customNavbar/CustomNavbar";
 import useApps from "@/hooks/app/useApps";
 import AppCustomNavbar from "./AppCustomNavbar";
+import ShowApps from "@/components/app/simpleAppView/ShowApps";
 
 /**
  * App but client side
@@ -27,16 +28,7 @@ export default function ClientApp({ apps: appData }: { apps: AppData[] }) {
             
             <h1>Node app manager</h1>
             
-            {/* Show all apps */}
-            {apps.map(app => {
-                return (
-                    <SimpleAppView
-                        key={uuidv4()}
-                        app={app}
-                        socket={socket}
-                    ></SimpleAppView>
-                );
-            })}
+            <ShowApps apps={apps} socket={socket} />
         </div>
     );
 }
