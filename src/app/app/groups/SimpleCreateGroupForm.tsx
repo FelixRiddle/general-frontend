@@ -5,10 +5,8 @@ import { Suspense, useEffect, useState } from "react"
 import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
-import { getApps } from "@/api/appManager/apps";
 import Pagination from "./Pagination";
 import { io } from "socket.io-client";
-import SimpleAppView from "@/components/app/simpleAppView/SimpleAppView";
 import ShowApps from "@/components/app/simpleAppView/ShowApps";
 import { itemsWindow, totalPages } from "@/lib/pagination";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
@@ -16,7 +14,7 @@ import appsInPaginationWindow from "@/lib/app/appsWindow";
 /**
  * Create group form
  */
-export default async function CreateGroupForm({
+export default async function SimpleCreateGroupForm({
     apps,
     searchParams,
 }: {
@@ -33,31 +31,11 @@ export default async function CreateGroupForm({
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
     
-    // Items window
-    const [itemsWindowInfo, setItemsWindowInfo] = useState(itemsWindow(apps.length, currentPage));
-    
     const [groupApps, setGroupApps] = useState([]);
     const [show, setShow] = useState(false);
     
     // Fetch apps
     const pages = totalPages(apps.length);
-    
-    useEffect(() => {
-        setItemsWindowInfo(itemsWindow(apps.length, currentPage));
-        
-        console.log(`Items window info: `, itemsWindowInfo);
-        
-        const lastWindowInfo = itemsWindow(apps.length, 7);
-        console.log(`Last window info: `, lastWindowInfo);
-    }, [apps, currentPage]);
-    
-    const [windowAppsName, setWindowAppsName] = useState(appsInPaginationWindow(apps, itemsWindowInfo));
-    console.log(`Window apps: `, windowAppsName);
-    
-    // const [windowApps2, setWindowApps2] = useState(appsInPaginationWindow(apps, itemsWindow(apps.length, currentPage + 1)));
-    // console.log(`Page 2: `, windowApps2);
-    
-    // const [appsData, setAppsData] = use
     
     return (
         <div>

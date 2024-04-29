@@ -38,32 +38,6 @@ export async function getAppData(appPath: string): Promise<AppData | undefined> 
 }
 
 /**
- * Fetch apps data
- */
-export async function fetchAppsData(apps: string[]): Promise<Array<AppData>> {
-    // Get array of apps data
-    let appsData: Array<AppData> = [];
-    for(let app of apps) {
-        // App path
-        const appPath = `${apps.path}/${app}`;
-        
-        try {
-            // Get app data
-            const appData = await getAppData(appPath);
-            
-            if(appData) {
-                appsData.push(appData);
-            }
-        } catch(err) {
-            // Ignore errors
-            continue;
-        }
-    }
-    
-    return appsData;
-}
-
-/**
  * Get apps
  * 
  * Do get all apps
