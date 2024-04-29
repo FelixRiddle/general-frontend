@@ -56,7 +56,8 @@ export default async function GroupsPage({
             {/* No joke, it's really hard to program this thing */}
             {/* <CreateGroupForm apps={apps || []} searchParams={searchParams} /> */}
             
-            {/*  */}
+            {/* Simple create group form */}
+            {/* Different from create group form, the pagination and app information is fetch on the backend */}
             <SimpleCreateGroupForm apps={windowAppsInfo} searchParams={searchParams} />
         </div>
     );

@@ -13,7 +13,10 @@ export async function getAppData(appName: string): Promise<AppData | undefined> 
         console.log(`[GET] ${url}`);
         
         const res = await fetch(url, {
-            method: 'GET'
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
         });
         const data: AppResponse = await res.json();
         const app = data.app;
@@ -32,9 +35,12 @@ export async function getAppData(appName: string): Promise<AppData | undefined> 
  * Fetch apps data in folder ~/Repositories/Javascript
  */
 export async function fetchAppsData(apps: string[]): Promise<Array<AppData>> {
+    console.log(`Apps: `, apps);
+    
     // Get array of apps data
     let appsData: Array<AppData> = [];
     for(let appName of apps) {
+        console.log(`Current app: `, appName);
         try {
             // Get app data
             const appData = await getAppData(appName);
