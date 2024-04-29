@@ -6,7 +6,7 @@ export function totalPages(itemsLength: number, perPage: number = 5): number {
     return Math.ceil(itemsLength / perPage);
 }
 
-interface ItemsWindowInfo {
+export interface ItemsWindowInfo {
     // Start / End
     windowStart: number;
     windowEnd: number;
