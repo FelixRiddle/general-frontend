@@ -15,9 +15,11 @@ import ShowApps from "@/components/app/selectableAppView/ShowApps";
  */
 export default async function SimpleCreateGroupForm({
     apps,
+    pages,
     searchParams,
 }: {
     apps: any[];
+    pages: number;
     searchParams: {
         query?: string;
         page?: string;
@@ -31,8 +33,7 @@ export default async function SimpleCreateGroupForm({
     const [groupApps, setGroupApps] = useState([]);
     const [show, setShow] = useState(false);
     
-    // Fetch apps
-    const pages = totalPages(apps.length);
+    console.log(`Total pages: `, pages);
     
     return (
         <div>

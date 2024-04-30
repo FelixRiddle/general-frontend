@@ -44,6 +44,7 @@ export default async function GroupsPage({
     
     const windowAppsInfo = await fetchAppsData(windowAppsName);
     
+    
     return (
         <div>
             <AppCustomNavbar />
@@ -58,7 +59,7 @@ export default async function GroupsPage({
             
             {/* Simple create group form */}
             {/* Different from create group form, the pagination and app information is fetch on the backend */}
-            <SimpleCreateGroupForm apps={windowAppsInfo} searchParams={searchParams} />
+            <SimpleCreateGroupForm apps={windowAppsInfo} searchParams={searchParams} pages={pages} />
         </div>
     );
 }
