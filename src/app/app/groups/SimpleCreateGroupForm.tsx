@@ -7,9 +7,8 @@ import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import Pagination from "./Pagination";
 import { io } from "socket.io-client";
-import ShowApps from "@/components/app/simpleAppView/ShowApps";
-import { itemsWindow, totalPages } from "@/lib/pagination";
-import appsInPaginationWindow from "@/lib/app/appsWindow";
+import { totalPages } from "@/lib/pagination";
+import ShowApps from "@/components/app/selectableAppView/ShowApps";
 
 /**
  * Create group form
@@ -25,8 +24,6 @@ export default async function SimpleCreateGroupForm({
     }
 }) {
     console.log(`Apps: `, apps);
-    
-    const socket = io(`http://localhost:${24000}`);
     
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
@@ -65,7 +62,7 @@ export default async function SimpleCreateGroupForm({
                         <Search placeholder="Search apps" />
                         <Suspense key={query + currentPage} fallback={<TableAppsSkeleton />}>
                             {/* Show apps here */}
-                            <ShowApps apps={apps} socket={socket} />
+                            <ShowApps apps={apps} />
                         </Suspense>
                         
                         <Pagination totalPages={pages} />
