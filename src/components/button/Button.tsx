@@ -29,7 +29,7 @@ export default function Button({
                     onClick();
                 }
             }}
-            className={`border rounded border-purple-600 bg-purple-500 active:bg-purple-400 p-2 m-2 ${active && "bg-purple-400"}`}>
+            className={`border rounded border-purple-600 bg-purple-500 active:bg-purple-400 p-2 m-2 ${active && "bg-purple-400"} hover:bg-purple-400 hover:border-purple-500`}>
             {children}
         </button>
     );

@@ -1,16 +1,14 @@
 import { getApps } from "@/api/appManager/apps";
-import AppCustomNavbar from "../AppCustomNavbar";
-import CreateGroupForm from "./create/CreateGroupForm";
-import { itemsWindow, totalPages } from "@/lib/pagination";
-import appsInPaginationWindow from "@/lib/app/appsWindow";
-import SimpleCreateGroupForm from "./create/SimpleCreateGroupForm";
 import { fetchAppsData } from "@/api/appManager/repositories";
-import Link from "next/link";
+import appsInPaginationWindow from "@/lib/app/appsWindow";
+import { itemsWindow, totalPages } from "@/lib/pagination";
+import AppCustomNavbar from "../../AppCustomNavbar";
+import SimpleCreateGroupForm from "./SimpleCreateGroupForm";
 
 /**
- * App groups page
+ * Create group
  */
-export default async function GroupsPage({
+export default async function CreateGroupPage({
     searchParams,
 }: {
     searchParams: {
@@ -18,6 +16,7 @@ export default async function GroupsPage({
         page?: string;
     }
 }) {
+    
     const apps = await getApps()
         .then((res) => {
             return res?.apps;
@@ -45,26 +44,20 @@ export default async function GroupsPage({
     
     const windowAppsInfo = await fetchAppsData(windowAppsName);
     
-    
     return (
         <div>
             <AppCustomNavbar />
             
-            <h1 className="text-height">App groups</h1>
+            <h1>App groups</h1>
             <p>
                 Apps can be grouped together to manage them together.
             </p>
             
-            {/* Create group form */}
-            <div className="mt-4">
-                <Link
-                    href="/app/groups/create"
-                    className={`border rounded border-purple-600 bg-purple-500 active:bg-purple-400 p-2 m-2 mt-5 hover:bg-purple-400 hover:border-purple-500`}
-                >
-                    Create group
-                </Link>
-            </div>
+            {/* No joke, it's really hard to program this thing */}
+            
+            {/* Simple create group form */}
+            {/* Different from create group form, the pagination and app information is fetch on the backend */}
+            <SimpleCreateGroupForm apps={windowAppsInfo} searchParams={searchParams} pages={pages} />
         </div>
     );
 }
-

@@ -70,10 +70,26 @@ export default function Pagination({
                 ))}
                 
                 {/* Right arrows */}
-                <Link href={createPageUrl(currentPage + 1)} className={pageButtonClasses}>
+                <Link
+                    href={createPageUrl(currentPage + 1)}
+                    className={`${pageButtonClasses}  ${currentPage === totalPages && "bg-gray-300"}`}
+                    
+                    // Disable left arrow if it's the first page
+                    style={{pointerEvents: currentPage === totalPages ? "none" : "auto"}}
+                    aria-disabled={currentPage === totalPages}
+                    tabIndex={currentPage === totalPages ? -1 : 0}
+                >
                     <GoChevronRight className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                 </Link>
-                <Link href={`${pathname}?query=${query}&page=${totalPages}`} className={pageButtonClasses}>
+                <Link
+                    href={`${pathname}?query=${query}&page=${totalPages}`}
+                    className={`${pageButtonClasses} ${currentPage === totalPages && "bg-gray-300"}`}
+                    
+                    // Disable left arrow if it's the first page
+                    style={{pointerEvents: currentPage === totalPages ? "none" : "auto"}}
+                    aria-disabled={currentPage === totalPages}
+                    tabIndex={currentPage === totalPages ? -1 : 0}
+                >
                     <GoChevronRight className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                     <GoChevronRight className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                 </ Link>
