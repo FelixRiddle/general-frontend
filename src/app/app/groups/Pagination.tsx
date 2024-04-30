@@ -31,25 +31,41 @@ export default function Pagination({
     
     console.log(`Total pages: `, totalPages);
     
-    const pageButtonClasses = "m-1 p-1 flex border border-gray-500 rounded hover:border-rose-600 hover:bg-rose-500"
+    const pageButtonClasses = "m-1 p-1 flex border border-gray-500 rounded hover:border-rose-600 hover:bg-rose-500 disabled:bg-gray-500"
     
     return (
         <div>
             <nav className="flex items-center">
                 {/* Left arrows */}
                 {/* For this one just remove the page */}
-                <Link href={`${pathname}?query=${query}`} className={pageButtonClasses}>
+                <Link
+                    href={`${pathname}?query=${query}`}
+                    className={`${pageButtonClasses} ${currentPage === 1 && "bg-gray-300"}`}
+                    
+                    // Disable left arrow if it's the first page
+                    style={{pointerEvents: currentPage === 1 ? "none" : "auto"}}
+                    aria-disabled={currentPage === 1}
+                    tabIndex={currentPage === 1 ? -1 : 0}
+                >
                     <GoChevronLeft className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                     <GoChevronLeft className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                 </ Link>
-                <Link href={createPageUrl(currentPage - 1)} className={pageButtonClasses}>
+                <Link
+                    href={createPageUrl(currentPage - 1)}
+                    className={`${pageButtonClasses} ${currentPage === 1 && "bg-gray-300"}`}
+                    
+                    // Disable left arrow if it's the first page
+                    style={{pointerEvents: currentPage === 1 ? "none" : "auto"}}
+                    aria-disabled={currentPage === 1}
+                    tabIndex={currentPage === 1 ? -1 : 0}
+                >
                     <GoChevronLeft className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                 </Link>
                 
                 {/* Pages */}
                 {Array.from({ length: totalPages }).map((_, index) => (
-                    <Link href={createPageUrl(index + 1)} key={index} className={pageButtonClasses}>
-                        {index + 1}
+                    <Link href={createPageUrl(index + 1)} key={index} className={`${pageButtonClasses} ${index + 1 === currentPage && "bg-sky-400"}`}>
+                        <span className={"pl-1 pr-1"}>{index + 1}</span>
                     </Link>
                 ))}
                 
