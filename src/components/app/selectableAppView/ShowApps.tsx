@@ -9,22 +9,13 @@ import useSelectableApp, { AppSelection } from '@/components/apps/selectableApp/
  */
 export default function ShowApps({
     apps,
+    appSelection,
+    selectClickCb,
 }: {
     apps: AppData[];
+    appSelection: AppSelection[];
+    selectClickCb: (event: any, appName: string) => void;
 }) {
-    const {
-        appSelection,
-        switchAppSelectedState
-    } = useSelectableApp({
-        apps
-    })
-    
-    const selectClickCb = (event: any, appName: string) => {
-        // event.preventDefault();
-        
-        // Update app selected state
-        switchAppSelectedState(appName);
-    }
     
     return (
         <div>

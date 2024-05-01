@@ -1,12 +1,14 @@
 "use client";
 
-import { Suspense, useState } from "react"
+import { Suspense, useEffect, useState } from "react"
 
 import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import Pagination from "./Pagination";
 import ShowApps from "@/components/app/selectableAppView/ShowApps";
+import useSelectableApp from "@/components/apps/selectableApp/useSelectableApp";
+import AppData from "@/types/AppData";
 
 /**
  * Create group form
@@ -16,21 +18,59 @@ export default async function SimpleCreateGroupForm({
     pages,
     searchParams,
 }: {
-    apps: any[];
+    apps: AppData[];
     pages: number;
     searchParams: {
         query?: string;
         page?: string;
     }
 }) {
-    console.log(`Apps: `, apps);
-    
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
     
-    const [groupApps, setGroupApps] = useState([]);
+    const [groupApps, setGroupApps] = useState<AppData[]>([]);
     
-    console.log(`Total pages: `, pages);
+    // App selection
+    const {
+        appSelection,
+        switchAppSelectedState
+    } = useSelectableApp({
+        apps
+    });
+    
+    const selectClickCb = (event: any, appName: string) => {
+        // event.preventDefault();
+        
+        // Update app selected state
+        switchAppSelectedState(appName);
+        
+        // Find app and add to the group
+        const app = apps.find((app) => app.packageJson.name === appName);
+        if(app) {
+            const groupApp = groupApps.find((app) => app.packageJson.name === appName);
+            if(groupApp) {
+                const groupAppIndex = groupApps.indexOf(app);
+                let newGroupApps = groupApps;
+                newGroupApps.splice(groupAppIndex, 1);
+                
+                return setGroupApps([
+                    ...newGroupApps
+                ]);
+            } else {
+                // Add app to group
+                setGroupApps([
+                    ...groupApps,
+                    app,
+                ]);
+            }
+        }
+    }
+    
+    useEffect(() => {
+        console.log(`Group apps: `, groupApps);
+    }, [groupApps])
+    
+    console.log(`App selection: `, appSelection);
     
     return (
         <div>
@@ -52,7 +92,7 @@ export default async function SimpleCreateGroupForm({
                     <Search placeholder="Search apps" />
                     <Suspense key={query + currentPage} fallback={<TableAppsSkeleton />}>
                         {/* Show apps here */}
-                        <ShowApps apps={apps} />
+                        <ShowApps apps={apps} selectClickCb={selectClickCb} appSelection={appSelection}/>
                     </Suspense>
                     
                     <Pagination totalPages={pages} />
