@@ -9,13 +9,13 @@ export interface ServerResponse {
 }
 
 /**
- * Function to authenticate
+ * Get apps name
  * 
  * @param formData 
  */
-export async function getApps(): Promise<ServerResponse | undefined> {
+export async function getApps(query: string = ""): Promise<ServerResponse | undefined> {
     try {
-        const res = await fetch('http://localhost:24000/apps');
+        const res = await fetch(`http://localhost:24000/apps?query=${query}`);
         const data = await res.json();
         return data;
     } catch(error: any) {

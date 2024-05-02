@@ -16,8 +16,11 @@ export default async function CreateGroupPage({
         page?: string;
     }
 }) {
+    // Fetch apps
+    const query = searchParams?.query || "";
     
-    const apps = await getApps()
+    // There's a query, get apps that match it
+    const appNames = await getApps(query)
         .then((res) => {
             return res?.apps;
         })
@@ -25,24 +28,31 @@ export default async function CreateGroupPage({
             console.error(err);
         });
     
-    const query = searchParams?.query || "";
-    const currentPage = Number(searchParams?.page) || 1;
+    /**
+     * Fetch apps
+     * 
+     * @returns 
+     */
+    const fetchApps = async () => {
+        const currentPage = Number(searchParams?.page) || 1;
+        
+        // Items window
+        const itemsWindowInfo = itemsWindow(appNames.length, currentPage);
+        console.log(`Items window info: `, itemsWindowInfo);
+        
+        // Fetch apps
+        const windowAppsName = appsInPaginationWindow(appNames, itemsWindowInfo);
+        console.log(`Window apps: `, windowAppsName);
+        
+        const windowAppsInfo = await fetchAppsData(windowAppsName);
+        console.log(`Window apps: `, windowAppsInfo);
+        
+        return windowAppsInfo;
+    };
+    const apps = await fetchApps();
     
-    // Items window
-    const itemsWindowInfo = itemsWindow(apps.length, currentPage);
-    
-    // Fetch apps
-    const pages = totalPages(apps.length);
-    
-    console.log(`Items window info: `, itemsWindowInfo);
-    
-    const lastWindowInfo = itemsWindow(apps.length, 7);
-    console.log(`Last window info: `, lastWindowInfo);
-    
-    const windowAppsName = appsInPaginationWindow(apps, itemsWindowInfo);
-    console.log(`Window apps: `, windowAppsName);
-    
-    const windowAppsInfo = await fetchAppsData(windowAppsName);
+    // Get total pages
+    const pages = totalPages(appNames.length);
     
     return (
         <div>
@@ -57,7 +67,7 @@ export default async function CreateGroupPage({
             
             {/* Simple create group form */}
             {/* Different from create group form, the pagination and app information is fetch on the backend */}
-            <SimpleCreateGroupForm apps={windowAppsInfo} searchParams={searchParams} pages={pages} />
+            <SimpleCreateGroupForm apps={apps} searchParams={searchParams} pages={pages} />
         </div>
     );
 }
