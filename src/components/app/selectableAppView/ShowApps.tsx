@@ -9,11 +9,11 @@ import useSelectableApp, { AppSelection } from '@/components/apps/selectableApp/
  */
 export default function ShowApps({
     apps,
-    appSelection,
+    appsGroup,
     selectClickCb,
 }: {
     apps: AppData[];
-    appSelection: AppSelection[];
+    appsGroup: AppData[];
     selectClickCb: (event: any, appName: string) => void;
 }) {
     
@@ -21,16 +21,13 @@ export default function ShowApps({
         <div>
             {/* Show all apps */}
             {apps.map((app, index) => {
-                const isSelected = appSelection[index];
-                if(!isSelected) {
-                    return
-                }
+                const selectedApp = appsGroup.find(selectedApp => selectedApp.packageJson.name === app.packageJson.name)
                 
                 return (
                     <SelectableAppView
                         key={uuidv4()}
                         app={app}
-                        selected={isSelected}
+                        selected={selectedApp ? true : false}
                         selectClickCb={selectClickCb}
                     ></SelectableAppView>
                 );

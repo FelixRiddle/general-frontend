@@ -15,7 +15,7 @@ export default function SelectableAppView({
     selectClickCb,
 }: {
     app: AppData,
-    selected: AppSelection,
+    selected: boolean,
     selectClickCb: (event: any, appName: string) => void,
 }) {
     const [showMore, setShowMore] = useState(false);
@@ -31,8 +31,8 @@ export default function SelectableAppView({
     // There's one project that I deleted that is still showing up, I don't know why
     return (
         <div
-            className={`bg-lime-300 rounded border-2 p-2 m-2 ${selected && selected.selected && "border-sky-500"} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
-            onClick={(e) => selectClickCb(e, selected && selected.packageJson.name)}
+            className={`bg-lime-300 rounded border-2 p-2 m-2 ${selected && "border-sky-500"} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
+            onClick={(e) => selectClickCb(e, selected && app.packageJson.name)}
         >
             {/* Generate tailwind classes, because dynamic code doesn't */}
             <div hidden={true} className={""}></div>
