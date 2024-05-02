@@ -1,5 +1,5 @@
 import AppData from "@/types/AppData";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 /**
  * 
@@ -12,11 +12,8 @@ export default function useSelectedApps({
     
     const [groupApps, setGroupApps] = useState<AppData[]>([]);
     
-    const selectClickCb = (event: any, appName: string) => {
+    const clickToggleAppsSelectionCb = (event: any, appName: string) => {
         // event.preventDefault();
-        
-        // // Update app selected state
-        // switchAppSelectedState(appName);
         
         // Find app and add to the group
         const app = apps.find((app) => app.packageJson.name === appName);
@@ -37,7 +34,7 @@ export default function useSelectedApps({
                     app,
                 ]);
             }
-        
+            
             // console.log(`App selected: `, app);
         } else {
             // console.log(`An app was clicked but it couldn't be found!`);
@@ -50,13 +47,22 @@ export default function useSelectedApps({
         }
     }
     
-    useEffect(() => {
-        console.log(`Group apps: `, groupApps);
-    }, [groupApps]);
+    const clickDeselectAppCb = (event: any, appName: string) => {
+        // Remove app from group
+        setGroupApps([
+            ...groupApps.filter((app) => app.packageJson.name!== appName)
+        ]);
+    }
+    
+    // useEffect(() => {
+    //     console.log(`Group apps: `, groupApps);
+    // }, [groupApps]);
     
     return {
         groupApps,
         setGroupApps,
-        selectClickCb,
+        
+        clickToggleAppsSelectionCb,
+        clickDeselectAppCb,
     }
 }

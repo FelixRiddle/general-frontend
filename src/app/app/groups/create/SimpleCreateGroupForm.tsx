@@ -31,8 +31,11 @@ export default async function SimpleCreateGroupForm({
     // Select apps in groups
     const {
         groupApps,
-        selectClickCb
+        clickToggleAppsSelectionCb,
+        clickDeselectAppCb
     } = useSelectedApps({ apps });
+    
+    const titleClasses = "m-1 p-1 mb-4 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white";
     
     return (
         <div>
@@ -54,10 +57,21 @@ export default async function SimpleCreateGroupForm({
                     <Search placeholder="Search apps" />
                     <Suspense key={query + currentPage} fallback={<TableAppsSkeleton />}>
                         {/* Show apps here */}
-                        <ShowApps apps={apps} selectClickCb={selectClickCb} appsGroup={groupApps}/>
+                        <ShowApps apps={apps} selectClickCb={clickToggleAppsSelectionCb} appsGroup={groupApps}/>
                     </Suspense>
                     
                     <Pagination totalPages={pages} />
+                    
+                    {/* Show selectd apps */}
+                    {groupApps.length > 0 && (
+                        <div>
+                            <h3 className={titleClasses}>Selected apps</h3>
+                            <p>
+                                Click an app to deselect
+                            </p>
+                            <ShowApps apps={groupApps} selectClickCb={clickDeselectAppCb} appsGroup={groupApps} />
+                        </div>
+                    )}
                 </div>
                 <Button>Create group</Button>
             </form>

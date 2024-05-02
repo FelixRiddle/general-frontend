@@ -29,7 +29,7 @@ export default function Pagination({
         return `${pathname}?${params.toString()}`;
     }
     
-    console.log(`Total pages: `, totalPages);
+    // console.log(`Total pages: `, totalPages);
     
     const pageButtonClasses = "m-1 p-1 flex border border-gray-500 rounded hover:border-rose-600 hover:bg-rose-500 disabled:bg-gray-500"
     
