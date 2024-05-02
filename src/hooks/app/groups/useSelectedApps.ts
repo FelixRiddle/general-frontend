@@ -37,6 +37,16 @@ export default function useSelectedApps({
                     app,
                 ]);
             }
+        
+            // console.log(`App selected: `, app);
+        } else {
+            // console.log(`An app was clicked but it couldn't be found!`);
+            
+            // console.log(`Apps: `, apps);
+            // console.log(`App clicked: `, appName);
+            
+            // This shouldn't happen
+            throw new Error(`An app was clicked but it couldn't be found!`);
         }
     }
     
