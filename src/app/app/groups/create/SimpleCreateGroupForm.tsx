@@ -68,7 +68,7 @@ export default async function SimpleCreateGroupForm({
     
     useEffect(() => {
         console.log(`Group apps: `, groupApps);
-    }, [groupApps])
+    }, [groupApps]);
     
     console.log(`App selection: `, appSelection);
     

@@ -21,11 +21,16 @@ export default function ShowApps({
         <div>
             {/* Show all apps */}
             {apps.map((app, index) => {
+                const isSelected = appSelection[index];
+                if(!isSelected) {
+                    return
+                }
+                
                 return (
                     <SelectableAppView
                         key={uuidv4()}
                         app={app}
-                        selected={appSelection[index]}
+                        selected={isSelected}
                         selectClickCb={selectClickCb}
                     ></SelectableAppView>
                 );
