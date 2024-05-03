@@ -15,7 +15,11 @@ export interface ServerResponse {
  */
 export async function getApps(query: string = ""): Promise<ServerResponse | undefined> {
     try {
-        const res = await fetch(`http://localhost:24000/apps?query=${query}`);
+        const res = await fetch(`http://localhost:24000/apps?query=${query}`, {
+            // Don't cache this thing
+            // On release, maybe this should be cached
+            cache: 'no-store',
+        });
         const data = await res.json();
         return data;
     } catch(error: any) {

@@ -24,7 +24,8 @@ export async function getAppData(appPath: string): Promise<AppData | undefined> 
             },
             body: JSON.stringify({
                 path: appPath,
-            })
+            }),
+            cache: 'no-store'
         });
         const data: AppResponse = await res.json();
         const app = data.app;
