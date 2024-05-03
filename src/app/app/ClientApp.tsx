@@ -1,11 +1,8 @@
 'use client';
 
-import { Socket, io } from "socket.io-client";
-import { v4 as uuidv4 } from 'uuid';
+import { io } from "socket.io-client";
 
-import SimpleAppView from "@/components/app/simpleAppView/SimpleAppView";
 import AppData from "@/types/AppData";
-import CustomNavbar from "@/components/customNavbar/CustomNavbar";
 import useApps from "@/hooks/app/useApps";
 import AppCustomNavbar from "./AppCustomNavbar";
 import ShowApps from "@/components/app/simpleAppView/ShowApps";

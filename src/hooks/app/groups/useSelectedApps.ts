@@ -2,7 +2,9 @@ import AppData from "@/types/AppData";
 import { useState } from "react";
 
 /**
+ * Use selected apps
  * 
+ * Hook to select apps and put them in a group
  */
 export default function useSelectedApps({
     apps
@@ -34,14 +36,7 @@ export default function useSelectedApps({
                     app,
                 ]);
             }
-            
-            // console.log(`App selected: `, app);
         } else {
-            // console.log(`An app was clicked but it couldn't be found!`);
-            
-            // console.log(`Apps: `, apps);
-            // console.log(`App clicked: `, appName);
-            
             // This shouldn't happen
             throw new Error(`An app was clicked but it couldn't be found!`);
         }
@@ -54,15 +49,11 @@ export default function useSelectedApps({
         ]);
     }
     
-    // useEffect(() => {
-    //     console.log(`Group apps: `, groupApps);
-    // }, [groupApps]);
-    
     return {
         groupApps,
         setGroupApps,
         
         clickToggleAppsSelectionCb,
         clickDeselectAppCb,
-    }
+    };
 }

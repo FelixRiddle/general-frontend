@@ -13,7 +13,7 @@ export default function Button({
     clickToggleActive = true
 }: {
     children: React.ReactNode;
-    onClick?: () => void;
+    onClick?: ((event: any) => void) | (() => void);
     clickToggleActive?: boolean;
 }) {
     const [active, setActive] = useState(clickToggleActive);
@@ -26,7 +26,7 @@ export default function Button({
                 setActive(!active);
                 
                 if(onClick) {
-                    onClick();
+                    onClick(e);
                 }
             }}
             className={`border rounded border-purple-600 bg-purple-500 active:bg-purple-400 p-2 m-2 ${active && "bg-purple-400"} hover:bg-purple-400 hover:border-purple-500`}>
