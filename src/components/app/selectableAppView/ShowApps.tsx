@@ -21,16 +21,27 @@ export default function ShowApps({
         <div>
             {/* Show all apps */}
             {apps.map((app, index) => {
-                const selectedApp = appsGroup.find(selectedApp => selectedApp.packageJson.name === app.packageJson.name)
+                // Check that package json exists
+                if(app.packageJson) {
+                    const selectedApp = appsGroup.find(selectedApp => {
+                        
+                        // Validate that there's package json in the app
+                        return selectedApp.packageJson && selectedApp.packageJson.name === app.packageJson.name;
+                    });
+                    
+                    return (
+                        <SelectableAppView
+                            key={uuidv4()}
+                            app={app}
+                            selected={selectedApp ? true : false}
+                            selectClickCb={selectClickCb}
+                        ></SelectableAppView>
+                    );
+                }
                 
-                return (
-                    <SelectableAppView
-                        key={uuidv4()}
-                        app={app}
-                        selected={selectedApp ? true : false}
-                        selectClickCb={selectClickCb}
-                    ></SelectableAppView>
-                );
+                // If package json doesn't exists
+                // Don't show anything then
+                return (<></>);
             })}
         </div>
     );
