@@ -17,3 +17,5 @@
     - [x] Go to end button
     - [x] Previous page / Next page button
 
+- [ ] Create group form
+    - [ ] Get fields data

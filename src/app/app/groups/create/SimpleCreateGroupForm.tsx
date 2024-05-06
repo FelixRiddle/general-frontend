@@ -1,6 +1,6 @@
 "use client";
 
-import { Suspense } from "react"
+import { Suspense, useState } from "react"
 
 import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
@@ -28,6 +28,7 @@ export default async function SimpleCreateGroupForm({
 }) {
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
+    const [input, setInput] = useState({});
     
     // Select apps in groups
     const {
@@ -38,12 +39,21 @@ export default async function SimpleCreateGroupForm({
     
     // Use debounced callback
     const updateFieldCb = useDebouncedCallback((event: any) => {
+        const name = event.target.name;
+        const value = event.target.value;
         
-    }, 300);
+        setInput((values: any) => {
+            return {
+                ...values,
+                [name]: value,
+            };
+        });
+    }, 500);
     
     // Create group action
     const createGroupAction = (event: any) => {
         
+        console.log(`Input data: `, input);
     };
     
     const titleClasses = "m-1 p-1 mb-4 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white";
@@ -52,11 +62,11 @@ export default async function SimpleCreateGroupForm({
         <div>
             <form action="">
                 <div>
-                    <label htmlFor="groupName" className="m-1">Group name</label>
+                    <label htmlFor="name" className="m-1">Group name</label>
                     <input
                         type="text"
-                        id="groupName"
-                        name="groupName"
+                        id="name"
+                        name="name"
                         className="m-1 border rounded border-gray-900 p-1"
                         onChange={(event: any) => {
                             updateFieldCb(event);
@@ -64,11 +74,11 @@ export default async function SimpleCreateGroupForm({
                     />
                 </div>
                 <div>
-                    <label htmlFor="groupDescription" className="m-1">Group description</label>
+                    <label htmlFor="description" className="m-1">Group description</label>
                     <input
                         type="text"
-                        id="groupDescription"
-                        name="groupDescription"
+                        id="description"
+                        name="description"
                         className="m-1 border rounded border-gray-900 p-1"
                         onChange={(event: any) => {
                             updateFieldCb(event);
@@ -86,7 +96,9 @@ export default async function SimpleCreateGroupForm({
                         <ShowApps apps={apps} selectClickCb={clickToggleAppsSelectionCb} appsGroup={groupApps}/>
                     </Suspense>
                     
-                    <Pagination totalPages={pages} />
+                    <Pagination
+                        totalPages={pages}
+                    />
                     
                     {/* Show selectd apps */}
                     {groupApps.length > 0 && (

@@ -50,6 +50,7 @@ export default async function CreateGroupPage({
         return windowAppsInfo;
     };
     const apps = await fetchApps();
+    console.log(`New apps: `, apps);
     
     // Get total pages
     const pages = totalPages(appNames.length);
@@ -67,7 +68,11 @@ export default async function CreateGroupPage({
             
             {/* Simple create group form */}
             {/* Different from create group form, the pagination and app information is fetch on the backend */}
-            <SimpleCreateGroupForm apps={apps} searchParams={searchParams} pages={pages} />
+            <SimpleCreateGroupForm
+                apps={apps}
+                searchParams={searchParams}
+                pages={pages}
+            />
         </div>
     );
 }

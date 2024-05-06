@@ -1,6 +1,5 @@
 import { getApps } from "@/api/appManager/apps";
 import AppCustomNavbar from "../AppCustomNavbar";
-import CreateGroupForm from "./create/CreateGroupForm";
 import { itemsWindow, totalPages } from "@/lib/pagination";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
 import SimpleCreateGroupForm from "./create/SimpleCreateGroupForm";
