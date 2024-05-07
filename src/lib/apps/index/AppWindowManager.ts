@@ -1,7 +1,7 @@
 import { getApps } from "@/api/appManager/apps";
 import { fetchAppsData } from "@/api/appManager/repositories";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
-import { itemsWindow, totalPages } from "@/lib/pagination";
+import { ItemsWindowInfo, itemsWindow, totalPages } from "@/lib/pagination";
 import AppData from "@/types/AppData";
 
 /**
@@ -42,7 +42,7 @@ export default class AppWindowManager {
      * 
      * @param typeData Cheap trick to create window apps manager in the frontend from an interface
      */
-    constructor(typeData: AppWindowManagerType | undefined) {
+    constructor(typeData: AppWindowManagerType | undefined = undefined) {
         if(typeData) {
             this.queryInfo = typeData.queryInfo;
             this.appNames = typeData.appNames;
@@ -73,9 +73,9 @@ export default class AppWindowManager {
     }
     
     /**
-     * Get all apps
+     * Update all
      */
-    async fetchAllApps() {
+    async updateAll() {
         const appNames = await getApps(this.queryInfo.query)
            .then((res) => {
                 return res?.apps;
@@ -84,39 +84,67 @@ export default class AppWindowManager {
                 console.error(err);
             });
         
-        const apps = await this.fetchApps();
+        console.log(`Total apps: ${appNames.length}`);
+        // console.log(`Apps: `, appNames);
         
         // Get total pages
         const pages = totalPages(appNames.length);
+        console.log(`Total pages: `, pages);
         
+        // Update
         this.appNames = appNames;
-        this.apps = apps;
         this.pages = pages;
+        
+        // Lastly update apps in window
+        const apps = await this.appsWindow();
+        this.apps = apps;
     }
 
     /**
-     * Fetch apps
+     * Fetch apps in window
      * 
      * @returns 
      */
-    async fetchApps() {
+    async appsWindow() {
         // Items window
-        const itemsWindowInfo = itemsWindow(this.appNames.length, this.queryInfo.page);
+        const itemsWindowInfo = itemsWindow(this.pages, this.queryInfo.page);
         
         // Fetch apps
         const windowAppsName = appsInPaginationWindow(this.appNames, itemsWindowInfo);
         
         const windowAppsInfo = await fetchAppsData(windowAppsName);
         
-        // Pro debugging methods
+        // // Pro debugging methods
         // console.log(`Items window info: `, itemsWindowInfo);
-        // console.log(`Window apps: `, windowAppsName);
-        // console.log(`Window apps: `, windowAppsInfo);
+        // console.log(`Window apps name: `, windowAppsName);
+        // console.log(`Window apps information: `, windowAppsInfo);
         
         return windowAppsInfo;
     }
     
     // --- Query Info ---
+    /**
+     * Query from search params
+     */
+    setQueryFromSearchParams(searchParams: {
+        query?: string;
+        page?: string;
+    }) {
+        // Fetch apps
+        const query = searchParams?.query || "";
+        const page = Number(searchParams?.page) || 1;
+        
+        this.setQuery(query);
+        this.setPage(page);
+    }
+    
+    /**
+     * Set query
+     */
+    setQuery(query: string) {
+        this.queryInfo.query = query;
+    }
+    
     /**
      * Set page
      */

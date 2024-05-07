@@ -6,33 +6,23 @@ import Button from "@/components/button/Button";
 import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
 import { useDebouncedCallback } from "use-debounce";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import AppSelector from "@/components/input/appSelector/AppSelector";
+import QueryAppSelector from "@/components/input/queryAppSelector/QueryAppSelector";
 
 /**
  * Create group form
  */
 export default async function CreateGroupForm({
-    appWindowManagerProp,
+    appWindowManager,
 }: {
-    appWindowManagerProp: AppWindowManagerType,
+    appWindowManager: AppWindowManagerType,
 }) {
     
-    const [appWindowManager, setAppWindowManager] = useState(appWindowManagerProp);
     const [input, setInput] = useState({});
     
     console.log(`App window manager: `, appWindowManager);
     
     // Set page of app window manager
     const setPage = (page: number) => {
-        setAppWindowManager((appWindowManager: AppWindowManagerType) => {
-            return {
-               ...appWindowManager,
-                queryInfo: {
-                   ...appWindowManager.queryInfo,
-                    page,
-                },
-            };
-        });
     };
     
     // Select apps in groups
@@ -88,17 +78,18 @@ export default async function CreateGroupForm({
                         }}
                     />
                 </div>
+                
+                {/* Select apps to be in the group */}
+                <QueryAppSelector
+                    appWindowManager={appWindowManager}
+                    groupApps={groupApps}
+                    clickDeselectAppCb={clickDeselectAppCb}
+                    clickToggleAppsSelectionCb={clickToggleAppsSelectionCb}
+                    setPage={setPage}
+                />
+                
                 <Button onClick={createGroupAction}>Create group</Button>
             </form>
-            
-            {/* Select apps to be in the group */}
-            <AppSelector
-                appWindowManager={appWindowManager}
-                groupApps={groupApps}
-                clickDeselectAppCb={clickDeselectAppCb}
-                clickToggleAppsSelectionCb={clickToggleAppsSelectionCb}
-                setPage={setPage}
-            />
         </div>
     );
 }

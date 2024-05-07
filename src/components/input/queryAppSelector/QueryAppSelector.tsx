@@ -1,20 +1,20 @@
+import { Suspense } from "react";
+
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import ShowApps from "@/components/app/selectableAppView/ShowApps";
-import AppWindowManager, { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import { Suspense } from "react";
-import Pagination from "./Pagination";
+import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import AppData from "@/types/AppData";
+import QueryPagination from "./QueryPagination";
 
 /**
  * 
  */
-export default function AppSelector({
+export default function QueryAppSelector({
     appWindowManager,
     groupApps,
     clickToggleAppsSelectionCb,
     clickDeselectAppCb,
-    setPage,
 }: {
     appWindowManager: AppWindowManagerType;
     groupApps: AppData[];
@@ -39,10 +39,8 @@ export default function AppSelector({
                     <ShowApps apps={appWindowManager.apps} selectClickCb={clickToggleAppsSelectionCb} appsGroup={groupApps}/>
                 </Suspense>
                 
-                <Pagination
+                <QueryPagination
                     totalPages={appWindowManager.pages}
-                    setPage={setPage}
-                    currentPage={appWindowManager.queryInfo.page}
                 />
                 
                 {/* Show selectd apps */}

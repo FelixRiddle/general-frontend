@@ -8,7 +8,7 @@ import { usePathname, useSearchParams } from 'next/navigation';
 /**
  * Pagination
  */
-export default function Pagination({
+export default function QueryPagination({
     totalPages,
 }: {
     totalPages: number;

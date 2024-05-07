@@ -5,8 +5,17 @@ import AppWindowManager from "@/lib/apps/index/AppWindowManager";
 /**
  * Create group
  */
-export default async function CreateV3() {
+export default async function CreateV4({
+    searchParams,
+}: {
+    searchParams: {
+        query?: string;
+        page?: string;
+    }
+}) {
+    
     const appWindowManager = new AppWindowManager();
+    appWindowManager.setQueryFromSearchParams(searchParams);
     await appWindowManager.updateAll();
     
     return (
@@ -21,7 +30,7 @@ export default async function CreateV3() {
             {/* Simple create group form */}
             {/* Different from create group form, the pagination and app information is fetch on the backend */}
             <CreateGroupForm
-                appWindowManagerProp={appWindowManager.toType()}
+                appWindowManager={appWindowManager.toType()}
             />
         </div>
     );
