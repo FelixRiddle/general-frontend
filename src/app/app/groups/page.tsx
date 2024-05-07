@@ -44,7 +44,6 @@ export default async function GroupsPage({
     
     const windowAppsInfo = await fetchAppsData(windowAppsName);
     
-    
     return (
         <div>
             <AppCustomNavbar />
