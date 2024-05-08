@@ -1,6 +1,19 @@
+"use server";
+
+import AppData from "@/types/AppData";
 import AppCustomNavbar from "../../AppCustomNavbar";
 import CreateGroupForm from "./CreateGroupForm";
 import AppWindowManager from "@/lib/apps/index/AppWindowManager";
+
+/**
+ * Form submission
+ */
+export async function createGroup(formData: FormData, groupApps: AppData[]) {
+    "use server";
+    
+    console.log(`Create group with apps: `, groupApps);
+    console.log(`Form data: `, formData);
+}
 
 /**
  * Create group

@@ -7,6 +7,7 @@ import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
 import { useDebouncedCallback } from "use-debounce";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import QueryAppSelector from "@/components/input/queryAppSelector/QueryAppSelector";
+import { createGroup } from "./page";
 
 /**
  * Create group form
@@ -16,15 +17,6 @@ export default async function CreateGroupForm({
 }: {
     appWindowManager: AppWindowManagerType,
 }) {
-    
-    const [input, setInput] = useState({});
-    
-    console.log(`App window manager: `, appWindowManager);
-    
-    // Set page of app window manager
-    const setPage = (page: number) => {
-    };
-    
     // Select apps in groups
     const {
         groupApps,
@@ -32,28 +24,11 @@ export default async function CreateGroupForm({
         clickDeselectAppCb
     } = useSelectedApps({ apps: appWindowManager.apps });
     
-    // Use debounced callback
-    const updateFieldCb = useDebouncedCallback((event: any) => {
-        const name = event.target.name;
-        const value = event.target.value;
-        
-        setInput((values: any) => {
-            return {
-                ...values,
-                [name]: value,
-            };
-        });
-    }, 500);
-    
-    // Create group action
-    const createGroupAction = (event: any) => {
-        
-        console.log(`Input data: `, input);
-    };
+    // const createGroupApps = createGroup.bind
     
     return (
         <div>
-            <form action="">
+            <form action={(formData) => createGroup(formData, groupApps)}>
                 <div>
                     <label htmlFor="name" className="m-1">Group name</label>
                     <input
@@ -61,9 +36,6 @@ export default async function CreateGroupForm({
                         id="name"
                         name="name"
                         className="m-1 border rounded border-gray-900 p-1"
-                        onChange={(event: any) => {
-                            updateFieldCb(event);
-                        }}
                     />
                 </div>
                 <div>
@@ -73,9 +45,6 @@ export default async function CreateGroupForm({
                         id="description"
                         name="description"
                         className="m-1 border rounded border-gray-900 p-1"
-                        onChange={(event: any) => {
-                            updateFieldCb(event);
-                        }}
                     />
                 </div>
                 
@@ -85,10 +54,12 @@ export default async function CreateGroupForm({
                     groupApps={groupApps}
                     clickDeselectAppCb={clickDeselectAppCb}
                     clickToggleAppsSelectionCb={clickToggleAppsSelectionCb}
-                    setPage={setPage}
                 />
                 
-                <Button onClick={createGroupAction}>Create group</Button>
+                {/* <Button>Create group</Button> */}
+                <button type="submit">
+                    Add
+                </button>
             </form>
         </div>
     );
