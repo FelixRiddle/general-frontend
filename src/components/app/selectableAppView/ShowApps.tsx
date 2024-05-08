@@ -16,32 +16,33 @@ export default function ShowApps({
     appsGroup: AppData[];
     selectClickCb: (event: any, appName: string) => void;
 }) {
+    console.log(`UUid: `, uuidv4());
+    console.log(`UUid string: `, uuidv4().toString());
+    
+    // Only apps with package.json
+    const appsWithPackageJson = apps.filter(app => app.packageJson && true);
+    
+    // console.log(`Apps with package json: `, appsWithPackageJson);
+    // const appsWithoutPackageJson = apps.filter(app => app.packageJson && false);
+    // console.log(`Apps without package json: `, appsWithoutPackageJson);
     
     return (
         <div>
             {/* Show all apps */}
-            {apps.map((app, index) => {
-                // Check that package json exists
-                if(app.packageJson) {
-                    const selectedApp = appsGroup.find(selectedApp => {
-                        
-                        // Validate that there's package json in the app
-                        return selectedApp.packageJson && selectedApp.packageJson.name === app.packageJson.name;
-                    });
-                    
-                    return (
-                        <SelectableAppView
-                            key={uuidv4()}
-                            app={app}
-                            selected={selectedApp ? true : false}
-                            selectClickCb={selectClickCb}
-                        ></SelectableAppView>
-                    );
-                }
+            {appsWithPackageJson.map((app, index) => {
+                const selectedApp = appsGroup.find(selectedApp => {
+                    // Validate that there's package json in the app
+                    return selectedApp.packageJson && selectedApp.packageJson.name === app.packageJson.name;
+                });
                 
-                // If package json doesn't exists
-                // Don't show anything then
-                return (<></>);
+                return (
+                    <SelectableAppView
+                        key={uuidv4()}
+                        app={app}
+                        selected={selectedApp ? true : false}
+                        selectClickCb={selectClickCb}
+                    ></SelectableAppView>
+                );
             })}
         </div>
     );

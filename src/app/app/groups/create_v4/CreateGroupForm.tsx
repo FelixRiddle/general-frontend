@@ -1,10 +1,7 @@
 "use client";
 
-import { useState } from "react"
-
 import Button from "@/components/button/Button";
 import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
-import { useDebouncedCallback } from "use-debounce";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import QueryAppSelector from "@/components/input/queryAppSelector/QueryAppSelector";
 import { createGroup } from "./page";
@@ -24,11 +21,12 @@ export default async function CreateGroupForm({
         clickDeselectAppCb
     } = useSelectedApps({ apps: appWindowManager.apps });
     
-    // const createGroupApps = createGroup.bind
+    // const createGroupApps = createGroup.bind(null, groupApps);
     
     return (
         <div>
             <form action={(formData) => createGroup(formData, groupApps)}>
+            {/* <form action={createGroupApps}> */}
                 <div>
                     <label htmlFor="name" className="m-1">Group name</label>
                     <input
@@ -56,10 +54,7 @@ export default async function CreateGroupForm({
                     clickToggleAppsSelectionCb={clickToggleAppsSelectionCb}
                 />
                 
-                {/* <Button>Create group</Button> */}
-                <button type="submit">
-                    Add
-                </button>
+                <Button type={"submit"}>Create group</Button>
             </form>
         </div>
     );

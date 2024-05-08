@@ -63,7 +63,11 @@ export default function QueryPagination({
                 
                 {/* Pages */}
                 {Array.from({ length: totalPages }).map((_, index) => (
-                    <Link href={createPageUrl(index + 1)} key={index} className={`${pageButtonClasses} ${index + 1 === currentPage && "bg-sky-400"}`}>
+                    <Link
+                        href={createPageUrl(index + 1)}
+                        key={createPageUrl(index + 1)}
+                        className={`${pageButtonClasses} ${index + 1 === currentPage && "bg-sky-400"}`}
+                    >
                         <span className={"pl-1 pr-1"}>{index + 1}</span>
                     </Link>
                 ))}
