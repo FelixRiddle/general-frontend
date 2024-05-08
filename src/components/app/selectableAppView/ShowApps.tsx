@@ -16,9 +16,6 @@ export default function ShowApps({
     appsGroup: AppData[];
     selectClickCb: (event: any, appName: string) => void;
 }) {
-    console.log(`UUid: `, uuidv4());
-    console.log(`UUid string: `, uuidv4().toString());
-    
     // Only apps with package.json
     const appsWithPackageJson = apps.filter(app => app.packageJson && true);
     

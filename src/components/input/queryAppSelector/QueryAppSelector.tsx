@@ -20,7 +20,6 @@ export default function QueryAppSelector({
     groupApps: AppData[];
     clickToggleAppsSelectionCb: (event: any, appName: string) => void;
     clickDeselectAppCb: (event: any, appName: string) => void;
-    // setPage: (page: number) => void;
 }) {
     const titleClasses = "m-1 p-1 mb-4 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl dark:text-white";
     

@@ -5,6 +5,7 @@ import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import QueryAppSelector from "@/components/input/queryAppSelector/QueryAppSelector";
 import { createGroup } from "./page";
+import { useRef } from "react";
 
 /**
  * Create group form
@@ -14,6 +15,8 @@ export default async function CreateGroupForm({
 }: {
     appWindowManager: AppWindowManagerType,
 }) {
+    const formRef = useRef(null);
+    
     // Select apps in groups
     const {
         groupApps,
@@ -23,10 +26,24 @@ export default async function CreateGroupForm({
     
     // const createGroupApps = createGroup.bind(null, groupApps);
     
+    // On submit
+    const onSubmit = () => {
+        if(formRef && formRef.current) {
+            const formData = new FormData(formRef.current);
+            createGroup(formData, groupApps);
+        }
+    }
+    
     return (
         <div>
-            <form action={(formData) => createGroup(formData, groupApps)}>
-            {/* <form action={createGroupApps}> */}
+            <form
+                action={(formData) => {
+                    console.log(`Run server action`);
+                    createGroup(formData, groupApps);
+                }}
+                ref={formRef}
+                id="createAppGroupForm"
+            >
                 <div>
                     <label htmlFor="name" className="m-1">Group name</label>
                     <input
@@ -54,7 +71,7 @@ export default async function CreateGroupForm({
                     clickToggleAppsSelectionCb={clickToggleAppsSelectionCb}
                 />
                 
-                <Button type={"submit"}>Create group</Button>
+                <Button type={"submit"} onClick={onSubmit}>Create group</Button>
             </form>
         </div>
     );

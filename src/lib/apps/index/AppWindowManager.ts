@@ -84,12 +84,12 @@ export default class AppWindowManager {
                 console.error(err);
             });
         
-        console.log(`Total apps: ${appNames.length}`);
+        // console.log(`Total apps: ${appNames.length}`);
         // console.log(`Apps: `, appNames);
         
         // Get total pages
         const pages = totalPages(appNames.length);
-        console.log(`Total pages: `, pages);
+        // console.log(`Total pages: `, pages);
         
         // Update
         this.appNames = appNames;
