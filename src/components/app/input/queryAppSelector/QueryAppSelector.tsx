@@ -26,9 +26,7 @@ export default function QueryAppSelector({
     return (
         <div>
             {/* Navbar outside the form */}
-            {/* Trying to fix the problem of continuous re-render */}
             <div>
-                {/* This one take it lightly, because it will take a while to make it actually pleasingly functional */}
                 <label htmlFor="selectedApps" className="m-1">Select apps in the group</label>
                 
                 {/* Search and select an app */}

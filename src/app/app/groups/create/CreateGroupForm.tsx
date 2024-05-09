@@ -3,7 +3,7 @@
 import Button from "@/components/button/Button";
 import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import QueryAppSelector from "@/components/input/queryAppSelector/QueryAppSelector";
+import QueryAppSelector from "@/components/app/input/queryAppSelector/QueryAppSelector";
 import { createGroup } from "./page";
 import { useRef } from "react";
 

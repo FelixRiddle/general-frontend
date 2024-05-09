@@ -34,8 +34,11 @@ export default class AppWindowManager {
     queryInfo: QueryInfo;
     appNames: string[];
     windowAppsInfo: AppData[];
-    pages = 1;
     apps: Array<AppData> = [];
+    
+    // Pagination
+    pages = 1;
+    perPage: number = 5;
     
     /**
      * Constructor
@@ -107,7 +110,7 @@ export default class AppWindowManager {
      */
     async appsWindow() {
         // Items window
-        const itemsWindowInfo = itemsWindow(this.pages, this.queryInfo.page);
+        const itemsWindowInfo = itemsWindow(this.pages, this.queryInfo.page, this.perPage);
         
         // Fetch apps
         const windowAppsName = appsInPaginationWindow(this.appNames, itemsWindowInfo);
@@ -150,5 +153,13 @@ export default class AppWindowManager {
      */
     setPage(page: number) {
         this.queryInfo.page = page;
+    }
+    
+    // --- Pagination ---
+    /**
+     * Set per page
+     */
+    setPerPage(perPage: number) {
+        this.perPage = perPage;
     }
 }

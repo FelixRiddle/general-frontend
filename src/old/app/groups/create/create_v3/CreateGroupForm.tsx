@@ -6,7 +6,7 @@ import Button from "@/components/button/Button";
 import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
 import { useDebouncedCallback } from "use-debounce";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import AppSelector from "@/components/input/appSelector/AppSelector";
+import AppSelector from "@/components/app/input/appSelector/AppSelector";
 
 /**
  * Create group form

@@ -4,7 +4,6 @@ import { useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
-import { AppSelection } from "@/components/apps/selectableApp/useSelectableApp";
 
 /**
  * Simple app view
@@ -16,7 +15,7 @@ export default function SelectableAppView({
 }: {
     app: AppData,
     selected: boolean,
-    selectClickCb: (event: any, appName: string) => void,
+    selectClickCb?: ((event: any, appName: string) => void) | (() => void),
 }) {
     const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
@@ -32,7 +31,11 @@ export default function SelectableAppView({
     return (
         <div
             className={`bg-lime-300 rounded border-2 p-2 m-2 ${selected && "border-sky-500"} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
-            onClick={(e) => selectClickCb(e, app.packageJson.name)}
+            onClick={(e) => {
+                if(selectClickCb) {
+                    selectClickCb(e, app.packageJson.name);
+                }
+            }}
         >
             {/* Generate tailwind classes, because dynamic code doesn't */}
             <div hidden={true} className={""}></div>
