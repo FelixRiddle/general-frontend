@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Socket } from "socket.io-client";
 
 import AppData from "@/types/AppData";
@@ -17,16 +17,21 @@ export default function SimpleAppActions({ app, socket }: { app: AppData, socket
     const startApp = async (event: any) => {
         console.log(`Running app: `, app.packageJson.name);
         try {
-            const devScript = app.packageJson.scripts["dev"];
-            console.log(`Dev script: `, devScript);
+            const startScript = app.packageJson.scripts["start"];
+            console.log(`Start script: `, startScript);
             socket.emit("run", {
                 name: app.packageJson.name,
-                command: devScript,
+                command: startScript,
                 path: app.path,
             });
         } catch(err) {
-            console.log(`Error when emitting run, couldn't get dev script`);
+            console.log(`Error when emitting run, couldn't get start script`);
         }
+    }
+    
+    // Stop app
+    const stopApp = async (event: any) => {
+        // What we have to do here, is to kill the shell and all its chidlren processes
     }
     
     // Classes
@@ -45,15 +50,17 @@ export default function SimpleAppActions({ app, socket }: { app: AppData, socket
                 </button>
                 <button
                     className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
-                    disabled={!isRunning}>Stop</button>
+                    disabled={!isRunning}
+                    onClick={stopApp}
+                >Stop</button>
             </div>
             
             {/* Other actions */}
             <button
                 className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-3 rounded ${disabledClasses}`}
                 onClick={() => {
-                    console.log(`Show other actions: `, !showOtherActions);
-                    console.log(`Package json scripts: `, app.packageJson.scripts);
+                    // console.log(`Show other actions: `, !showOtherActions);
+                    // console.log(`Package json scripts: `, app.packageJson.scripts);
                     setShowOtherActions((prevState) => {
                         return !prevState;
                     });

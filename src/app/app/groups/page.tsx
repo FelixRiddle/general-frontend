@@ -5,6 +5,34 @@ import AppCustomNavbar from "../AppCustomNavbar";
 import { itemsWindow, totalPages } from "@/lib/pagination";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
 import { fetchAppsData } from "@/api/appManager/repositories";
+import { getAppGroups } from "@/api/appManager/group/group";
+
+// const apps = await getApps()
+//     .then((res) => {
+//         return res?.apps;
+//     })
+//     .catch((err) => {
+//         console.error(err);
+//     });
+
+// const query = searchParams?.query || "";
+// const currentPage = Number(searchParams?.page) || 1;
+
+// // Items window
+// const itemsWindowInfo = itemsWindow(apps.length, currentPage);
+
+// // Fetch apps
+// const pages = totalPages(apps.length);
+
+// console.log(`Items window info: `, itemsWindowInfo);
+
+// const lastWindowInfo = itemsWindow(apps.length, 7);
+// console.log(`Last window info: `, lastWindowInfo);
+
+// const windowAppsName = appsInPaginationWindow(apps, itemsWindowInfo);
+// console.log(`Window apps: `, windowAppsName);
+
+// const windowAppsInfo = await fetchAppsData(windowAppsName);
 
 /**
  * App groups page
@@ -15,34 +43,16 @@ export default async function GroupsPage({
     searchParams: {
         query?: string;
         page?: string;
+        perPage?: string;
     }
 }) {
-    const apps = await getApps()
-        .then((res) => {
-            return res?.apps;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    
     const query = searchParams?.query || "";
     const currentPage = Number(searchParams?.page) || 1;
+    const perPage = Number(searchParams?.perPage) || 10;
     
-    // Items window
-    const itemsWindowInfo = itemsWindow(apps.length, currentPage);
-    
-    // Fetch apps
-    const pages = totalPages(apps.length);
-    
-    console.log(`Items window info: `, itemsWindowInfo);
-    
-    const lastWindowInfo = itemsWindow(apps.length, 7);
-    console.log(`Last window info: `, lastWindowInfo);
-    
-    const windowAppsName = appsInPaginationWindow(apps, itemsWindowInfo);
-    console.log(`Window apps: `, windowAppsName);
-    
-    const windowAppsInfo = await fetchAppsData(windowAppsName);
+    // Fetch app groups
+    const appGroups = await getAppGroups(query, currentPage, perPage);
+    console.log(`App groups: `, appGroups);
     
     return (
         <div>
