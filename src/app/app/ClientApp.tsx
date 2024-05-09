@@ -6,7 +6,7 @@ import AppData from "@/types/AppData";
 import useApps from "@/hooks/app/useApps";
 import AppCustomNavbar from "./AppCustomNavbar";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import AppSearch from "@/components/app/search/appSearch/AppSearch";
+// import AppSearch from "@/components/app/search/appSearch/AppSearch";
 import ShowApps from "@/components/app/appViews/multi/simpleAppView/ShowApps";
 
 /**

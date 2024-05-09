@@ -39,7 +39,7 @@ export default function useApps(apps: AppData[], socket: Socket) {
         // If output is undefined, insert a string to it
         if(typeof(app.out) === "undefined") {
             app.out = "";
-            console.log(`Setting app output to a string`);
+            // console.log(`Setting app output to a string`);
         }
         
         return app;

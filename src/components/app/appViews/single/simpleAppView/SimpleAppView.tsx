@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
@@ -38,16 +38,26 @@ export default function SimpleAppView({
         }
     })();
     
+    // On element click
+    const onElementClick = (event: any) => {
+        if(selectClickCb) {
+            selectClickCb(event, app.packageJson.name);
+        } else {
+            // Show app information
+            switchShowMore();
+        }
+    }
+    
     return (
         <div
             // className={`rounded border-2 p-2 m-2 ${appColor}`}
             className={`rounded border-2 p-2 m-2 ${appColor} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
             onClick={(e) => {
-                if(selectClickCb) {
-                    selectClickCb(e, app.packageJson.name);
-                } else {
-                    // Show app information
-                    switchShowMore();
+                // Only when it's not shown
+                // Otherwise it's gonna collapse when you click anywhere insde the parent element
+                // We will enable it to be hidden when the user clicks either the arrow icon or the name
+                if(!showMore) {
+                    onElementClick(e);
                 }
             }}
         >
@@ -56,8 +66,21 @@ export default function SimpleAppView({
                     <div className="flex">
                         {/* Name and toggle */}
                         <div className="flex flex-1">
-                            {showMore ? <SlArrowUp className={arrowClasses} /> : <SlArrowDown className={arrowClasses} /> }
-                            <h1 className="cursor-pointer">{app.name ? app.name : app.packageJson.name}</h1>
+                            {showMore ? (
+                                <SlArrowUp
+                                    className={arrowClasses}
+                                    onClick={onElementClick}
+                                />
+                            ) : (
+                                <SlArrowDown
+                                    className={arrowClasses}
+                                    onClick={onElementClick}
+                                />
+                            )}
+                            <h1
+                                className="cursor-pointer"
+                                onClick={onElementClick}
+                            >{app.name ? app.name : app.packageJson.name}</h1>
                         </div>
                         
                         {/* Is it running */}

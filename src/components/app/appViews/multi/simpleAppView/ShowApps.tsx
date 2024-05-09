@@ -1,3 +1,5 @@
+"use client";
+
 import { v4 as uuidv4 } from 'uuid';
 import SimpleAppView from '../../single/simpleAppView/SimpleAppView';
 import AppData from '@/types/AppData';

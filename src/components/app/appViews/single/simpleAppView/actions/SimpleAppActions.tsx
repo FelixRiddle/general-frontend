@@ -1,8 +1,9 @@
-import { useState } from "react";
+"use client";
+
+import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 
 import AppData from "@/types/AppData";
-import AppAction from "./appScripts/AppAction";
 import AppScriptsView from "./appScripts/AppScriptsView";
 
 /**
@@ -46,14 +47,16 @@ export default function SimpleAppActions({ app, socket }: { app: AppData, socket
                     className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
                     disabled={!isRunning}>Stop</button>
             </div>
-        
+            
             {/* Other actions */}
             <button
                 className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-3 rounded ${disabledClasses}`}
                 onClick={() => {
                     console.log(`Show other actions: `, !showOtherActions);
                     console.log(`Package json scripts: `, app.packageJson.scripts);
-                    setShowOtherActions(!showOtherActions);
+                    setShowOtherActions((prevState) => {
+                        return !prevState;
+                    });
                 }}
             >
                 Show other actions
