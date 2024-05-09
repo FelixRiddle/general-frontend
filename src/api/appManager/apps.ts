@@ -18,7 +18,7 @@ export async function getApps(query: string = ""): Promise<ServerResponse | unde
         const res = await fetch(`http://localhost:24000/apps?query=${query}`, {
             // Don't cache this thing
             // On release, maybe this should be cached
-            // cache: 'no-store',
+            cache: 'no-store',
         });
         const data = await res.json();
         return data;

@@ -17,7 +17,6 @@ export default function ClientApp({ apps: appData }: { apps: AppData[] }) {
     const {
         apps
     } = useApps(appData, socket);
-    console.log(`Apps: `, apps);
     
     return (
         <div>
