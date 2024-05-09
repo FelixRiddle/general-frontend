@@ -46,7 +46,7 @@ export default function Pagination({
                 >
                     <GoChevronLeft className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                     <GoChevronLeft className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
-                </ Link>
+                </Link>
                 <Link
                     href={createPageUrl(currentPage - 1)}
                     className={`${pageButtonClasses} ${currentPage === 1 && "bg-gray-300"}`}
@@ -93,7 +93,7 @@ export default function Pagination({
                 >
                     <GoChevronRight className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
                     <GoChevronRight className={clsx("h-5 w-5", currentPage > 1 && "cursor-pointer")} />
-                </ Link>
+                </Link>
             </nav>
         </div>
     );

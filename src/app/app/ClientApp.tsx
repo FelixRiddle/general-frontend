@@ -5,9 +5,9 @@ import { io } from "socket.io-client";
 import AppData from "@/types/AppData";
 import useApps from "@/hooks/app/useApps";
 import AppCustomNavbar from "./AppCustomNavbar";
-import ShowApps from "@/components/app/simpleAppView/ShowApps";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import AppSearch from "@/components/app/search/appSearch/AppSearch";
+import ShowApps from "@/components/app/appViews/multi/simpleAppView/ShowApps";
 
 /**
  * App but client side
@@ -32,12 +32,12 @@ export default function ClientApp({
             
             <h1>Node app manager</h1>
             
-            {/* <ShowApps apps={apps} socket={socket} /> */}
+            <ShowApps apps={apps} socket={socket} />
             
             {/* App search and pagination */}
-            <AppSearch
+            {/* <AppSearch
                 appWindowManager={appWindowManager}
-            />
+            /> */}
         </div>
     );
 }

@@ -2,10 +2,10 @@ import { Suspense } from "react";
 
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
-import ShowApps from "@/components/app/selectableAppView/ShowApps";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import AppData from "@/types/AppData";
 import QueryPagination from "./QueryPagination";
+import ShowApps from "../../appViews/multi/selectableApps/ShowApps";
 
 /**
  * 

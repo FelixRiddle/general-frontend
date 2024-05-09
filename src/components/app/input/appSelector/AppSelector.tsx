@@ -1,10 +1,11 @@
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
-import ShowApps from "@/components/app/selectableAppView/ShowApps";
+// import ShowApps from "@/components/app/selectableAppView/ShowApps";
 import AppWindowManager, { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import { Suspense } from "react";
 import Pagination from "./Pagination";
 import AppData from "@/types/AppData";
+import ShowApps from "../../appViews/multi/selectableApps/ShowApps";
 
 /**
  * 

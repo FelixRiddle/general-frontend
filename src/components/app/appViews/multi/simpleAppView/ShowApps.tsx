@@ -1,5 +1,5 @@
 import { v4 as uuidv4 } from 'uuid';
-import SimpleAppView from './SimpleAppView';
+import SimpleAppView from '../../single/simpleAppView/SimpleAppView';
 import AppData from '@/types/AppData';
 import { Socket } from 'socket.io-client';
 

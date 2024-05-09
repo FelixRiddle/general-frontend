@@ -3,7 +3,7 @@
 import AppData from "@/types/AppData";
 import React, { useState } from "react";
 
-import ShowApps from "../../app/selectableAppView/ShowApps";
+import ShowApps from "../../../components/app/appViews/multi/selectableApps/ShowApps";
 
 export interface AppSelection {
     appName: string;

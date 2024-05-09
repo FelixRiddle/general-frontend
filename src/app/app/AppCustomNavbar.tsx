@@ -1,4 +1,4 @@
-import CustomNavbar from "@/components/customNavbar/CustomNavbar";
+import CustomNavbar from "@/components/navbar/customNavbar/CustomNavbar";
 
 /**
  * App custom navbar

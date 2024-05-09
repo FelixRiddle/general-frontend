@@ -4,18 +4,18 @@ import { useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
-import { Socket } from "socket.io-client";
-import SimpleAppActions from "./actions/SimpleAppActions";
-import TerminalView from "@/components/terminalView/TerminalView";
 
 /**
  * Simple app view
  */
-export default function SimpleAppView({
-    app, socket
+export default function SelectableAppView({
+    app,
+    selected,
+    selectClickCb,
 }: {
     app: AppData,
-    socket: Socket
+    selected: boolean,
+    selectClickCb?: ((event: any, appName: string) => void) | (() => void),
 }) {
     const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
@@ -26,20 +26,19 @@ export default function SimpleAppView({
     
     // Classes
     const arrowClasses = "mt-1 mr-2";
-    const appColor = (() => {
-        // console.log(`App out: `, app.out);
-        if(app.out) {
-            return "bg-lime-300 border-lime-400";
-        } else {
-            return "bg-gray-300 border-gray-400";
-        }
-    })();
     
+    // There's one project that I deleted that is still showing up, I don't know why
     return (
-        <div className={`rounded border-2 p-2 m-2 ${appColor}`}>
-            {/* Generate tailwind classes, because dynamic code doesn't */}
-            <div hidden={true} className={""}></div>
-            
+        <div
+            className={`bg-lime-300 rounded border-2 p-2 m-2 ${selected && "border-sky-500"} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
+            onClick={(e) => {
+                if(selectClickCb) {
+                    selectClickCb(e, app.packageJson.name);
+                } else {
+                    // Show app information
+                }
+            }}
+        >
             {app.packageJson && (
                 <div>
                     <div className="flex">
@@ -79,16 +78,6 @@ export default function SimpleAppView({
                                     No description
                                 </div>
                             )}
-                            
-                            
-                            {/* Actions */}
-                            <SimpleAppActions app={app} socket={socket} />
-                            
-                            {/* Output */}
-                            {/* If the app is running show the output */}
-                            <div>
-                                <TerminalView output={app.out ? app.out : ""} />
-                            </div>
                         </div>
                     )}
                 </div>
@@ -101,5 +90,31 @@ export default function SimpleAppView({
     );
 }
 
-
+// {showMore && (
+//     <div>
+//         <p>App path: {app.path}</p>
+        
+//         {/* Show description */}
+//         {app.packageJson.description && (
+//             <div>
+//                 <h3>Description</h3>
+//                 <p>{app.packageJson.description}</p>
+//             </div>
+//         ) || (
+//             <div>
+//                 No description
+//             </div>
+//         )}
+        
+        
+//         {/* Actions */}
+//         <SimpleAppActions app={app} socket={socket} />
+        
+//         {/* Output */}
+//         {/* If the app is running show the output */}
+//         <div>
+//             <TerminalView output={app.out ? app.out : ""} />
+//         </div>
+//     </div>
+// )}
 

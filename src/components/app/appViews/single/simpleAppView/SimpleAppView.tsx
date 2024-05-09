@@ -4,18 +4,21 @@ import { useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
+import { Socket } from "socket.io-client";
+import SimpleAppActions from "./actions/SimpleAppActions";
+import TerminalView from "@/components/terminalView/TerminalView";
 
 /**
  * Simple app view
  */
-export default function SelectableAppView({
+export default function SimpleAppView({
     app,
-    selected,
+    socket,
     selectClickCb,
 }: {
     app: AppData,
-    selected: boolean,
-    selectClickCb?: ((event: any, appName: string) => void) | (() => void),
+    socket: Socket,
+    selectClickCb?: ((event: any, appName: string) => void);
 }) {
     const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
@@ -26,27 +29,35 @@ export default function SelectableAppView({
     
     // Classes
     const arrowClasses = "mt-1 mr-2";
+    const appColor = (() => {
+        // console.log(`App out: `, app.out);
+        if(app.out) {
+            return "bg-lime-300 border-lime-400";
+        } else {
+            return "bg-gray-300 border-gray-400";
+        }
+    })();
     
-    // There's one project that I deleted that is still showing up, I don't know why
     return (
         <div
-            className={`bg-lime-300 rounded border-2 p-2 m-2 ${selected && "border-sky-500"} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
+            // className={`rounded border-2 p-2 m-2 ${appColor}`}
+            className={`rounded border-2 p-2 m-2 ${appColor} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
             onClick={(e) => {
                 if(selectClickCb) {
                     selectClickCb(e, app.packageJson.name);
+                } else {
+                    // Show app information
+                    switchShowMore();
                 }
             }}
         >
-            {/* Generate tailwind classes, because dynamic code doesn't */}
-            <div hidden={true} className={""}></div>
-            
             {app.packageJson && (
                 <div>
                     <div className="flex">
                         {/* Name and toggle */}
                         <div className="flex flex-1">
                             {showMore ? <SlArrowUp className={arrowClasses} /> : <SlArrowDown className={arrowClasses} /> }
-                            <h1 className="cursor-pointer" onClick={switchShowMore}>{app.name ? app.name : app.packageJson.name}</h1>
+                            <h1 className="cursor-pointer">{app.name ? app.name : app.packageJson.name}</h1>
                         </div>
                         
                         {/* Is it running */}
@@ -79,6 +90,16 @@ export default function SelectableAppView({
                                     No description
                                 </div>
                             )}
+                            
+                            
+                            {/* Actions */}
+                            <SimpleAppActions app={app} socket={socket} />
+                            
+                            {/* Output */}
+                            {/* If the app is running show the output */}
+                            <div>
+                                <TerminalView output={app.out ? app.out : ""} />
+                            </div>
                         </div>
                     )}
                 </div>
@@ -90,3 +111,6 @@ export default function SelectableAppView({
         </div>
     );
 }
+
+
+
