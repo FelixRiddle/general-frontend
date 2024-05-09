@@ -6,6 +6,7 @@ import { itemsWindow, totalPages } from "@/lib/pagination";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
 import { fetchAppsData } from "@/api/appManager/repositories";
 import { getAppGroups } from "@/api/appManager/group/group";
+import GroupsView from "@/components/group/GroupsView";
 
 // const apps = await getApps()
 //     .then((res) => {
@@ -72,6 +73,9 @@ export default async function GroupsPage({
                     Create group
                 </Link>
             </div>
+            
+            {/* Groups view */}
+            <GroupsView groups={appGroups} />
         </div>
     );
 }
