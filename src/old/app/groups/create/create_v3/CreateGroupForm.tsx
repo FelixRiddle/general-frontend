@@ -11,7 +11,7 @@ import AppSelector from "@/components/input/appSelector/AppSelector";
 /**
  * Create group form
  */
-export default async function CreateGroupForm({
+export default function CreateGroupForm({
     appWindowManagerProp,
 }: {
     appWindowManagerProp: AppWindowManagerType,

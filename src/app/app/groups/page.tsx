@@ -1,10 +1,10 @@
+import Link from "next/link";
+
 import { getApps } from "@/api/appManager/apps";
 import AppCustomNavbar from "../AppCustomNavbar";
 import { itemsWindow, totalPages } from "@/lib/pagination";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
-import SimpleCreateGroupForm from "./create/SimpleCreateGroupForm";
 import { fetchAppsData } from "@/api/appManager/repositories";
-import Link from "next/link";
 
 /**
  * App groups page

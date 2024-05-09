@@ -10,7 +10,7 @@ import { useRef } from "react";
 /**
  * Create group form
  */
-export default async function CreateGroupForm({
+export default function CreateGroupForm({
     appWindowManager,
 }: {
     appWindowManager: AppWindowManagerType,

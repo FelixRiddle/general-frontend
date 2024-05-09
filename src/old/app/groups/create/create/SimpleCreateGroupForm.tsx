@@ -14,7 +14,7 @@ import { useDebouncedCallback } from "use-debounce";
 /**
  * Create group form
  */
-export default async function SimpleCreateGroupForm({
+export default function SimpleCreateGroupForm({
     apps,
     pages,
     searchParams,

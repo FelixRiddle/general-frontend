@@ -1,14 +1,76 @@
-import { getApps } from "@/api/appManager/apps";
-import { fetchAppsData } from "@/api/appManager/repositories";
-import appsInPaginationWindow from "@/lib/app/appsWindow";
-import { itemsWindow, totalPages } from "@/lib/pagination";
+"use server";
+
+import AppData from "@/types/AppData";
 import AppCustomNavbar from "../../AppCustomNavbar";
-import SimpleCreateGroupForm from "./SimpleCreateGroupForm";
+import CreateGroupForm from "./CreateGroupForm";
+import AppWindowManager from "@/lib/apps/index/AppWindowManager";
+
+/**
+ * App group interface
+ */
+export interface AppGroup {
+    name: string;
+    description: string;
+    apps: AppData[];
+}
+
+function getDescription(formData: FormData): string {
+    const description = formData.get("description");
+    if(!description) {
+        return "";
+    }
+    
+    return description.toString();
+}
+
+/**
+ * Form submission
+ */
+export async function createGroup(formData: FormData, groupApps: AppData[]) {
+    "use server";
+    
+    try {
+        console.log(`Create group with apps: `, groupApps);
+        console.log(`Form data: `, formData);
+        
+        // Create app group
+        const name = formData.get("name");
+        if(!name) {
+            throw Error("No name provided");
+        }
+        
+        const description = getDescription(formData);
+        const appGroup: AppGroup = {
+            name: name.toString(),
+            description,
+            apps: groupApps,
+        }
+        
+        console.log(`App group: `, appGroup);
+        
+        // Backend location
+        const location = "http://localhost:24000";
+        const url = `${location}/apps/group/create`;
+        
+        const res = await fetch(url, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(appGroup),
+        });
+        const data = await res.json();
+        console.log(`Data: `, data);
+    } catch(err: any) {
+        console.log(`Error when trying to create the app group`);
+        console.error(err);
+    }
+}
 
 /**
  * Create group
  */
-export default async function CreateGroupPage({
+export default async function CreateV4({
     searchParams,
 }: {
     searchParams: {
@@ -16,44 +78,10 @@ export default async function CreateGroupPage({
         page?: string;
     }
 }) {
-    // Fetch apps
-    const query = searchParams?.query || "";
     
-    // There's a query, get apps that match it
-    const appNames = await getApps(query)
-        .then((res) => {
-            return res?.apps;
-        })
-        .catch((err) => {
-            console.error(err);
-        });
-    
-    /**
-     * Fetch apps
-     * 
-     * @returns 
-     */
-    const fetchApps = async () => {
-        const currentPage = Number(searchParams?.page) || 1;
-        
-        // Items window
-        const itemsWindowInfo = itemsWindow(appNames.length, currentPage);
-        console.log(`Items window info: `, itemsWindowInfo);
-        
-        // Fetch apps
-        const windowAppsName = appsInPaginationWindow(appNames, itemsWindowInfo);
-        console.log(`Window apps: `, windowAppsName);
-        
-        const windowAppsInfo = await fetchAppsData(windowAppsName);
-        console.log(`Window apps: `, windowAppsInfo);
-        
-        return windowAppsInfo;
-    };
-    const apps = await fetchApps();
-    console.log(`New apps: `, apps);
-    
-    // Get total pages
-    const pages = totalPages(appNames.length);
+    const appWindowManager = new AppWindowManager();
+    appWindowManager.setQueryFromSearchParams(searchParams);
+    await appWindowManager.updateAll();
     
     return (
         <div>
@@ -64,14 +92,10 @@ export default async function CreateGroupPage({
                 Apps can be grouped together to manage them together.
             </p>
             
-            {/* No joke, it's really hard to program this thing */}
-            
             {/* Simple create group form */}
             {/* Different from create group form, the pagination and app information is fetch on the backend */}
-            <SimpleCreateGroupForm
-                apps={apps}
-                searchParams={searchParams}
-                pages={pages}
+            <CreateGroupForm
+                appWindowManager={appWindowManager.toType()}
             />
         </div>
     );

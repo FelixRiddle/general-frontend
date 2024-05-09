@@ -9,12 +9,11 @@ import Pagination from "./Pagination";
 import ShowApps from "@/components/app/selectableAppView/ShowApps";
 import AppData from "@/types/AppData";
 import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
-import { useDebouncedCallback } from "use-debounce";
 
 /**
  * Create group form
  */
-export default async function CreateGroupFormFrontend({
+export default function CreateGroupFormFrontend({
     apps,
     pages,
     query,
