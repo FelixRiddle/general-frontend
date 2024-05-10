@@ -10,7 +10,7 @@ export interface AppGroup {
     updatedAt: Date,
 }
 
-export interface GetAppGroupResponse {
+export interface GetAppGroupsResponse {
     appGroups: AppGroup[];
     messages: Array<Status>;
 }
@@ -30,7 +30,7 @@ export async function getAppGroups(query: string, page: number, perPage: number)
             }
             // cache: 'no-store'
         });
-        const data: GetAppGroupResponse = await res.json();
+        const data: GetAppGroupsResponse = await res.json();
         // console.log(`App group response: `, data);
         
         return data.appGroups;

@@ -6,7 +6,7 @@ import Button from "@/components/button/Button";
 import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import Pagination from "./Pagination";
-import ShowApps from "@/components/app/selectableAppView/ShowApps";
+import ShowApps from "@/components/app/appViews/multi/selectableApps/ShowApps";
 import AppData from "@/types/AppData";
 import useSelectedApps from "@/hooks/app/groups/useSelectedApps";
 import { useDebouncedCallback } from "use-debounce";

@@ -1,4 +1,9 @@
+"use server";
 
+import { getAppsDataInGroup } from "@/api/appManager/group/apps";
+import { getAppGroup } from "@/api/appManager/group/id";
+import Group from "@/components/group/deep/Group";
+import { redirect } from "next/navigation";
 
 /**
  * Group page
@@ -6,7 +11,7 @@
  * @param param0 
  * @returns 
  */
-export default function GroupPage({
+export default async function GroupPage({
     params: {
         groupId,
     }
@@ -15,10 +20,25 @@ export default function GroupPage({
         groupId: number,
     }
 }) {
+    const group = await getAppGroup(groupId);
+    console.log(`Group: `, group);
+    
+    if(!group) {
+        // return window.location.href = "/404";
+        return redirect("/404");
+    }
+    
+    const apps = await getAppsDataInGroup(groupId);
+    console.log(`<GroupView />`);
+    console.log(`Apps: `, apps);
     
     return (
         <div>
             <h1>Group id: {groupId}</h1>
+            <Group
+                group={group}
+                apps={apps}
+            />
         </div>
     );
 }
