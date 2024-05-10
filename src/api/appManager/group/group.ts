@@ -1,3 +1,5 @@
+"use server";
+
 import { Status } from "felixriddle.good-roots-ts-api";
 
 export interface AppGroup {

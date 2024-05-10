@@ -1,6 +1,7 @@
 "use client";
 
 import { AppGroup } from "@/api/appManager/group/group";
+import AppData from "@/types/AppData";
 import { useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
@@ -8,9 +9,11 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
  * App group
  */
 export default function Group({
-    group
+    group,
+    apps
 }: {
-    group: AppGroup
+    group: AppGroup,
+    apps: AppData[]
 }) {
     const [showMore, setShowMore] = useState(false);
     
