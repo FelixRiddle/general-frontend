@@ -1,6 +1,6 @@
 "use server";
 
-import { getAppsInGroup } from "@/api/appManager/group/apps";
+import { getAppsDataInGroup } from "@/api/appManager/group/apps";
 import { AppGroup } from "@/api/appManager/group/group";
 import Group from "./Group";
 
@@ -16,7 +16,9 @@ export default async function GroupsView({
     return (
         <div className="mt-4">
             {groups.map(async group => {
-                const apps = await getAppsInGroup(group.id);
+                const apps = await getAppsDataInGroup(group.id);
+                console.log(`<GroupView />`);
+                console.log(`Apps: `, apps);
                 
                 return (
                     <Group

@@ -53,7 +53,7 @@ export default async function GroupsPage({
     
     // Fetch app groups
     const appGroups = await getAppGroups(query, currentPage, perPage);
-    console.log(`App groups: `, appGroups);
+    // console.log(`App groups: `, appGroups);
     
     return (
         <div>

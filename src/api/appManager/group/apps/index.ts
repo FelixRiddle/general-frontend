@@ -3,9 +3,18 @@
 import { Status } from "felixriddle.good-roots-ts-api";
 
 import AppData from "@/types/AppData";
+import { fetchAppsData } from "../../repositories";
 
-export interface AppNamesInGroup {
-    appNames: string[];
+export interface AppGroup {
+    id: number;
+    appName: string;
+    groupId: number;
+    createdAt: Date,
+    updatedAt: Date,
+}
+
+export interface AppNamesInGroupResponse {
+    apps: AppGroup[];
     messages: Array<Status>;
 }
 
@@ -17,7 +26,7 @@ export interface AppsInGroupResponse {
 /**
  * Get apps name in group
  */
-export async function getAppNamesInGroup(groupId: number): Promise<string[]> {
+export async function getAppsInGroup(groupId: number): Promise<AppGroup[]> {
     try {
         const res = await fetch(`http://localhost:24000/apps/group/apps?groupId=${groupId}`, {
             method: 'GET',
@@ -27,10 +36,10 @@ export async function getAppNamesInGroup(groupId: number): Promise<string[]> {
             // Use this for testing
             cache: 'no-store'
         });
-        const data: AppNamesInGroup = await res.json();
-        // console.log(`Response: `, data);
+        const data: AppNamesInGroupResponse = await res.json();
+        const apps = data.apps;
         
-        return data.appNames;
+        return apps;
     } catch(err: any) {
         console.error(err);
         return [];
@@ -40,13 +49,23 @@ export async function getAppNamesInGroup(groupId: number): Promise<string[]> {
 /**
  * Get apps in group
  */
-export async function getAppsInGroup(groupId: number): Promise<AppData[]> {
+export async function getAppsDataInGroup(groupId: number): Promise<AppData[]> {
     try {
-        const appNames = await getAppNamesInGroup(groupId);
-        // console.log(`App names: `, appNames);
+        const groupApps = await getAppsInGroup(groupId);
+        
+        if(groupApps) {
+            // Get the names of the apps
+            const appNames = groupApps.map(app => app.appName);
+            
+            // Fetch app data
+            const appData = await fetchAppsData(appNames);
+            
+            return appData;
+        }
         
         return [];
     } catch(err: any) {
+        console.log(`Error when fetching app data: `);
         console.error(err);
         
         return [];

@@ -31,7 +31,7 @@ export async function getAppGroups(query: string, page: number, perPage: number)
             // cache: 'no-store'
         });
         const data: GetAppGroupResponse = await res.json();
-        console.log(`App group response: `, data);
+        // console.log(`App group response: `, data);
         
         return data.appGroups;
     } catch(error: any) {
