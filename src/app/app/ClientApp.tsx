@@ -19,7 +19,6 @@ export default function ClientApp({
     apps: AppData[]
     appWindowManager: AppWindowManagerType,
 }) {
-    
     const socket = io(`http://localhost:${24000}`);
     
     const {
