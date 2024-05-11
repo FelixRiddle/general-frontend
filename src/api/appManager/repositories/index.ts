@@ -9,7 +9,7 @@ import AppData from "@/types/AppData";
 export async function getAppData(appName: string): Promise<AppData | undefined> {
     try {
         const location = "http://localhost:24000";
-        const url = `${location}/app/repository/javascript?name=${appName}`;
+        const url = `${location}/app/repository/javascript/name?name=${appName}`;
         // console.log(`[GET] ${url}`);
         
         const res = await fetch(url, {
