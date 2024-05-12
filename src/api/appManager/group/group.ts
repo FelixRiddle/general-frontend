@@ -27,8 +27,8 @@ export async function getAppGroups(query: string, page: number, perPage: number)
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
-            }
-            // cache: 'no-store'
+            },
+            cache: 'no-store'
         });
         const data: GetAppGroupsResponse = await res.json();
         // console.log(`App group response: `, data);

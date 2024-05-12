@@ -3,7 +3,7 @@
 import { Status } from "felixriddle.good-roots-ts-api";
 
 import AppData from "@/types/AppData";
-import { fetchAppsData } from "../../repositories";
+import { fetchAppsDataByName } from "../../repositories";
 
 export interface AppGroup {
     id: number;
@@ -58,7 +58,7 @@ export async function getAppsDataInGroup(groupId: number): Promise<AppData[]> {
             const appNames = groupApps.map(app => app.appName);
             
             // Fetch app data
-            const appData = await fetchAppsData(appNames);
+            const appData = await fetchAppsDataByName(appNames);
             
             return appData;
         }
