@@ -19,6 +19,7 @@ Filter, sorting and view todo lists.
 ## Sorting
 
 - [ ] Sort alphabetically
+    - [ ] It's the default
     - [ ] Inverted sorting
 - [x] Apps with output are on top
     - [ ] Apps that are currently running are on top
@@ -28,7 +29,6 @@ Filter, sorting and view todo lists.
     - Condition
         The app has process model support
         - [ ] Simply check last updated on the 'process' model / table.
-
 
 ## View
 

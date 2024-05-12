@@ -2,7 +2,7 @@
 
 - [x] Show group
     - [x] Group info
-    - [ ] Group apps
+    - [x] Group apps
     - [ ] Run a command for every group app
 - [ ] Pagination
-- [ ] Search
+- [ ] Search groups by name
