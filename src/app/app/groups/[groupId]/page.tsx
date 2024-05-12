@@ -34,7 +34,6 @@ export default async function GroupPage({
     
     return (
         <div>
-            <h1>Group id: {groupId}</h1>
             <Group
                 group={group}
                 apps={apps}

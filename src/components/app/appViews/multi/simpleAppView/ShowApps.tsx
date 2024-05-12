@@ -17,13 +17,12 @@ export default function ShowApps({
     socket: Socket;
 }) {
     const [showApps, setShowApps] = useState(apps);
-    const [firstRender, setFirstRender] = useState(true);
     
     /**
-     * Sort alphabetically
+     * Sort and add
      */
-    const sortAlphabetically = () => {
-        setShowApps(apps.sort((a, b) => {
+    useEffect(() => {
+        const sortedApps = apps.sort((a, b) => {
             if (a.packageJson.name < b.packageJson.name) {
                 return -1;
             }
@@ -31,16 +30,10 @@ export default function ShowApps({
                 return 1;
             }
             return 0;
-        }));
-    }
-    
-    useEffect(() => {
-        if(firstRender) {
-            sortAlphabetically();
-            
-            setFirstRender(false);
-        }
-    }, [firstRender]);
+        });
+        
+        setShowApps(sortedApps);
+    }, [apps]);
     
     return (
         <div>

@@ -58,7 +58,7 @@ export default function useApps(apps: AppData[], socket: Socket) {
     
     // Stdout
     socket.on('out', (out) => {
-        console.log(`out: `, out);
+        // console.log(`out: `, out);
         
         // Update apps output
         const name = out.app.name;
