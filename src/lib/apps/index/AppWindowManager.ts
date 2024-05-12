@@ -87,20 +87,23 @@ export default class AppWindowManager {
                 console.error(err);
             });
         
-        // console.log(`Total apps: ${appNames.length}`);
-        // console.log(`Apps: `, appNames);
+        console.log(`App names: `, appNames);
         
-        // Get total pages
-        const pages = totalPages(appNames.length);
-        // console.log(`Total pages: `, pages);
-        
-        // Update
-        this.appNames = appNames;
-        this.pages = pages;
-        
-        // Lastly update apps in window
-        const apps = await this.appsWindow();
-        this.apps = apps;
+        if(appNames) {
+            // Get total pages
+            const pages = totalPages(appNames.length);
+            // console.log(`Total pages: `, pages);
+            
+            // Update
+            this.appNames = appNames;
+            this.pages = pages;
+            
+            // Lastly update apps in window
+            const apps = await this.appsWindow();
+            this.apps = apps;
+        } else {
+            console.log(`WARNING: Couldn't fetch apps! Maybe 'app-manager' backend is not running?`);
+        }
     }
 
     /**
