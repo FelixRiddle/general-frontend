@@ -48,6 +48,11 @@ export default function SimpleAppView({
         }
     }
     
+    const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
+    const subtitleClasses = "m-1 p-1 text-xs font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
+    const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";
+    const paragraphClasses = "p-1 m-1 text-gray-900";
+    
     return (
         <div
             // className={`rounded border-2 p-2 m-2 ${appColor}`}
@@ -78,7 +83,7 @@ export default function SimpleAppView({
                                 />
                             )}
                             <h1
-                                className="cursor-pointer"
+                                className={`cursor-pointer`}
                                 onClick={onElementClick}
                             >{app.name ? app.name : app.packageJson.name}</h1>
                         </div>
@@ -100,13 +105,11 @@ export default function SimpleAppView({
                     </div>
                     {showMore && (
                         <div>
-                            <p>App path: {app.path}</p>
-                            
                             {/* Show description */}
                             {app.packageJson.description && (
                                 <div>
-                                    <h3>Description</h3>
-                                    <p>{app.packageJson.description}</p>
+                                    <h3 className={subtitleClasses}>Description</h3>
+                                    <p className={paragraphClasses}>{app.packageJson.description}</p>
                                 </div>
                             ) || (
                                 <div>

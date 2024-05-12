@@ -1,6 +1,7 @@
 {
     "name": "general-frontend",
     "version": "0.1.0",
+    "description": "General frontend is a central app manager for many of my apps",
     "private": true,
     "scripts": {
         "dev": "next dev -p 3003",
