@@ -7,6 +7,7 @@ import Link from "next/link";
  */
 export default function Home() {
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
+    const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";
     
     return (
         <div>
@@ -19,7 +20,7 @@ export default function Home() {
             <nav>
                 <ul>
                     <li>
-                        <Link href="/doc" className={"p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline"}>Documentation</Link>
+                        <Link href="/doc" className={linkClasses}>Documentation</Link>
                     </li>
                 </ul>
             </nav>
