@@ -29,21 +29,35 @@ export function findApp(apps: AppData[], name: string) {
     return undefined;
 }
 
+
+/**
+ * Sort alphabetically
+ */
+export function sortAlphabetically(apps: AppData[]) {
+    return apps.sort((a, b) => {
+        return a.packageJson.name.localeCompare(b.packageJson.name);
+    });
+}
+
 /**
  * Use apps
  */
 export default function useApps(apps: AppData[], socket: Socket) {
     const debug = false;
-    const [filteredApps, setFilteredApps] = useState(apps.filter((app) => {
+    
+    // Fix app.out and sort alphabetically
+    const [filteredApps, setFilteredApps] = useState(sortAlphabetically(
+        apps.filter((app) => {
         
-        // If output is undefined, insert a string to it
-        if(typeof(app.out) === "undefined") {
-            app.out = "";
-            // console.log(`Setting app output to a string`);
-        }
-        
-        return app;
-    }));
+            // If output is undefined, insert a string to it
+            if(typeof(app.out) === "undefined") {
+                app.out = "";
+                // console.log(`Setting app output to a string`);
+            }
+            
+            return app;
+        })
+    ));
     
     // On app start
     socket.on('app start', (appName: string) => {
@@ -83,11 +97,15 @@ export default function useApps(apps: AppData[], socket: Socket) {
                 console.log(`App data(message added): `, newAppData);
             }
             
-            return [
+            // Create result and sort alphabetically
+            const result = [
                 // Put it above to show that it has changed
+                // TODO: After the sort it's gonna remove the position, I'm gonna need to fix this later
                 newAppData,
-                ...apps.filter(app => app.packageJson.name !== name),
+               ...apps.filter(app => app.packageJson.name!== name),
             ];
+            
+            return result;
         });
     });
     
@@ -118,11 +136,15 @@ export default function useApps(apps: AppData[], socket: Socket) {
                 console.log(`App data(message added): `, newAppData);
             }
             
-            return [
+            // Create result and sort alphabetically
+            const result = [
                 // Put it above to show that it has changed
+                // TODO: After the sort it's gonna remove the position, I'm gonna need to fix this later
                 newAppData,
-                ...apps.filter(app => app.packageJson.name !== name),
+               ...apps.filter(app => app.packageJson.name!== name),
             ];
+            
+            return result;
         });
     });
     

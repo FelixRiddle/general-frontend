@@ -87,7 +87,7 @@ export default class AppWindowManager {
                 console.error(err);
             });
         
-        console.log(`App names: `, appNames);
+        // console.log(`App names: `, appNames);
         
         if(appNames) {
             // Get total pages
