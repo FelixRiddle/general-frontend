@@ -1,10 +1,6 @@
 import Link from "next/link";
 
-import { getApps } from "@/api/appManager/apps";
 import AppCustomNavbar from "../AppCustomNavbar";
-import { itemsWindow, totalPages } from "@/lib/pagination";
-import appsInPaginationWindow from "@/lib/app/appsWindow";
-import { fetchAppsData } from "@/api/appManager/repositories";
 import { getAppGroups } from "@/api/appManager/group/group";
 import GroupsView from "@/components/group/shallow/GroupsView";
 
