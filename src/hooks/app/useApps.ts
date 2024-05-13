@@ -40,28 +40,73 @@ export function sortAlphabetically(apps: AppData[]) {
 }
 
 /**
+ * Append message to app and re-create the app state
+ */
+export function appendMessage(apps: AppData[], name: string, message: string) {
+    // Get previous app output
+    const appData = findApp(apps, name);
+    if(!appData) {
+        throw new Error("Couldn't find the app " + name);
+    }
+    
+    // Insert output message
+    const newAppData = {
+        ...appData,
+        out: appData.out + message,
+    };
+    
+    // Insert the updated app into the array
+    const updatedState = [
+        newAppData,
+       ...apps.filter(app => app.packageJson.name !== name),
+    ];
+    
+    // Result from createAppsState
+    const result = createAppsState(updatedState);
+    return result;
+}
+
+/**
+ * Create apps state
+ */
+export function createAppsState(apps: AppData[]) {
+    // Sort alphabetically
+    const sortedApps = sortAlphabetically(apps);
+    
+    // If output is undefined, insert a string to it
+    const updatedApps = sortedApps.filter((app) => {
+        if(typeof(app.out) === "undefined") {
+            app.out = "";
+        }
+        return app;
+    });
+    
+    // Apps with output are first in the list
+    const appsOutput = updatedApps.filter((app) => {
+        return typeof(app.out)!== "undefined";
+    });
+    
+    // Apps without output are last in the list
+    const appsNoOutput = updatedApps.filter((app) => {
+        return typeof(app.out) === "undefined";
+    });
+    
+    const outputFirst = [...appsOutput,...appsNoOutput];
+    
+    return outputFirst;
+}
+
+/**
  * Use apps
  */
 export default function useApps(apps: AppData[], socket: Socket) {
     const debug = false;
     
     // Fix app.out and sort alphabetically
-    const [filteredApps, setFilteredApps] = useState(sortAlphabetically(
-        apps.filter((app) => {
-        
-            // If output is undefined, insert a string to it
-            if(typeof(app.out) === "undefined") {
-                app.out = "";
-                // console.log(`Setting app output to a string`);
-            }
-            
-            return app;
-        })
-    ));
+    const [filteredApps, setFilteredApps] = useState<AppData[]>(createAppsState(apps));
     
     // On app start
     socket.on('app start', (appName: string) => {
-        console.log(`Event: app start`);
         console.log(`App ${appName} started`);
     });
     
@@ -72,80 +117,18 @@ export default function useApps(apps: AppData[], socket: Socket) {
     
     // Stdout
     socket.on('out', (out) => {
-        // console.log(`out: `, out);
-        
-        // Update apps output
+        // Update app output
         const name = out.app.name;
-        // console.log(`App name: `, name);
-        setFilteredApps((apps) => {
-            // Get previous app output
-            const appData = findApp(apps, name);
-            if(!appData) {
-                throw new Error("Couldn't find the app " + name);
-            }
-            
-            if(debug) {
-                console.log(`--- Stdout ---`);
-                console.log(`Out message: `, out.message);
-            }
-            
-            const newAppData = {
-                ...appData,
-                out: appData.out + out.message,
-            };
-            if(debug) {
-                console.log(`App data(message added): `, newAppData);
-            }
-            
-            // Create result and sort alphabetically
-            const result = [
-                // Put it above to show that it has changed
-                // TODO: After the sort it's gonna remove the position, I'm gonna need to fix this later
-                newAppData,
-               ...apps.filter(app => app.packageJson.name!== name),
-            ];
-            
-            return result;
-        });
+        
+        setFilteredApps((apps) => appendMessage(apps, name, out.message));
     });
     
     // Stderr
     socket.on('err', (err) => {
-        console.log(`err: `, err);
-        
-        // Update apps output
+        // Update app output
         const name = err.app.name;
-        // console.log(`App name: `, name);
-        setFilteredApps((apps) => {
-            // Get previous app output
-            const appData = findApp(apps, name);
-            if(!appData) {
-                throw new Error("Couldn't find the app " + name);
-            }
-            
-            if(debug) {
-                console.log(`--- Stderr ---`);
-                console.log(`Err message: `, err.message);
-            }
-            
-            const newAppData = {
-                ...appData,
-                out: appData.out + err.message,
-            };
-            if(debug) {
-                console.log(`App data(message added): `, newAppData);
-            }
-            
-            // Create result and sort alphabetically
-            const result = [
-                // Put it above to show that it has changed
-                // TODO: After the sort it's gonna remove the position, I'm gonna need to fix this later
-                newAppData,
-               ...apps.filter(app => app.packageJson.name!== name),
-            ];
-            
-            return result;
-        });
+        
+        setFilteredApps((apps) => appendMessage(apps, name, err.message));
     });
     
     return {

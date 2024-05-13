@@ -15,10 +15,8 @@ export default function SimpleAppActions({ app, socket }: { app: AppData, socket
     
     // Start app
     const startApp = async (event: any) => {
-        console.log(`Running app: `, app.packageJson.name);
         try {
             const startScript = app.packageJson.scripts["start"];
-            console.log(`Start script: `, startScript);
             socket.emit("run", {
                 name: app.packageJson.name,
                 command: startScript,
