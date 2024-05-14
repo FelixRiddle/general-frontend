@@ -29,7 +29,6 @@ export function findApp(apps: AppData[], name: string) {
     return undefined;
 }
 
-
 /**
  * Sort alphabetically
  */
@@ -70,6 +69,10 @@ export function appendMessage(apps: AppData[], name: string, message: string) {
  * Create apps state
  */
 export function createAppsState(apps: AppData[]) {
+    const operationName = "[Transform array]";
+    
+    console.log(`${operationName} Sort alphabetically`);
+    
     // Sort alphabetically
     const sortedApps = sortAlphabetically(apps);
     
@@ -81,23 +84,31 @@ export function createAppsState(apps: AppData[]) {
         return app;
     });
     
+    console.log(`${operationName} Set apps with output first`);
     // Apps with output are first in the list
     const appsOutput = updatedApps.filter((app) => {
-        return typeof(app.out)!== "undefined";
+        return app && app.out && app.out.length > 0;
     });
     
     // Apps without output are last in the list
     const appsNoOutput = updatedApps.filter((app) => {
-        return typeof(app.out) === "undefined";
+        // app.out is either 'undefined' or empty string
+        return !app.out;
     });
     
+    console.log(`Apps with output: `, appsOutput);
+    
     const outputFirst = [...appsOutput,...appsNoOutput];
+    
+    // console.log(`Result: `, outputFirst);
     
     return outputFirst;
 }
 
 /**
  * Use apps
+ * 
+ * @deprecated
  */
 export default function useApps(apps: AppData[], socket: Socket) {
     const debug = false;
@@ -105,6 +116,7 @@ export default function useApps(apps: AppData[], socket: Socket) {
     // Fix app.out and sort alphabetically
     const [filteredApps, setFilteredApps] = useState<AppData[]>(createAppsState(apps));
     
+    // TODO: FIX: These things are updated randomly I can't use a 'useEffect' here
     // On app start
     socket.on('app start', (appName: string) => {
         console.log(`App ${appName} started`);

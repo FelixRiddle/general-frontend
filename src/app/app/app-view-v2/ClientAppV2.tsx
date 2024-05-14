@@ -1,34 +1,27 @@
 'use client';
 
-import { io } from "socket.io-client";
-
 import AppData from "@/types/AppData";
-import useApps from "@/hooks/app/useApps";
-import AppCustomNavbar from "./AppCustomNavbar";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import ShowApps from "@/components/app/appViews/multi/simpleAppView/ShowApps";
+import ShowAppsV2 from "@/components/app/appViews/multi-apps-view-v2/ShowApps";
+import AppCustomNavbar from "../AppCustomNavbar";
 
 /**
  * App but client side
  */
-export default function ClientApp({
-    apps: appData,
+export default function ClientAppV2({
+    apps,
     appWindowManager,
+    runApp,
 }: {
     apps: AppData[]
     appWindowManager: AppWindowManagerType,
+    runApp: (appInfo: any) => void,
 }) {
-    const socket = io(`http://localhost:${24000}`);
-    
-    const {
-        apps
-    } = useApps(appData, socket);
+    console.log(`Client app view`);
     
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";
     const paragraphClasses = "p-1 m-1 text-gray-900";
-    
-    console.log(`Resulting apps: `, apps);
     
     return (
         <div>
@@ -42,12 +35,7 @@ export default function ClientApp({
                 The command line output of the apps is also visible for each app.
             </p>
             
-            <ShowApps apps={apps} socket={socket} />
-            
-            {/* App search and pagination */}
-            {/* <AppSearch
-                appWindowManager={appWindowManager}
-            /> */}
+            <ShowAppsV2 apps={apps} runApp={runApp}/>
         </div>
     );
 }

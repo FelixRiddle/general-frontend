@@ -21,6 +21,12 @@ Filter, sorting and view todo lists.
 - [x] Sort alphabetically
     - [x] It's the default
     - [ ] Inverted sorting
+
+- [ ] [Bug] Apps with output are not on top for some reason
+<!-- 2024/05/13 -->
+<!-- I was trying to update state on the frontend without useEffect -->
+<!-- Now I'm trying to move the socket connection to the backend -->
+
 - [x] Apps with output are on top
     - [ ] Apps that are currently running are on top
     - [ ] Apps that have stopped / terminated are below
