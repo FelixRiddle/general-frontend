@@ -118,7 +118,6 @@ export default function SimpleAppViewV2({
                                 </div>
                             )}
                             
-                            
                             {/* Actions */}
                             <SimpleAppActionsV2 app={app} socket={socket} />
                             

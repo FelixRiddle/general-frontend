@@ -35,6 +35,7 @@ export default function AppActionV2({
                             path: app.path,
                         };
                         
+                        console.log(`Emit: Run app event`);
                         console.log(`Run app: `, appInfo);
                         
                         // await runApp(appInfo);

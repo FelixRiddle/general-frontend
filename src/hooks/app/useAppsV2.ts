@@ -43,6 +43,7 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
             });
             
             // Stdout
+            // React in development mode will run this twice
             socket.on('out', (out) => {
                 // Update app output
                 const name = out.app.name;

@@ -45,18 +45,23 @@ export function appendMessage(apps: AppData[], name: string, message: string) {
     // Get previous app output
     const appData = findApp(apps, name);
     if(!appData) {
+        console.log(`Couldn't find the app to add output to: `, name);
         throw new Error("Couldn't find the app " + name);
     }
     
-    // Insert output message
-    const newAppData = {
-        ...appData,
-        out: appData.out + message,
-    };
+    appData.out += message;
+    console.log(`App data + out: `, appData);
+    
+    // This doesn't update the view for some reason
+    // // Insert output message
+    // const newAppData = {
+    //     ...appData,
+    //     out: appData.out + message,
+    // };
     
     // Insert the updated app into the array
     const updatedState = [
-        newAppData,
+        appData,
        ...apps.filter(app => app.packageJson.name !== name),
     ];
     
