@@ -1,5 +1,6 @@
 import AppData from "@/types/AppData";
 import AppActionV2 from "./AppActionV2";
+import { Socket } from "socket.io-client";
 
 /**
  * App scripts view
@@ -7,14 +8,13 @@ import AppActionV2 from "./AppActionV2";
 export default function AppScriptsViewV2({
     scripts,
     app,
-    runApp,
+    socket,
 }: {
     scripts: object;
     app: AppData;
-    runApp: (appInfo: any) => void;
+    socket: Socket;
 }) {
     const scriptEntries = Object.entries(scripts);
-    
     
     return scriptEntries.map(([commandKey, value], index) => {
         if(typeof(value) !== 'string') {
@@ -34,7 +34,7 @@ export default function AppScriptsViewV2({
                 scriptName={commandKey}
                 command={command}
                 app={app}
-                runApp={runApp}
+                socket={socket}
             />
         );
     });

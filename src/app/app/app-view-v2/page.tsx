@@ -22,32 +22,14 @@ export default async function App({
     appWindowManager.setQueryFromSearchParams(searchParams);
     await appWindowManager.updateAll();
     
-    // App data
     const appsData = await getAppsData();
-    const appsManager = new Apps(appsData, appManagerSocket());
-    appsManager.defaultAppsView();
-    const appsView = appsManager.getAppsView();
-    
-    const runAnyApp = (appInfo: any) => {
-        // appsManager.runApp(appInfo);
-    }
-    
-    // Run app server action
-    async function runApp(appInfo: any) {
-        "use server";
-        
-        console.log(`Update app info: `, appInfo);
-        
-        // You can't run functions that don't have "use server"
-        // runAnyApp(appInfo);
-    }
     
     return(
         <div>
             <ClientAppV2
-                apps={appsView}
+                apps={appsData}
                 appWindowManager={appWindowManager.toType()}
-                runApp={runApp}
+                
             ></ClientAppV2>
         </div>
     );

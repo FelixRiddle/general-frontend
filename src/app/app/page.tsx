@@ -24,9 +24,10 @@ export default async function App({
     await appWindowManager.updateAll();
     
     // App data
+    // The apps are handled with 'useApps' hook on the client side
     const appsData = await getAppsData();
-    const appsManager = new Apps(appsData, appManagerSocket());
-    appsManager.defaultAppsView();
+    // const appsManager = new Apps(appsData, appManagerSocket());
+    // appsManager.defaultAppsView();
     
     return(
         <div>

@@ -1,7 +1,7 @@
 "use client";
 
 import AppData from "@/types/AppData";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Socket } from "socket.io-client";
 
 /**
@@ -71,7 +71,7 @@ export function appendMessage(apps: AppData[], name: string, message: string) {
 export function createAppsState(apps: AppData[]) {
     const operationName = "[Transform array]";
     
-    console.log(`${operationName} Sort alphabetically`);
+    // console.log(`${operationName} Sort alphabetically`);
     
     // Sort alphabetically
     const sortedApps = sortAlphabetically(apps);
@@ -84,7 +84,7 @@ export function createAppsState(apps: AppData[]) {
         return app;
     });
     
-    console.log(`${operationName} Set apps with output first`);
+    // console.log(`${operationName} Set apps with output first`);
     // Apps with output are first in the list
     const appsOutput = updatedApps.filter((app) => {
         return app && app.out && app.out.length > 0;
@@ -96,7 +96,7 @@ export function createAppsState(apps: AppData[]) {
         return !app.out;
     });
     
-    console.log(`Apps with output: `, appsOutput);
+    // console.log(`Apps with output: `, appsOutput);
     
     const outputFirst = [...appsOutput,...appsNoOutput];
     
@@ -108,7 +108,7 @@ export function createAppsState(apps: AppData[]) {
 /**
  * Use apps
  * 
- * @deprecated
+ * TODO: Big time trouble on whether using useEffect or not with the sockets, I have to do multiple implementations and check which one fits better.
  */
 export default function useApps(apps: AppData[], socket: Socket) {
     const debug = false;
@@ -116,7 +116,7 @@ export default function useApps(apps: AppData[], socket: Socket) {
     // Fix app.out and sort alphabetically
     const [filteredApps, setFilteredApps] = useState<AppData[]>(createAppsState(apps));
     
-    // TODO: FIX: These things are updated randomly I can't use a 'useEffect' here
+    // useEffect(() => {
     // On app start
     socket.on('app start', (appName: string) => {
         console.log(`App ${appName} started`);
@@ -142,6 +142,7 @@ export default function useApps(apps: AppData[], socket: Socket) {
         
         setFilteredApps((apps) => appendMessage(apps, name, err.message));
     });
+    // }, []);
     
     return {
         apps: filteredApps,

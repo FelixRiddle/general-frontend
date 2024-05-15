@@ -18,22 +18,22 @@ export default function ShowApps({
 }) {
     const [showApps, setShowApps] = useState(apps);
     
-    /**
-     * Sort and add
-     */
-    useEffect(() => {
-        const sortedApps = apps.sort((a, b) => {
-            if (a.packageJson.name < b.packageJson.name) {
-                return -1;
-            }
-            if (a.packageJson.name > b.packageJson.name) {
-                return 1;
-            }
-            return 0;
-        });
+    // /**
+    //  * Sort and add
+    //  */
+    // useEffect(() => {
+    //     const sortedApps = apps.sort((a, b) => {
+    //         if (a.packageJson.name < b.packageJson.name) {
+    //             return -1;
+    //         }
+    //         if (a.packageJson.name > b.packageJson.name) {
+    //             return 1;
+    //         }
+    //         return 0;
+    //     });
         
-        setShowApps(sortedApps);
-    }, [apps]);
+    //     setShowApps(sortedApps);
+    // }, [apps]);
     
     return (
         <div>

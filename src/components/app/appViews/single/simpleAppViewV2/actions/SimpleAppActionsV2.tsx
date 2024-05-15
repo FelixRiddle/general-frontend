@@ -4,16 +4,17 @@ import { useState } from "react";
 
 import AppData from "@/types/AppData";
 import AppScriptsViewV2 from "./appScripts/AppScriptsViewV2";
+import { Socket } from "socket.io-client";
 
 /**
  * Simple app actions
  */
 export default function SimpleAppActionsV2({
     app,
-    runApp
+    socket
 }: {
     app: AppData;
-    runApp: (appInfo: any) => void;
+    socket: Socket;
 }) {
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
     const [showOtherActions, setShowOtherActions] = useState(false);
@@ -28,7 +29,8 @@ export default function SimpleAppActionsV2({
                 path: app.path,
             };
             
-            runApp(appInfo);
+            console.log(`TODO: Start app`);
+            // runApp(appInfo);
         } catch(err: any) {
             console.log(`Error when emitting run, couldn't get start script`);
             console.error(err);
@@ -78,7 +80,7 @@ export default function SimpleAppActionsV2({
                 <AppScriptsViewV2
                     scripts={app.packageJson.scripts}
                     app={app}
-                    runApp={runApp}
+                    socket={socket}
                 />
             ) : (
             // ( : )

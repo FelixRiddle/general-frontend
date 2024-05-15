@@ -1,4 +1,5 @@
 import AppData from "@/types/AppData";
+import { Socket } from "socket.io-client";
 
 /**
  * App action
@@ -7,12 +8,12 @@ export default function AppActionV2({
     scriptName,
     command,
     app,
-    runApp,
+    socket,
 }: {
     scriptName: string,
     command: string,
     app: AppData,
-    runApp: (appInfo: any) => void,
+    socket: Socket,
 }) {
     // Classes
     const disabledClasses = "disabled:bg-gray-500";
@@ -26,16 +27,19 @@ export default function AppActionV2({
             <div>
                 <button
                     className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
-                    // onClick={async () => {
-                    //     const appName = app.packageJson.name;
-                    //     const appInfo = {
-                    //         name: appName,
-                    //         command,
-                    //         path: app.path,
-                    //     };
+                    onClick={async () => {
+                        const appName = app.packageJson.name;
+                        const appInfo = {
+                            name: appName,
+                            command,
+                            path: app.path,
+                        };
                         
-                    //     await runApp(appInfo);
-                    // }}
+                        console.log(`Run app: `, appInfo);
+                        
+                        // await runApp(appInfo);
+                        socket.emit("run", appInfo);
+                    }}
                 >
                     Run
                 </button>
