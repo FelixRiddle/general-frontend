@@ -4,7 +4,7 @@ import { io } from "socket.io-client";
 
 import AppData from "@/types/AppData";
 import useApps from "@/hooks/app/useApps";
-import AppCustomNavbar from "./AppCustomNavbar";
+import AppCustomNavbar from "../AppCustomNavbar";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import ShowApps from "@/components/app/appViews/multi/simpleAppView/ShowApps";
 

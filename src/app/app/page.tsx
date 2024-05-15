@@ -1,8 +1,6 @@
 import AppWindowManager from "@/lib/apps/index/AppWindowManager";
-import ClientApp from "./ClientApp";
 import { getAppsData } from "@/api/appManager/app";
-import Apps from "@/lib/apps/Apps";
-import appManagerSocket from "@/lib/connection/appManagerSocket";
+import ClientAppV2 from "./ClientAppV2";
 
 /**
  * App manager
@@ -15,7 +13,6 @@ export default async function App({
         page?: string;
     }
 }) {
-    
     // App window manager
     // For pagination and search
     const appWindowManager = new AppWindowManager();
@@ -23,18 +20,14 @@ export default async function App({
     appWindowManager.setQueryFromSearchParams(searchParams);
     await appWindowManager.updateAll();
     
-    // App data
-    // The apps are handled with 'useApps' hook on the client side
     const appsData = await getAppsData();
-    // const appsManager = new Apps(appsData, appManagerSocket());
-    // appsManager.defaultAppsView();
     
     return(
         <div>
-            <ClientApp
+            <ClientAppV2
                 apps={appsData}
                 appWindowManager={appWindowManager.toType()}
-            ></ClientApp>
+            ></ClientAppV2>
         </div>
     );
 }

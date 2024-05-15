@@ -5,7 +5,7 @@ import { io } from "socket.io-client";
 import AppData from "@/types/AppData";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import ShowAppsV2 from "@/components/app/appViews/multi-apps-view-v2/ShowApps";
-import AppCustomNavbar from "../AppCustomNavbar";
+import AppCustomNavbar from "./AppCustomNavbar";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 
 const socket = io(`http://localhost:${24000}`);
