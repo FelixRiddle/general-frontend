@@ -22,6 +22,8 @@ Mainly for 'good-roots' stack
 - [x] Show all apps
     - [x] Sort apps alphabetically
 - [x] App actions
+    - [x] Start app
+    - [ ] [Stop app](./actions/Stop.md)
 - [x] Show app terminal output
     - [x] Have terminal colors(This was hard for me because I didn't know how)
 
