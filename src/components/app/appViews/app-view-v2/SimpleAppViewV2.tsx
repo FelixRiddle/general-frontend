@@ -15,10 +15,12 @@ export default function SimpleAppViewV2({
     app,
     selectClickCb,
     socket,
+    appsHandler,
 }: {
     app: AppData;
     selectClickCb?: ((event: any, appName: string) => void);
     socket: Socket;
+    appsHandler: any;
 }) {
     const [showMore, setShowMore] = useState(false);
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
@@ -117,7 +119,11 @@ export default function SimpleAppViewV2({
                             )}
                             
                             {/* Actions */}
-                            <SimpleAppActionsV2 app={app} socket={socket} />
+                            <SimpleAppActionsV2
+                                app={app}
+                                socket={socket}
+                                appsHandler={appsHandler}
+                            />
                             
                             {/* Output */}
                             {/* If the app is running show the output */}

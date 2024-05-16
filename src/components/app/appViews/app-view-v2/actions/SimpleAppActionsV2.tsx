@@ -11,10 +11,12 @@ import { Socket } from "socket.io-client";
  */
 export default function SimpleAppActionsV2({
     app,
-    socket
+    socket,
+    appsHandler,
 }: {
     app: AppData;
     socket: Socket;
+    appsHandler: any;
 }) {
     const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
     const [showOtherActions, setShowOtherActions] = useState(false);
@@ -81,6 +83,7 @@ export default function SimpleAppActionsV2({
                     scripts={app.packageJson.scripts}
                     app={app}
                     socket={socket}
+                    appsHandler={appsHandler}
                 />
             ) : (
             // ( : )

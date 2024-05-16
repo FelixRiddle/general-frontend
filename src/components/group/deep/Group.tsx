@@ -2,8 +2,10 @@
 
 import { AppGroup } from "@/api/appManager/group/group";
 import ShowApps from "@/components/app/appViews/app-view-v1/ShowApps";
+import useAppsV2 from "@/hooks/app/useAppsV2";
+import { socket } from "@/socket";
 // import ShowApps from "@/components/app/appViews/app-view-v1/simpleAppView/ShowApps";
-import useApps from "@/hooks/app/useApps";
+// import useApps from "@/hooks/app/useApps";
 import AppData from "@/types/AppData";
 import { io } from "socket.io-client";
 
@@ -17,11 +19,14 @@ export default function Group({
     group: AppGroup,
     apps: AppData[]
 }) {
-    const socket = io(`http://localhost:${24000}`);
+    // const socket = io(`http://localhost:${24000}`);
     
+    // const {
+    //     apps: appsData
+    // } = useApps(apps, socket);
     const {
         apps: appsData
-    } = useApps(apps, socket);
+    } = useAppsV2(apps, socket);
     
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     

@@ -21,9 +21,11 @@ function createAppManager(apps: AppData[]) {
 export default function ShowAppsV2({
     apps,
     socket,
+    appsHandler,
 }: {
     apps: AppData[];
     socket: Socket;
+    appsHandler: any;
 }) {
     const [appsManager, setAppsManager] = useState(createAppManager(apps));
     const [appsView, setAppsView] = useState(appsManager.getAppsView());
@@ -37,6 +39,7 @@ export default function ShowAppsV2({
                         key={uuidv4()}
                         app={app}
                         socket={socket}
+                        appsHandler={appsHandler}
                     ></SimpleAppViewV2>
                 );
             })}

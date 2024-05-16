@@ -50,7 +50,7 @@ export function appendMessage(apps: AppData[], name: string, message: string) {
     }
     
     appData.out += message;
-    console.log(`App data + out: `, appData);
+    // console.log(`App data + out: `, appData);
     
     // This doesn't update the view for some reason
     // // Insert output message
@@ -110,46 +110,46 @@ export function createAppsState(apps: AppData[]) {
     return outputFirst;
 }
 
-/**
- * Use apps
- * 
- * TODO: Big time trouble on whether using useEffect or not with the sockets, I have to do multiple implementations and check which one fits better.
- */
-export default function useApps(apps: AppData[], socket: Socket) {
-    const debug = false;
+// /**
+//  * Use apps
+//  * 
+//  * TODO: Big time trouble on whether using useEffect or not with the sockets, I have to do multiple implementations and check which one fits better.
+//  */
+// export default function useApps(apps: AppData[], socket: Socket) {
+//     const debug = false;
     
-    // Fix app.out and sort alphabetically
-    const [filteredApps, setFilteredApps] = useState<AppData[]>(createAppsState(apps));
+//     // Fix app.out and sort alphabetically
+//     const [filteredApps, setFilteredApps] = useState<AppData[]>(createAppsState(apps));
     
-    // useEffect(() => {
-    // On app start
-    socket.on('app start', (appName: string) => {
-        console.log(`App ${appName} started`);
-    });
+//     // useEffect(() => {
+//     // On app start
+//     socket.on('app start', (appName: string) => {
+//         console.log(`App ${appName} started`);
+//     });
     
-    // On app error / start error
-    socket.on('app error', (err) => {
-        console.error(`App start error: `, err);
-    });
+//     // On app error / start error
+//     socket.on('app error', (err) => {
+//         console.error(`App start error: `, err);
+//     });
     
-    // Stdout
-    socket.on('out', (out) => {
-        // Update app output
-        const name = out.app.name;
+//     // Stdout
+//     socket.on('out', (out) => {
+//         // Update app output
+//         const name = out.app.name;
         
-        setFilteredApps((apps) => appendMessage(apps, name, out.message));
-    });
+//         setFilteredApps((apps) => appendMessage(apps, name, out.message));
+//     });
     
-    // Stderr
-    socket.on('err', (err) => {
-        // Update app output
-        const name = err.app.name;
+//     // Stderr
+//     socket.on('err', (err) => {
+//         // Update app output
+//         const name = err.app.name;
         
-        setFilteredApps((apps) => appendMessage(apps, name, err.message));
-    });
-    // }, []);
+//         setFilteredApps((apps) => appendMessage(apps, name, err.message));
+//     });
+//     // }, []);
     
-    return {
-        apps: filteredApps,
-    };
-}
+//     return {
+//         apps: filteredApps,
+//     };
+// }

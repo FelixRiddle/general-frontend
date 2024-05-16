@@ -31,36 +31,36 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
                 setTransport(transport);
             });
             
-            // --- The important things ---
-            // On app start
-            socket.on('app start', (appName: string) => {
-                console.log(`App ${appName} started`);
-            });
+            // // --- The important things ---
+            // // On app start
+            // socket.on('app start', (appName: string) => {
+            //     console.log(`App ${appName} started`);
+            // });
             
-            // On app error / start error
-            socket.on('app error', (err) => {
-                console.error(`App start error: `, err);
-            });
+            // // On app error / start error
+            // socket.on('app error', (err) => {
+            //     console.error(`App start error: `, err);
+            // });
             
-            // Stdout
-            // React in development mode will run this twice
-            socket.on('out', (out) => {
-                // Update app output
-                const name = out.app.name;
+            // // Stdout
+            // // React in development mode will run this twice
+            // socket.on('out', (out) => {
+            //     // Update app output
+            //     const name = out.app.name;
                 
-                // console.log(`Output received for app: `, name);
-                // console.log(`Output: `, out);
+            //     // console.log(`Output received for app: `, name);
+            //     // console.log(`Output: `, out);
                 
-                setFilteredApps((apps) => appendMessage(apps, name, out.message));
-            });
+            //     setFilteredApps((apps) => appendMessage(apps, name, out.message));
+            // });
             
-            // Stderr
-            socket.on('err', (err) => {
-                // Update app output
-                const name = err.app.name;
+            // // Stderr
+            // socket.on('err', (err) => {
+            //     // Update app output
+            //     const name = err.app.name;
                 
-                setFilteredApps((apps) => appendMessage(apps, name, err.message));
-            });
+            //     setFilteredApps((apps) => appendMessage(apps, name, err.message));
+            // });
         }
         
         function onDisconnect() {
@@ -68,12 +68,27 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
             setTransport("N/A");
         }
         
+        // --- The important events ---
+        /**
+         * Out event
+         * 
+         * @param out 
+         */
+        function onOutEvent(out: any) {
+            // Update app output
+            const name = out.app.name;
+            
+            setFilteredApps((apps) => appendMessage(apps, name, out.message));
+        }
+        
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisconnect);
+        socket.on('out', onOutEvent);
         
         return () => {
             socket.off("connect", onConnect);
             socket.off("disconnect", onDisconnect);
+            socket.off("out", onOutEvent);
         }
     }, []);
     

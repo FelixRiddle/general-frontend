@@ -9,11 +9,13 @@ export default function AppActionV2({
     command,
     app,
     socket,
+    appsHandler,
 }: {
     scriptName: string,
     command: string,
     app: AppData,
     socket: Socket,
+    appsHandler: any,
 }) {
     // Classes
     const disabledClasses = "disabled:bg-gray-500";
@@ -27,16 +29,17 @@ export default function AppActionV2({
             <div>
                 <button
                     className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
-                    onClick={async () => {
+                    onClick={() => {
+                        // console.log(`Event: Run app`);
+                        console.log(`Run app: ${app.packageJson.name}`);
+                        // console.log(`Command: ${command}`);
+                        
                         const appName = app.packageJson.name;
                         const appInfo = {
                             name: appName,
                             command,
                             path: app.path,
                         };
-                        
-                        console.log(`Emit: Run app event`);
-                        console.log(`Run app: `, appInfo);
                         
                         // This only runs once
                         // If you try to start multiple apps it won't work for some reason

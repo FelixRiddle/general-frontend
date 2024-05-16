@@ -17,9 +17,7 @@ export default function ClientAppV2({
     apps: AppData[];
     appWindowManager: AppWindowManagerType;
 }) {
-    const {
-        apps
-    } = useAppsV2(appData, socket);
+    const AppsHandler = useAppsV2(appData, socket);
     
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";
@@ -38,8 +36,9 @@ export default function ClientAppV2({
             </p>
             
             <ShowAppsV2
-                apps={apps}
+                apps={AppsHandler.apps}
                 socket={socket}
+                appsHandler={AppsHandler}
             />
         </div>
     );

@@ -6,7 +6,8 @@ import AppData from "@/types/AppData";
 import AppCustomNavbar from "../AppCustomNavbar";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import ShowApps from "@/components/app/appViews/app-view-v1/ShowApps";
-import useApps from "@/hooks/app/useApps";
+import useAppsV2 from "@/hooks/app/useAppsV2";
+import { socket } from "@/socket";
 
 /**
  * App but client side
@@ -18,11 +19,9 @@ export default function ClientApp({
     apps: AppData[]
     appWindowManager: AppWindowManagerType,
 }) {
-    const socket = io(`http://localhost:${24000}`);
-    
     const {
         apps
-    } = useApps(appData, socket);
+    } = useAppsV2(appData, socket);
     
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";

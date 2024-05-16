@@ -9,10 +9,12 @@ export default function AppScriptsViewV2({
     scripts,
     app,
     socket,
+    appsHandler
 }: {
     scripts: object;
     app: AppData;
     socket: Socket;
+    appsHandler: any;
 }) {
     const scriptEntries = Object.entries(scripts);
     
@@ -35,6 +37,7 @@ export default function AppScriptsViewV2({
                 command={command}
                 app={app}
                 socket={socket}
+                appsHandler={appsHandler}
             />
         );
     });
