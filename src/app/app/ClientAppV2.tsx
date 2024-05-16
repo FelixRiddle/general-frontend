@@ -4,11 +4,12 @@ import { io } from "socket.io-client";
 
 import AppData from "@/types/AppData";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import ShowAppsV2 from "@/components/app/appViews/multi-apps-view-v2/ShowApps";
 import AppCustomNavbar from "./AppCustomNavbar";
 import useAppsV2 from "@/hooks/app/useAppsV2";
+import { socket } from "@/socket";
+import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
 
-const socket = io(`http://localhost:${24000}`);
+// const socket = io(`http://localhost:${24000}`);
 
 /**
  * App but client side

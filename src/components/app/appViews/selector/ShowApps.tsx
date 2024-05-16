@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import AppData from '@/types/AppData';
-import SelectableAppView from '../../single/selectableAppView/SelectableAppView';
+import SelectableAppView from './SelectableAppView';
 
 /**
  * Show apps

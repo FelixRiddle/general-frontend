@@ -5,7 +5,7 @@ import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import AppData from "@/types/AppData";
 import QueryPagination from "./QueryPagination";
-import ShowApps from "../../appViews/multi/selectableApps/ShowApps";
+import ShowApps from "../../appViews/selector/ShowApps";
 
 /**
  * 

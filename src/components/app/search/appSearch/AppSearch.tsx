@@ -4,7 +4,7 @@ import Search from "@/app/ui/search";
 import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import Pagination from "./Pagination";
-import SimpleAppView from "../../appViews/single/simpleAppView/SimpleAppView";
+import SimpleAppView from "../../appViews/app-view-v1/SimpleAppView";
 
 /**
  * TODO: This

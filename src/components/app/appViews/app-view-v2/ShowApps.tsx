@@ -3,7 +3,7 @@
 import { v4 as uuidv4 } from 'uuid';
 import AppData from '@/types/AppData';
 import { useEffect, useState } from 'react';
-import SimpleAppViewV2 from '../single/simpleAppViewV2/SimpleAppViewV2';
+import SimpleAppViewV2 from './SimpleAppViewV2';
 import Apps from '@/lib/apps/Apps';
 import appManagerSocket from '@/lib/connection/appManagerSocket';
 import { Socket } from 'socket.io-client';

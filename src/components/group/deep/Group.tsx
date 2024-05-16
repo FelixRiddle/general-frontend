@@ -1,7 +1,7 @@
 "use client";
 
 import { AppGroup } from "@/api/appManager/group/group";
-import ShowApps from "@/components/app/appViews/multi/simpleAppView/ShowApps";
+import ShowApps from "@/components/app/appViews/app-view-v1/simpleAppView/ShowApps";
 import useApps from "@/hooks/app/useApps";
 import AppData from "@/types/AppData";
 import { io } from "socket.io-client";
