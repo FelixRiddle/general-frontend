@@ -38,7 +38,8 @@ export default function AppActionV2({
                         console.log(`Emit: Run app event`);
                         console.log(`Run app: `, appInfo);
                         
-                        // await runApp(appInfo);
+                        // This only runs once
+                        // If you try to start multiple apps it won't work for some reason
                         socket.emit("run", appInfo);
                     }}
                 >

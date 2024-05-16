@@ -3,10 +3,10 @@
 import { io } from "socket.io-client";
 
 import AppData from "@/types/AppData";
-import useApps from "@/hooks/app/useApps";
 import AppCustomNavbar from "../AppCustomNavbar";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import ShowApps from "@/components/app/appViews/app-view-v1/ShowApps";
+import useApps from "@/hooks/app/useApps";
 
 /**
  * App but client side

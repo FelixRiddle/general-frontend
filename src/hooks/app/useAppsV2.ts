@@ -48,8 +48,8 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
                 // Update app output
                 const name = out.app.name;
                 
-                console.log(`Output received for app: `, name);
-                console.log(`Output: `, out);
+                // console.log(`Output received for app: `, name);
+                // console.log(`Output: `, out);
                 
                 setFilteredApps((apps) => appendMessage(apps, name, out.message));
             });

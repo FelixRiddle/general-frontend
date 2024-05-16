@@ -1,8 +1,6 @@
 import AppWindowManager from "@/lib/apps/index/AppWindowManager";
 import ClientApp from "./ClientApp";
 import { getAppsData } from "@/api/appManager/app";
-import Apps from "@/lib/apps/Apps";
-import appManagerSocket from "@/lib/connection/appManagerSocket";
 
 /**
  * App manager

@@ -5,7 +5,6 @@ import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
-import SimpleAppActions from "./actions/SimpleAppActionsV2";
 import TerminalView from "@/components/terminalView/TerminalView";
 import SimpleAppActionsV2 from "./actions/SimpleAppActionsV2";
 
@@ -56,7 +55,6 @@ export default function SimpleAppViewV2({
     
     return (
         <div
-            // className={`rounded border-2 p-2 m-2 ${appColor}`}
             className={`rounded border-2 p-2 m-2 ${appColor} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
             onClick={(e) => {
                 // Only when it's not shown
@@ -137,6 +135,3 @@ export default function SimpleAppViewV2({
         </div>
     );
 }
-
-
-
