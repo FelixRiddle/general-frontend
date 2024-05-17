@@ -69,8 +69,6 @@ export default function SimpleAppActionsV2({
             <button
                 className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-3 rounded ${disabledClasses}`}
                 onClick={() => {
-                    // console.log(`Show other actions: `, !showOtherActions);
-                    // console.log(`Package json scripts: `, app.packageJson.scripts);
                     setShowOtherActions((prevState) => {
                         return !prevState;
                     });

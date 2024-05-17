@@ -32,7 +32,6 @@ export default function SimpleAppViewV2({
     // Classes
     const arrowClasses = "mt-1 mr-2";
     const appColor = (() => {
-        // console.log(`App out: `, app.out);
         if(app.out) {
             return "bg-lime-300 border-lime-400";
         } else {
