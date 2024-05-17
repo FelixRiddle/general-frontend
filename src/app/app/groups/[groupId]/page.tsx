@@ -21,7 +21,6 @@ export default async function GroupPage({
     }
 }) {
     const group = await getAppGroup(groupId);
-    console.log(`Group: `, group);
     
     if(!group) {
         // return window.location.href = "/404";
@@ -29,8 +28,6 @@ export default async function GroupPage({
     }
     
     const apps = await getAppsDataInGroup(groupId);
-    console.log(`<GroupView />`);
-    console.log(`Apps: `, apps);
     
     return (
         <div>

@@ -25,8 +25,6 @@ export default function ClientAppV2({
     
     return (
         <div>
-            <AppCustomNavbar />
-            
             <h1 className={titleClasses}>Node app manager</h1>
             <p className={paragraphClasses}>
                 Node app manager, is a dashboard to perform actions with apps, start apps, stop apps, etc.

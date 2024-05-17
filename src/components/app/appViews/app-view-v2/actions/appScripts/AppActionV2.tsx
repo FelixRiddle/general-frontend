@@ -48,11 +48,11 @@ export default function AppActionV2({
                 >
                     Run
                 </button>
-                <button
+                {/* <button
                     className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
                 >
                     Stop
-                </button>
+                </button> */}
             </div>
         </div>
     );

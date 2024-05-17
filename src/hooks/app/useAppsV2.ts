@@ -69,6 +69,8 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
         }
         
         // --- The important events ---
+        // TODO: I think the behaviour should be, start a socket for each running app
+        // The backend must keep track of every running app
         /**
          * Out event
          * 

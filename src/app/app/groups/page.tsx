@@ -29,8 +29,6 @@ export default async function GroupsPage({
     
     return (
         <div>
-            <AppCustomNavbar />
-            
             <h1 className={titleClasses}>App groups</h1>
             <p className="m-1 p-1">
                 Apps can be grouped together to manage them together.

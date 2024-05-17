@@ -14,6 +14,9 @@ export default function AppCustomNavbar() {
                 }, {
                     displayName: "Groups",
                     href: "/app/groups"
+                }, {
+                    displayName: "Process",
+                    href: "/app/process"
                 }]
             }>
             </CustomNavbar>
