@@ -1,3 +1,11 @@
+"use client";
+
+import { useState } from "react";
+import { SlArrowDown, SlArrowUp } from "react-icons/sl";
+
+import Button from "../button/Button";
+import stopProcess from "@/api/appManager/process/stopProcess";
+
 export interface Process {
     name: string;
     pid: number;
@@ -11,10 +19,18 @@ export interface Process {
  * Process
  */
 export default function ProcessView({
-    process
+    process,
+    selectClickCb
 }: {
     process: Process;
+    selectClickCb?: ((event: any, process: Process) => void);
 }) {
+    const [showMore, setShowMore] = useState(false);
+    
+    const switchShowMore = () => {
+        setShowMore(!showMore);
+    }
+    
     // Classes
     const arrowClasses = "mt-1 mr-2";
     const appColor = (() => {
@@ -27,13 +43,55 @@ export default function ProcessView({
     
     // const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";
-    const paragraphClasses = "p-1 m-1 text-gray-900";
+    const paragraphClasses = "text-gray-900";
+    
+    // On element click
+    const onElementClick = (event: any) => {
+        if(selectClickCb) {
+            selectClickCb(event, process);
+        } else {
+            // Show app information
+            switchShowMore();
+        }
+    }
     
     return (
         <div
             className={`rounded border-2 p-2 m-2 ${appColor} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
         >
-            <h1 className={paragraphClasses}>{process.name}</h1>
+            <div className="flex">
+                {/* Name and toggle */}
+                <div className="flex flex-1">
+                    {showMore ? (
+                        <SlArrowUp
+                            className={arrowClasses}
+                            onClick={onElementClick}
+                        />
+                    ) : (
+                        <SlArrowDown
+                            className={arrowClasses}
+                            onClick={onElementClick}
+                        />
+                    )}
+                    
+                    <h1
+                        className={`cursor-pointer ${paragraphClasses}`}
+                        onClick={onElementClick}
+                    >{process.name}</h1>
+                </div>
+            </div>
+            {showMore && (
+                <div className={"flex flex-col"}>
+                    <Button
+                        onClick={() => stopProcess(process)}
+                    >
+                        Stop app
+                    </Button>
+                </div>
+            ) || (
+                <div>
+                </div>
+            )}
         </div>
     );
 }

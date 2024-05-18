@@ -1,3 +1,5 @@
+"use client";
+
 import ProcessView, { Process } from "./ProcessView";
 
 /**
@@ -13,7 +15,10 @@ export default function Processes({
         <div>
             {processes.map(process => {
                 return (
-                    <ProcessView process={process} />
+                    <ProcessView
+                        process={process}
+                        key={process.name}
+                    />
                 );
             })}
         </div>
