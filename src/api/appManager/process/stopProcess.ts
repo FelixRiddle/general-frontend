@@ -20,6 +20,7 @@ export default async function stopProcess(process: Process) {
             headers: {
                 'Content-Type': 'application/json'
             },
+            body: JSON.stringify(process),
             cache: 'no-store',
         });
         const response: StopProcessResponse = await res.json();
@@ -31,4 +32,3 @@ export default async function stopProcess(process: Process) {
         return [];
     }
 }
-
