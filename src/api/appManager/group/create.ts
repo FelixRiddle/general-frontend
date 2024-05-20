@@ -1,6 +1,7 @@
 "use server";
 
 import AppData from "@/types/AppData";
+import { redirect } from "next/navigation";
 
 /**
  * App group interface
@@ -25,7 +26,6 @@ function getDescription(formData: FormData): string {
  */
 export async function createGroup(formData: FormData, groupApps: AppData[]) {
     try {
-        console.log(`Create group with apps: `, groupApps);
         console.log(`Form data: `, formData);
         
         // Create app group
@@ -40,8 +40,6 @@ export async function createGroup(formData: FormData, groupApps: AppData[]) {
             description,
             apps: groupApps,
         }
-        
-        console.log(`App group: `, appGroup);
         
         // Backend location
         const location = "http://localhost:24000";
@@ -60,4 +58,7 @@ export async function createGroup(formData: FormData, groupApps: AppData[]) {
         console.log(`Error when trying to create the app group`);
         console.error(err);
     }
+    
+    // Redirect to apps
+    redirect("/app");
 }

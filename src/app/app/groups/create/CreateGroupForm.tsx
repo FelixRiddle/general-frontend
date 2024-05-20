@@ -38,9 +38,10 @@ export default function CreateGroupForm({
     return (
         <div>
             <form
-                action={(formData) => {
+                action={async (formData) => {
                     console.log(`Run server action`);
-                    createGroup(formData, groupApps);
+                    
+                    await createGroup(formData, groupApps);
                 }}
                 ref={formRef}
                 id="createAppGroupForm"
