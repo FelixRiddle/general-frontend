@@ -23,7 +23,7 @@ export default function SimpleAppViewV2({
     appsHandler: any;
 }) {
     const [showMore, setShowMore] = useState(false);
-    const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
+    const [isRunning, setIsRunning] = useState(app.pid ? true : false);
     
     const switchShowMore = () => {
         setShowMore(!showMore);

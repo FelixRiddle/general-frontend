@@ -2,7 +2,6 @@
 
 import AppData from "@/types/AppData";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
-import AppCustomNavbar from "./AppCustomNavbar";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 import { socket } from "@/socket";
 import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";

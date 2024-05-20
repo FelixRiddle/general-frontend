@@ -9,4 +9,7 @@ export default interface AppData {
     name?: string;
     // App output
     out?: string;
+    pid?: number;
+    url?: string;
+    appType?: string;
 }

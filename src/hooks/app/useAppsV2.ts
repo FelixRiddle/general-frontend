@@ -77,6 +77,8 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
          * @param out 
          */
         function onOutEvent(out: any) {
+            console.log(`${out.app.name}: ${out.message}`);
+            
             // Update app output
             const name = out.app.name;
             
