@@ -5,7 +5,7 @@ import { Status } from "felixriddle.good-roots-ts-api";
 import AppData from "@/types/AppData";
 import { fetchAppsDataByName } from "../../repositories";
 
-export interface AppGroup {
+interface AppGroup {
     id: number;
     appName: string;
     groupId: number;

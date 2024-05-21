@@ -22,7 +22,6 @@ export interface GetAppGroupsResponse {
  */
 export async function getAppGroups(query: string, page: number, perPage: number): Promise<AppGroup[]> {
     try {
-        // console.log(`Sending request with path: `, appPath);
         const res = await fetch(`http://localhost:24000/apps/group?query=${query}&page=${page}&perPage=${perPage}`, {
             method: 'GET',
             headers: {
@@ -31,7 +30,6 @@ export async function getAppGroups(query: string, page: number, perPage: number)
             cache: 'no-store'
         });
         const data: GetAppGroupsResponse = await res.json();
-        // console.log(`App group response: `, data);
         
         return data.appGroups;
     } catch(error: any) {

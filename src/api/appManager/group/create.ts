@@ -6,7 +6,7 @@ import { redirect } from "next/navigation";
 /**
  * App group interface
  */
-export interface AppGroup {
+interface AppGroup {
     name: string;
     description: string;
     apps: AppData[];
@@ -26,8 +26,6 @@ function getDescription(formData: FormData): string {
  */
 export async function createGroup(formData: FormData, groupApps: AppData[]) {
     try {
-        console.log(`Form data: `, formData);
-        
         // Create app group
         const name = formData.get("name");
         if(!name) {
@@ -53,7 +51,6 @@ export async function createGroup(formData: FormData, groupApps: AppData[]) {
             body: JSON.stringify(appGroup),
         });
         const data = await res.json();
-        console.log(`Data: `, data);
     } catch(err: any) {
         console.log(`Error when trying to create the app group`);
         console.error(err);

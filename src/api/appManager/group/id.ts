@@ -15,7 +15,6 @@ export interface GetAppGroupResponse {
  */
 export async function getAppGroup(id: number): Promise<AppGroup | undefined> {
     try {
-        // console.log(`Sending request with path: `, appPath);
         const res = await fetch(`http://localhost:24000/apps/group/id?id=${id}`, {
             method: 'GET',
             headers: {
@@ -24,7 +23,6 @@ export async function getAppGroup(id: number): Promise<AppGroup | undefined> {
             cache: 'no-store'
         });
         const data: GetAppGroupResponse = await res.json();
-        console.log(`Response: `, data);
         
         return data.group;
     } catch(error: any) {

@@ -1,10 +1,11 @@
 "use client";
 
+import deleteGroup from "@/api/appManager/group/deleteGroup";
 import { AppGroup } from "@/api/appManager/group/group";
 import AppData from "@/types/AppData";
 import Link from "next/link";
 import { useState } from "react";
-import { SlArrowDown, SlArrowUp } from "react-icons/sl";
+import { SlArrowDown, SlArrowUp, SlTrash } from "react-icons/sl";
 
 /**
  * App group
@@ -37,6 +38,8 @@ export default function Group({
         switchShowMore();
     }
     
+    const trashClasses = "m-1 p-1 flex border border-gray-500 rounded hover:border-rose-600 hover:bg-rose-500 disabled:bg-gray-500";
+    
     return (
         <div
             className={`rounded border-2 p-2 m-2 ${appColor} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
@@ -68,6 +71,24 @@ export default function Group({
                             className="cursor-pointer"
                             onClick={onElementClick}
                         >{group.name}</h1>
+                    </div>
+                    
+                    {/* Actions */}
+                    <div className={"flex-1"}>
+                        <SlTrash
+                            className={trashClasses}
+                            onClick={(e) => {
+                                console.log(`Delete group: ${group.name}`);
+                                deleteGroup(group);
+                            }}
+                        />
+                    </div>
+                    
+                    <div className={"flex-1"}>
+                        <SlTrash
+                            className={arrowClasses}
+                            onClick={(e) => deleteGroup(group)}
+                        />
                     </div>
                 </div>
                 {showMore && (
