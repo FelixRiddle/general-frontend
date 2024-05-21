@@ -15,7 +15,7 @@ export default async function GroupsView({
     
     return (
         <div className="mt-4">
-            {groups.map(async group => {
+            {groups.map(group => {
                 // const apps = await getAppsDataInGroup(group.id);
                 // console.log(`<GroupView />`);
                 // console.log(`Apps: `, apps);

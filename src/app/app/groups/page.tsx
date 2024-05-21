@@ -1,6 +1,5 @@
 import Link from "next/link";
 
-import AppCustomNavbar from "../AppCustomNavbar";
 import { getAppGroups } from "@/api/appManager/group/group";
 import GroupsView from "@/components/group/shallow/GroupsView";
 
