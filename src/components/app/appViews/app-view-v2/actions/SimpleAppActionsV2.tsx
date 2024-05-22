@@ -76,6 +76,7 @@ export default function SimpleAppActionsV2({
             >
                 Show other actions
             </button>
+            
             {showOtherActions && app.packageJson.scripts ? (
                 <AppScriptsViewV2
                     scripts={app.packageJson.scripts}

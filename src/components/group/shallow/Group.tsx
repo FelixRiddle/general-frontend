@@ -94,7 +94,7 @@ export default function Group({
                         
                         <Link
                             href={`/app/groups/${group.id}`}
-                            className={`p-2 border rounded border-purple-600 bg-purple-500 active:bg-purple-400hover:bg-purple-400 hover:border-purple-500`}
+                            className={`p-2 border rounded border-purple-600 bg-purple-500 active:bg-purple-400 hover:bg-purple-400 hover:border-purple-500`}
                         >
                             Go to group
                         </Link>
