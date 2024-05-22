@@ -1,6 +1,7 @@
 "use server";
 
 import { Status } from "felixriddle.good-roots-ts-api";
+import { APP_MANAGER_URL } from "../appManagerUrl";
 
 export interface AppGroup {
     id: number;
@@ -22,7 +23,8 @@ export interface GetAppGroupsResponse {
  */
 export async function getAppGroups(query: string, page: number, perPage: number): Promise<AppGroup[]> {
     try {
-        const res = await fetch(`http://localhost:24000/apps/group?query=${query}&page=${page}&perPage=${perPage}`, {
+        const url = APP_MANAGER_URL;
+        const res = await fetch(`${url}/apps/group?query=${query}&page=${page}&perPage=${perPage}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'

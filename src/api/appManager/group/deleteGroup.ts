@@ -1,3 +1,4 @@
+import { APP_MANAGER_URL } from "../appManagerUrl";
 import { AppGroup } from "./group";
 
 /**
@@ -8,8 +9,7 @@ export default async function deleteGroup(group: AppGroup) {
         console.log(`[DELETE] /apps/group`);
         
         // Backend location
-        const location = "http://localhost:24000";
-        const url = `${location}/apps/group`;
+        const url = `${APP_MANAGER_URL}/apps/group`;
         
         const res = await fetch(url, {
             method: 'DELETE',

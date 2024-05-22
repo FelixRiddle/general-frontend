@@ -2,6 +2,7 @@
 
 import { Process } from "@/components/process/ProcessView";
 import { Status } from "felixriddle.good-roots-ts-api";
+import { APP_MANAGER_URL } from "../appManagerUrl";
 
 export interface StopProcessResponse {
     messages: Array<Status>;
@@ -13,9 +14,11 @@ export interface StopProcessResponse {
  * @param process 
  */
 export default async function stopProcess(process: Process) {
-    console.log(`[GET] /process/action/stop`);
     try {
-        const res = await fetch('http://localhost:24000/process/action/stop', {
+        console.log(`[GET] /process/action/stop`);
+        
+        const url = APP_MANAGER_URL;
+        const res = await fetch(`${url}/process/action/stop`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -23,6 +26,7 @@ export default async function stopProcess(process: Process) {
             body: JSON.stringify(process),
             cache: 'no-store',
         });
+        
         const response: StopProcessResponse = await res.json();
         
         return response;

@@ -1,5 +1,6 @@
 import { AppResponse } from "@/api/appManager/app";
 import AppData from "@/types/AppData";
+import { APP_MANAGER_URL } from "../appManagerUrl";
 
 /**
  * Function to authenticate
@@ -8,9 +9,8 @@ import AppData from "@/types/AppData";
  */
 export async function getAppData(appName: string): Promise<AppData | undefined> {
     try {
-        const location = "http://localhost:24000";
+        const location = APP_MANAGER_URL;
         const url = `${location}/app/repository/javascript/folder?name=${appName}`;
-        // console.log(`[GET] ${url}`);
         
         const res = await fetch(url, {
             method: 'GET',
@@ -35,7 +35,7 @@ export async function getAppData(appName: string): Promise<AppData | undefined> 
  */
 export async function getAppDataByName(name: string): Promise<AppData | undefined> {
     try {
-        const location = "http://localhost:24000";
+        const location = APP_MANAGER_URL;
         const url = `${location}/app/repository/javascript/name?name=${name}`;
         
         const res = await fetch(url, {

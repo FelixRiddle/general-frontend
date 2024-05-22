@@ -2,6 +2,7 @@
 
 import AppData from "@/types/AppData";
 import { redirect } from "next/navigation";
+import { APP_MANAGER_URL } from "../appManagerUrl";
 
 /**
  * App group interface
@@ -40,8 +41,7 @@ export async function createGroup(formData: FormData, groupApps: AppData[]) {
         }
         
         // Backend location
-        const location = "http://localhost:24000";
-        const url = `${location}/apps/group/create`;
+        const url = `${APP_MANAGER_URL}/apps/group/create`;
         
         const res = await fetch(url, {
             method: 'POST',

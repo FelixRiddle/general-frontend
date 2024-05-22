@@ -4,6 +4,7 @@ import { Status } from "felixriddle.good-roots-ts-api";
 
 import AppData from "@/types/AppData";
 import { fetchAppsDataByName } from "../../repositories";
+import { APP_MANAGER_URL } from "../../appManagerUrl";
 
 interface AppGroup {
     id: number;
@@ -28,7 +29,7 @@ export interface AppsInGroupResponse {
  */
 export async function getAppsInGroup(groupId: number): Promise<AppGroup[]> {
     try {
-        const res = await fetch(`http://localhost:24000/apps/group/apps?groupId=${groupId}`, {
+        const res = await fetch(`${APP_MANAGER_URL}/apps/group/apps?groupId=${groupId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',

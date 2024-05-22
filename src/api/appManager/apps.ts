@@ -1,6 +1,7 @@
 'use server';
 
 import { Status } from "felixriddle.good-roots-ts-api";
+import { APP_MANAGER_URL } from "./appManagerUrl";
 
 export interface ServerResponse {
     path: string;
@@ -15,7 +16,8 @@ export interface ServerResponse {
  */
 export async function getApps(query: string = ""): Promise<ServerResponse | undefined> {
     try {
-        const res = await fetch(`http://localhost:24000/apps?query=${query}`, {
+        const url = APP_MANAGER_URL;
+        const res = await fetch(`${url}/apps?query=${query}`, {
             // Don't cache this thing
             // On release, maybe this should be cached
             cache: 'no-store',

@@ -3,6 +3,7 @@
 import AppData from "@/types/AppData";
 import { Status } from "felixriddle.good-roots-ts-api";
 import { getApps } from "./apps";
+import { APP_MANAGER_URL } from "./appManagerUrl";
 
 export interface AppResponse {
     app: AppData;
@@ -16,8 +17,7 @@ export interface AppResponse {
  */
 export async function getAppData(appPath: string): Promise<AppData | undefined> {
     try {
-        // console.log(`Sending request with path: `, appPath);
-        const res = await fetch('http://localhost:24000/app', {
+        const res = await fetch(`${APP_MANAGER_URL}/app`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
