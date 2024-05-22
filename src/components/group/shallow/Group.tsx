@@ -38,7 +38,7 @@ export default function Group({
         switchShowMore();
     }
     
-    const trashClasses = "m-1 p-1 flex border border-gray-500 rounded hover:border-rose-600 hover:bg-rose-500 disabled:bg-gray-500";
+    const trashClasses = "flex border border-gray-500 rounded hover:border-rose-600 hover:bg-rose-500 disabled:bg-gray-500";
     
     return (
         <div
@@ -77,17 +77,11 @@ export default function Group({
                     <div className={"flex-1"}>
                         <SlTrash
                             className={trashClasses}
+                            size={20}
                             onClick={(e) => {
                                 console.log(`Delete group: ${group.name}`);
                                 deleteGroup(group);
                             }}
-                        />
-                    </div>
-                    
-                    <div className={"flex-1"}>
-                        <SlTrash
-                            className={arrowClasses}
-                            onClick={(e) => deleteGroup(group)}
                         />
                     </div>
                 </div>

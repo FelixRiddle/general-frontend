@@ -99,7 +99,7 @@ export default function SimpleAppViewV2({
                                     Not running
                                 </span>
                             )}
-                        </div> 
+                        </div>
                         
                         <div className="flex-1"></div>
                     </div>
