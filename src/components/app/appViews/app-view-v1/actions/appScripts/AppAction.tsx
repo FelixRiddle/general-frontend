@@ -1,6 +1,12 @@
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 
+export interface RunAppInfo {
+    name: string,
+    command: string,
+    path: string,
+}
+
 /**
  * App action
  */
@@ -18,6 +24,17 @@ export default function AppAction({
     // Classes
     const disabledClasses = "disabled:bg-gray-500";
     
+    // Run app script
+    const runApp = () => {
+        const appInfo: RunAppInfo = {
+            name: app.packageJson.name,
+            command,
+            path: app.path,
+        };
+        
+        socket.emit("run", appInfo);
+    }
+    
     return (
         <div className="mt-2">
             {/* Show other commands */}
@@ -27,15 +44,7 @@ export default function AppAction({
             <div>
                 <button
                     className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
-                    onClick={() => {
-                        const appName = app.packageJson.name;
-                        
-                        socket.emit("run", {
-                            name: appName,
-                            command,
-                            path: app.path,
-                        });
-                    }}
+                    onClick={runApp}
                 >
                     Run
                 </button>

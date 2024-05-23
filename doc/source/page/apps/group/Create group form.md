@@ -17,5 +17,6 @@
     - [x] Go to end button
     - [x] Previous page / Next page button
 
-- [ ] Create group form
-    - [ ] Get fields data
+- [x] Create group form
+    - [x] Get fields data
+    <!-- It was hard for me to realize -->

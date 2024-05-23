@@ -1,6 +1,6 @@
 # Stop
 
-- [ ] Stop apps
+- [x] Stop apps
     
 Note that some apps refuse to take signal 15(gentle stop, gives the app time to clean up) to stop, tested that it doesn't stops nextjs apps for example.
 
