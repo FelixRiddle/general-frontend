@@ -15,11 +15,13 @@ export default function AppAction({
     command,
     app,
     socket,
+    buttonName,
 }: {
     scriptName: string,
     command: string,
     app: AppData,
     socket: Socket,
+    buttonName?: string,
 }) {
     // Classes
     const disabledClasses = "disabled:bg-gray-500";
@@ -35,6 +37,7 @@ export default function AppAction({
         socket.emit("run", appInfo);
     }
     
+    const buttonClasses = `bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`;
     return (
         <div className="mt-2">
             {/* Show other commands */}
@@ -42,17 +45,26 @@ export default function AppAction({
             <p>Command: {command}</p>
             
             <div>
+                {/* Run actions */}
                 <button
-                    className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
+                    className={buttonClasses}
                     onClick={runApp}
                 >
-                    Run
+                    {buttonName ?? "Run"}
                 </button>
+                
+                {/* Run without sockets */}
                 <button
+                    className={buttonClasses}
+                >
+                    Run(Not realtime updates)
+                </button>
+                
+                {/* <button
                     className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
                 >
                     Stop
-                </button>
+                </button> */}
             </div>
         </div>
     );
