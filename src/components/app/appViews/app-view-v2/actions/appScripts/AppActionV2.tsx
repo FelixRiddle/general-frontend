@@ -47,7 +47,7 @@ export default function AppActionV2({
      * 
      * @param event 
      */
-    const runAppNotRealtime = (event: any) => {
+    const runAppNotRealtime = async (event: any) => {
         console.log(`Run app: ${app.packageJson.name}`);
         
         const appName = app.packageJson.name;
@@ -57,7 +57,9 @@ export default function AppActionV2({
             path: app.path,
         };
         
-        runApp(appInfo);
+        await runApp(appInfo);
+        
+        window.location.reload();
     }
     
     // Classes

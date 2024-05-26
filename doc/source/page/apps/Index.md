@@ -21,9 +21,17 @@ Mainly for 'good-roots' stack
 
 - [x] Show all apps
     - [x] Sort apps alphabetically
-- [x] App actions
-    - [x] Start app
-    - [ ] [Stop app](./actions/Stop.md)
 - [x] Show app terminal output
     - [x] Have terminal colors(This was hard for me because I didn't know how)
 
+
+### App actions
+
+- [x] Start app
+- [x] [Stop app](./actions/Stop.md)
+
+On the process tab I've made a view to check running processes, they can be stopped from there.
+
+- [x] On app action trigger reload
+
+Because the output is not updated
