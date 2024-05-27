@@ -10,6 +10,8 @@ import TerminalView from "@/components/terminalView/TerminalView";
 
 /**
  * Simple app view
+ * 
+ * @deprecated Use app-view-v2
  */
 export default function SimpleAppView({
     app,

@@ -8,6 +8,8 @@ import { useEffect, useState } from 'react';
 
 /**
  * Show apps
+ * 
+ * @deprecated Use app-view-v2
  */
 export default function ShowApps({
     apps,
