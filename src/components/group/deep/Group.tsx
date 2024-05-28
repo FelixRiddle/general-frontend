@@ -1,7 +1,7 @@
 "use client";
 
+import { runAppGroup } from "@/api/appManager/app/runAppGroup";
 import { AppGroup } from "@/api/appManager/group/group";
-import ShowApps from "@/components/app/appViews/app-view-v1/ShowApps";
 import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
 import Button from "@/components/button/Button";
 import useAppsV2 from "@/hooks/app/useAppsV2";
@@ -22,8 +22,9 @@ export default function Group({
     
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     
-    const onclick = (event: any) => {
-        
+    // Run all apps in dev mode
+    const runAppsDevMode = (event: any) => {
+        runAppGroup(AppsHandler.apps, "dev");
     }
     
     return (
@@ -34,8 +35,9 @@ export default function Group({
             </p>
             
             <Button
-                onClick={onclick}
+                onClick={runAppsDevMode}
             >Run all dev mode</Button>
+            
             {/* TODO: Show if an app has a missing dev script */}
             
             <div
