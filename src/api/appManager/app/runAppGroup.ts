@@ -1,3 +1,5 @@
+"use server";
+
 import AppData from "@/types/AppData";
 import runApp from "./run";
 import { RunAppInfo } from "@/components/app/appViews/app-view-v1/actions/appScripts/AppAction";

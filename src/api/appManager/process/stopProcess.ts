@@ -36,3 +36,37 @@ export default async function stopProcess(process: Process) {
         return [];
     }
 }
+
+/**
+ * Stop app by name
+ * 
+ * @param process 
+ * @returns 
+ */
+export async function stopAppByName(name: string) {
+    try {
+        // console.log(`Stop app by name: ${name}`);
+        console.log(`[GET] /process/action/stop/name?name=${name}`);
+        
+        // Build url
+        const url = APP_MANAGER_URL;
+        const endpoint = `/process/action/stop/name`;
+        const queryParams = `?name=${name}`;
+        const completeUrl = `${url}${endpoint}${queryParams}`;
+        
+        // Stop app
+        const res = await fetch(completeUrl, {
+            method: 'GET',
+            cache: 'no-store',
+        });
+        
+        const response: StopProcessResponse = await res.json();
+        // console.log(`Response: `, response);
+        
+        return response;
+    } catch(error: any) {
+        console.log(`Error when trying to fetch data`);
+        console.error(error);
+        return [];
+    }
+}

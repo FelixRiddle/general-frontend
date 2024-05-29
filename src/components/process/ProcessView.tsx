@@ -4,7 +4,7 @@ import { useState } from "react";
 import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import Button from "../button/Button";
-import stopProcess from "@/api/appManager/process/stopProcess";
+import stopProcess, { stopAppByName } from "@/api/appManager/process/stopProcess";
 
 export interface Process {
     name: string;
@@ -19,11 +19,11 @@ export interface Process {
  * Process
  */
 export default function ProcessView({
-    process,
+    process: appProcess,
     selectClickCb
 }: {
     process: Process;
-    selectClickCb?: ((event: any, process: Process) => void);
+    selectClickCb?: ((event: any, appProcess: Process) => void);
 }) {
     const [showMore, setShowMore] = useState(false);
     
@@ -34,7 +34,7 @@ export default function ProcessView({
     // Classes
     const arrowClasses = "mt-1 mr-2";
     const appColor = (() => {
-        if(process.pid) {
+        if(appProcess.pid) {
             return "bg-lime-300 border-lime-400";
         } else {
             return "bg-gray-300 border-gray-400";
@@ -48,7 +48,7 @@ export default function ProcessView({
     // On element click
     const onElementClick = (event: any) => {
         if(selectClickCb) {
-            selectClickCb(event, process);
+            selectClickCb(event, appProcess);
         } else {
             // Show app information
             switchShowMore();
@@ -77,16 +77,25 @@ export default function ProcessView({
                     <h1
                         className={`cursor-pointer ${paragraphClasses}`}
                         onClick={onElementClick}
-                    >{process.name}</h1>
+                    >{appProcess.name}</h1>
                 </div>
             </div>
             {showMore && (
                 <div className={"flex flex-col"}>
-                    <Button
-                        onClick={() => stopProcess(process)}
-                    >
-                        Stop app
-                    </Button>
+                    <div>
+                        <Button
+                            onClick={() => stopProcess(appProcess)}
+                        >
+                            Stop app
+                        </Button>
+                    </div>
+                    <div>
+                        <Button
+                            onClick={() => stopAppByName(appProcess.name)}
+                        >
+                            Stop app(By name)
+                        </Button>
+                    </div>
                 </div>
             ) || (
                 <div>
