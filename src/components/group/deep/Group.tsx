@@ -1,6 +1,7 @@
 "use client";
 
 import { runAppGroup } from "@/api/appManager/app/runAppGroup";
+import { stopAppGroup } from "@/api/appManager/app/stopAppGroup";
 import { AppGroup } from "@/api/appManager/group/group";
 import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
 import Button from "@/components/button/Button";
@@ -27,6 +28,11 @@ export default function Group({
         runAppGroup(AppsHandler.apps, "dev");
     }
     
+    // Stop all apps
+    const stopApps = (event: any) => {
+        stopAppGroup(AppsHandler.apps);
+    }
+    
     return (
         <div>
             <h1 className={titleClasses}>{group.name}</h1>
@@ -37,6 +43,10 @@ export default function Group({
             <Button
                 onClick={runAppsDevMode}
             >Run all dev mode</Button>
+            
+            <Button
+                onClick={stopApps}
+            >Stop all apps</Button>
             
             {/* TODO: Show if an app has a missing dev script */}
             
