@@ -84,16 +84,9 @@ export default function ProcessView({
                 <div className={"flex flex-col"}>
                     <div>
                         <Button
-                            onClick={() => stopProcess(appProcess)}
-                        >
-                            Stop app
-                        </Button>
-                    </div>
-                    <div>
-                        <Button
                             onClick={() => stopAppByName(appProcess.name)}
                         >
-                            Stop app(By name)
+                            Stop app
                         </Button>
                     </div>
                 </div>

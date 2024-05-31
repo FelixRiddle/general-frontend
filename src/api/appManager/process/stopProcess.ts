@@ -12,6 +12,7 @@ export interface StopProcessResponse {
  * Send a request to the server to stop an app
  * 
  * @param process 
+ * @deprecated Use 'stopAppByName' instead
  */
 export default async function stopProcess(process: Process) {
     try {
