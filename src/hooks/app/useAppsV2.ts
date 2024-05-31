@@ -30,37 +30,6 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
             socket.io.engine.on("upgrade", (transport) => {
                 setTransport(transport);
             });
-            
-            // // --- The important things ---
-            // // On app start
-            // socket.on('app start', (appName: string) => {
-            //     console.log(`App ${appName} started`);
-            // });
-            
-            // // On app error / start error
-            // socket.on('app error', (err) => {
-            //     console.error(`App start error: `, err);
-            // });
-            
-            // // Stdout
-            // // React in development mode will run this twice
-            // socket.on('out', (out) => {
-            //     // Update app output
-            //     const name = out.app.name;
-                
-            //     // console.log(`Output received for app: `, name);
-            //     // console.log(`Output: `, out);
-                
-            //     setFilteredApps((apps) => appendMessage(apps, name, out.message));
-            // });
-            
-            // // Stderr
-            // socket.on('err', (err) => {
-            //     // Update app output
-            //     const name = err.app.name;
-                
-            //     setFilteredApps((apps) => appendMessage(apps, name, err.message));
-            // });
         }
         
         function onDisconnect() {
@@ -71,6 +40,14 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
         // --- The important events ---
         // TODO: I think the behaviour should be, start a socket for each running app
         // The backend must keep track of every running app
+        function onAppStart(appName: string) {
+            console.log(`App ${appName} started`);
+        }
+        
+        function onAppError(err: any) {
+            console.error(`App start error: `, err);
+        }
+        
         /**
          * Out event
          * 
@@ -85,14 +62,27 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
             setFilteredApps((apps) => appendMessage(apps, name, out.message));
         }
         
+        function onAppErrorEvent(err: any) {
+            // Update app output
+            const name = err.app.name;
+            
+            setFilteredApps((apps) => appendMessage(apps, name, err.message));
+        };
+        
         socket.on("connect", onConnect);
         socket.on("disconnect", onDisconnect);
+        socket.on("app start", onAppStart);
+        socket.on("app error", onAppError);
         socket.on('out', onOutEvent);
+        socket.on("err", onAppErrorEvent)
         
         return () => {
             socket.off("connect", onConnect);
             socket.off("disconnect", onDisconnect);
+            socket.off("app start", onAppStart);
+            socket.off("app error", onAppError);
             socket.off("out", onOutEvent);
+            socket.off("err", onAppErrorEvent);
         }
     }, []);
     
