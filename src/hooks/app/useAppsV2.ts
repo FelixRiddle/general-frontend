@@ -18,6 +18,7 @@ export default function useAppsV2(apps: AppData[], socket: Socket) {
     const [isConnected, setIsConnected] = useState(false);
     const [transport, setTransport] = useState("N/A");
     
+    // Update app output via sockets
     useEffect(() => {
         if(socket.connected) {
             onConnect();

@@ -1,8 +1,6 @@
 "use client";
 
 import AppData from "@/types/AppData";
-import { useEffect, useState } from "react";
-import { Socket } from "socket.io-client";
 
 /**
  * Get apps name
@@ -50,14 +48,6 @@ export function appendMessage(apps: AppData[], name: string, message: string) {
     }
     
     appData.out += message;
-    // console.log(`App data + out: `, appData);
-    
-    // This doesn't update the view for some reason
-    // // Insert output message
-    // const newAppData = {
-    //     ...appData,
-    //     out: appData.out + message,
-    // };
     
     // Insert the updated app into the array
     const updatedState = [
@@ -101,55 +91,7 @@ export function createAppsState(apps: AppData[]) {
         return !app.out;
     });
     
-    // console.log(`Apps with output: `, appsOutput);
-    
-    const outputFirst = [...appsOutput,...appsNoOutput];
-    
-    // console.log(`Result: `, outputFirst);
+    const outputFirst = [...appsOutput, ...appsNoOutput];
     
     return outputFirst;
 }
-
-// /**
-//  * Use apps
-//  * 
-//  * TODO: Big time trouble on whether using useEffect or not with the sockets, I have to do multiple implementations and check which one fits better.
-//  */
-// export default function useApps(apps: AppData[], socket: Socket) {
-//     const debug = false;
-    
-//     // Fix app.out and sort alphabetically
-//     const [filteredApps, setFilteredApps] = useState<AppData[]>(createAppsState(apps));
-    
-//     // useEffect(() => {
-//     // On app start
-//     socket.on('app start', (appName: string) => {
-//         console.log(`App ${appName} started`);
-//     });
-    
-//     // On app error / start error
-//     socket.on('app error', (err) => {
-//         console.error(`App start error: `, err);
-//     });
-    
-//     // Stdout
-//     socket.on('out', (out) => {
-//         // Update app output
-//         const name = out.app.name;
-        
-//         setFilteredApps((apps) => appendMessage(apps, name, out.message));
-//     });
-    
-//     // Stderr
-//     socket.on('err', (err) => {
-//         // Update app output
-//         const name = err.app.name;
-        
-//         setFilteredApps((apps) => appendMessage(apps, name, err.message));
-//     });
-//     // }, []);
-    
-//     return {
-//         apps: filteredApps,
-//     };
-// }

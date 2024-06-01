@@ -1,4 +1,4 @@
 # Process
 
-- [ ] List running processes
-    - [ ] Stop a running process
+- [x] List running processes
+    - [x] Stop a running process

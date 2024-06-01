@@ -1,6 +1,6 @@
 # Group apps
 
-- [ ] Like my 'good-roots' stack for example
+- [x] Like my 'good-roots' stack for example
 
 Group apps together and run them all with a click.
 
@@ -12,7 +12,7 @@ There are many ways to implement this, these are two ideas that I thought, one i
 
 This is to run scripts that are named, like 'npm run test', 'npm run dev', 'npm run start' etc...
 
-- [ ] Run scripts by name
+- [x] Run scripts by name
 - [ ] Notify if an app of the group doesn't have that script name
 
 - [ ] Run app on release mode
