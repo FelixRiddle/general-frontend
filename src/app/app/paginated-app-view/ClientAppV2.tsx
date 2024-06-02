@@ -5,6 +5,7 @@ import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 import { socket } from "@/socket";
 import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
+import { useEffect } from "react";
 
 /**
  * App but client side
@@ -13,10 +14,14 @@ export default function ClientAppV2({
     apps: appData,
     appWindowManager,
 }: {
-    apps: AppData[];
-    appWindowManager: AppWindowManagerType;
+    apps?: AppData[];
+    appWindowManager?: AppWindowManagerType;
 }) {
-    const AppsHandler = useAppsV2(appData, socket);
+    const AppsHandler = useAppsV2((appWindowManager && appWindowManager.apps) ?? appData ?? [], socket);
+    
+    useEffect(() => {
+        console.log(`Apps in current window: `, AppsHandler.apps);
+    }, []);
     
     const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
     const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";

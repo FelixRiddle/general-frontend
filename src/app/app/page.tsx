@@ -1,33 +1,8 @@
-import AppWindowManager from "@/lib/apps/index/AppWindowManager";
-import { getAppsData } from "@/api/appManager/app";
-import ClientAppV2 from "./ClientAppV2";
+import { redirect } from "next/navigation";
 
 /**
  * App manager
  */
-export default async function App({
-    searchParams,
-}: {
-    searchParams: {
-        query?: string;
-        page?: string;
-    }
-}) {
-    // App window manager
-    // For pagination and search
-    const appWindowManager = new AppWindowManager();
-    appWindowManager.setPerPage(10);
-    appWindowManager.setQueryFromSearchParams(searchParams);
-    await appWindowManager.updateAll();
-    
-    const appsData = await getAppsData();
-    
-    return(
-        <div>
-            <ClientAppV2
-                apps={appsData}
-                appWindowManager={appWindowManager.toType()}
-            ></ClientAppV2>
-        </div>
-    );
+export default async function App() {
+    return redirect('/app/paginated-app-view');
 }

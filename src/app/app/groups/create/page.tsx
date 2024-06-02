@@ -17,7 +17,7 @@ export default async function CreateV4({
     
     const appWindowManager = new AppWindowManager();
     appWindowManager.setQueryFromSearchParams(searchParams);
-    await appWindowManager.updateAll();
+    await appWindowManager.update();
     
     return (
         <div>

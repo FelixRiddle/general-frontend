@@ -78,7 +78,7 @@ export default class AppWindowManager {
     /**
      * Update all
      */
-    async updateAll() {
+    async update() {
         const appNames = await getApps(this.queryInfo.query)
            .then((res) => {
                 return res?.apps;

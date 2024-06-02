@@ -85,7 +85,6 @@ export default function SimpleAppActionsV2({
                     appsHandler={appsHandler}
                 />
             ) : (
-            // ( : )
                 <div>
                     No scripts
                 </div>
