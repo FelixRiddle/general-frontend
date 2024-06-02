@@ -1,11 +1,11 @@
 import { Suspense } from "react";
 
 import Search from "@/app/ui/search";
-import TableAppsSkeleton from "@/app/ui/skeletons/TableAppsSkeleton";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import AppData from "@/types/AppData";
 import QueryPagination from "./QueryPagination";
 import ShowApps from "../../appViews/selector/ShowApps";
+import Lobby from "./Lobby";
 
 /**
  * 
@@ -31,7 +31,7 @@ export default function QueryAppSelector({
                 
                 {/* Search and select an app */}
                 <Search placeholder="Search apps" />
-                <Suspense key={appWindowManager.queryInfo.query + appWindowManager.queryInfo.page} fallback={<TableAppsSkeleton />}>
+                <Suspense key={appWindowManager.queryInfo.query + appWindowManager.queryInfo.page} fallback={<Lobby />}>
                     {/* Show apps here */}
                     <ShowApps apps={appWindowManager.apps} selectClickCb={clickToggleAppsSelectionCb} appsGroup={groupApps}/>
                 </Suspense>

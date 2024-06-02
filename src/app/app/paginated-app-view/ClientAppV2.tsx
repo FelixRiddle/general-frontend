@@ -5,19 +5,23 @@ import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 import { socket } from "@/socket";
 import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
-import { useEffect } from "react";
+import { Suspense, useEffect } from "react";
+import Lobby from "@/components/app/input/queryAppSelector/Lobby";
 
 /**
  * App but client side
  */
 export default function ClientAppV2({
-    apps: appData,
     appWindowManager,
 }: {
-    apps?: AppData[];
-    appWindowManager?: AppWindowManagerType;
+    appWindowManager: AppWindowManagerType;
 }) {
-    const AppsHandler = useAppsV2((appWindowManager && appWindowManager.apps) ?? appData ?? [], socket);
+    // Use apps does two things
+    // * Applies apps order, filters, etc.
+    // (Althogh in this context we don't need filters)
+    // (In this context filters should be applied before getting the data(in the server component), or stored in a server state)
+    // * Setups sockets
+    const AppsHandler = useAppsV2(appWindowManager.apps, socket);
     
     useEffect(() => {
         console.log(`Apps in current window: `, AppsHandler.apps);
@@ -37,11 +41,14 @@ export default function ClientAppV2({
                 The command line output of the apps is also visible for each app.
             </p>
             
-            <ShowAppsV2
-                apps={AppsHandler.apps}
-                socket={socket}
-                appsHandler={AppsHandler}
-            />
+            {/* This suspense is useless because the data is awaited in the backend */}
+            <Suspense key={appWindowManager.queryInfo.query + appWindowManager.queryInfo.page} fallback={<Lobby />}>
+                <ShowAppsV2
+                    apps={AppsHandler.apps}
+                    socket={socket}
+                    appsHandler={AppsHandler}
+                />
+            </Suspense>
         </div>
     );
 }
