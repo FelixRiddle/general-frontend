@@ -91,7 +91,7 @@ export default class AppWindowManager {
         
         if(appNames) {
             // Get total pages
-            const pages = totalPages(appNames.length);
+            const pages = totalPages(appNames.length, this.perPage);
             // console.log(`Total pages: `, pages);
             
             // Update
@@ -120,9 +120,9 @@ export default class AppWindowManager {
         
         const windowAppsInfo = await fetchAppsData(windowAppsName);
         
-        // // Pro debugging methods
+        // Pro debugging methods
         // console.log(`Items window info: `, itemsWindowInfo);
-        // console.log(`Window apps name: `, windowAppsName);
+        console.log(`Window apps name: `, windowAppsName);
         // console.log(`Window apps information: `, windowAppsInfo);
         
         return windowAppsInfo;

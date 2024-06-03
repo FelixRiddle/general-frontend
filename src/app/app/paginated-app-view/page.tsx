@@ -19,6 +19,9 @@ export default async function App({
     appWindowManager.setQueryFromSearchParams(searchParams);
     await appWindowManager.update();
     
+    // Data here is correctly shown but it's not updated on the frontend
+    console.log(`Apps in window: `, appWindowManager.apps.map((app) => app.packageJson && app.packageJson.name));
+    
     return(
         <div>
             <ClientAppV2

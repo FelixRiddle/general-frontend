@@ -11,7 +11,10 @@ export default function appsInPaginationWindow(apps: Array<string>, window: Item
     for (let i = window.windowStart; i < window.windowEnd; i++) {
         // appsName.push(app);
         const app = apps[i];
-        appsName.push(app);
+        
+        if(app) {
+            appsName.push(app);
+        }
     }
     
     return appsName;
