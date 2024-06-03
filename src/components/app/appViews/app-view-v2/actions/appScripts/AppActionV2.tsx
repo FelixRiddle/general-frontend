@@ -33,6 +33,7 @@ export default function AppActionV2({
             name: appName,
             command,
             path: app.path,
+            scriptName,
         };
         
         // This only runs once
@@ -55,6 +56,7 @@ export default function AppActionV2({
             name: appName,
             command,
             path: app.path,
+            scriptName,
         };
         
         await runApp(appInfo);

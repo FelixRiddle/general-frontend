@@ -46,7 +46,6 @@ export default async function stopProcess(process: Process) {
  */
 export async function stopAppByName(name: string) {
     try {
-        // console.log(`Stop app by name: ${name}`);
         console.log(`[GET] /process/action/stop/name?name=${name}`);
         
         // Build url
@@ -66,8 +65,8 @@ export async function stopAppByName(name: string) {
         
         return response;
     } catch(error: any) {
-        console.log(`Error when trying to fetch data`);
-        console.error(error);
+        // console.log(`Error when trying to fetch data`);
+        // console.error(error);
         return [];
     }
 }

@@ -12,6 +12,7 @@ interface RunResponse {
  */
 export default async function runApp(appInfo: RunAppInfo) {
     try {
+        console.log(`Run app info: `, appInfo);
         const response = await fetch("http://localhost:24000/app/run", {
             method: 'POST',
             headers: {
@@ -21,7 +22,7 @@ export default async function runApp(appInfo: RunAppInfo) {
             cache: 'no-store'
         });
         
-        const data = await response.json();
+        const data: RunResponse = await response.json();
         
         return data;
     } catch(err) {

@@ -14,9 +14,6 @@ export async function stopAppGroup(apps: AppData[]) {
             const name = app.packageJson.name;
             
             const response = await stopAppByName(name);
-            
-            console.log(`\nStop app: ${name}`);
-            console.log(`Response: `, response);
         }
     } catch(err) {
         console.error(err);

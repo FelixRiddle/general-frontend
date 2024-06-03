@@ -5,6 +5,7 @@ export interface RunAppInfo {
     name: string,
     command: string,
     path: string,
+    scriptName?: string,
 }
 
 /**
@@ -32,6 +33,7 @@ export default function AppAction({
             name: app.packageJson.name,
             command,
             path: app.path,
+            scriptName,
         };
         
         socket.emit("run", appInfo);

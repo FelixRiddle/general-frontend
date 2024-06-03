@@ -16,7 +16,8 @@ export async function runAppGroup(apps: AppData[], scriptName: string) {
                 name: app.packageJson.name,
                 command: app.packageJson.scripts[scriptName],
                 path: app.path,
-            }
+                scriptName: scriptName
+            };
             
             const response = await runApp(appInfo);
             
