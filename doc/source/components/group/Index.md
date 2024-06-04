@@ -8,3 +8,7 @@
 - [ ] Pagination
 - [ ] Search groups by name
 - [ ] Delete group
+
+- [ ] For running apps show them like a terminal with tabs on top
+    - [ ] Start from the bottom of the terminal
+    - [ ] Have a limit of messages
