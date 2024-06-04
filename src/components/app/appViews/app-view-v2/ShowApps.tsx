@@ -1,12 +1,13 @@
 "use client";
 
+import { Socket } from 'socket.io-client';
 import { v4 as uuidv4 } from 'uuid';
-import AppData from '@/types/AppData';
 import { useState } from 'react';
+
+import AppData from '@/types/AppData';
 import SimpleAppViewV2 from './SimpleAppViewV2';
 import Apps from '@/lib/apps/Apps';
 import appManagerSocket from '@/lib/connection/appManagerSocket';
-import { Socket } from 'socket.io-client';
 
 function createAppManager(apps: AppData[]) {
     const appsManager = new Apps(apps, appManagerSocket());
