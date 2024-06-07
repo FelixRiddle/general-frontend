@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 
-import AppData from "@/types/AppData";
+import AppData, { isAppRunning } from "@/types/AppData";
 import AppScriptsViewV2 from "./appScripts/AppScriptsViewV2";
 import { Socket } from "socket.io-client";
+import { RunAppInfo } from "../../app-view-v1/actions/appScripts/AppAction";
+import runApp from "@/api/appManager/app/run";
+import { stopAppByName } from "@/api/appManager/process/stopProcess";
 
 /**
  * Simple app actions
@@ -18,21 +21,47 @@ export default function SimpleAppActionsV2({
     socket: Socket;
     appsHandler: any;
 }) {
-    const [isRunning, setIsRunning] = useState(app.running ? app.running : false);
+    const [isRunning, setIsRunning] = useState(isAppRunning(app));
     const [showOtherActions, setShowOtherActions] = useState(false);
     
     // Start app
     const startApp = async (event: any) => {
         try {
-            const startScript = app.packageJson.scripts["start"];
-            const appInfo = {
+            const scriptName = "start";
+            const startScript = app.packageJson.scripts[scriptName];
+            const appInfo: RunAppInfo = {
                 name: app.packageJson.name,
                 command: startScript,
                 path: app.path,
+                scriptName: scriptName,
             };
             
-            console.log(`TODO: Start app`);
-            // runApp(appInfo);
+            await runApp(appInfo);
+            
+            window.location.reload();
+        } catch(err: any) {
+            console.log(`Error when emitting run, couldn't get start script`);
+            console.error(err);
+        }
+    }
+    
+    /**
+     * Start app in development mode
+     */
+    async function startAppDev(event: any) {
+        try {
+            const scriptName = "dev";
+            const startScript = app.packageJson.scripts[scriptName];
+            const appInfo: RunAppInfo = {
+                name: app.packageJson.name,
+                command: startScript,
+                path: app.path,
+                scriptName: scriptName,
+            };
+            
+            await runApp(appInfo);
+            
+            window.location.reload();
         } catch(err: any) {
             console.log(`Error when emitting run, couldn't get start script`);
             console.error(err);
@@ -42,6 +71,16 @@ export default function SimpleAppActionsV2({
     // Stop app
     const stopApp = async (event: any) => {
         // What we have to do here, is to kill the shell and all its chidlren processes
+        try {
+            const appName = app.packageJson.name;
+            
+            await stopAppByName(appName);
+            
+            window.location.reload();
+        } catch(err: any) {
+            console.log(`Error when emitting run, couldn't get start script`);
+            console.error(err);
+        }
     }
     
     // Classes
@@ -51,18 +90,27 @@ export default function SimpleAppActionsV2({
         <div>
             Actions
             <div className="flex justify-start">
-                <button
-                    className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
-                    disabled={isRunning}
-                    onClick={startApp}
-                >
-                    Start
-                </button>
-                <button
-                    className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
-                    disabled={!isRunning}
-                    onClick={stopApp}
-                >Stop</button>
+                {!isRunning && (
+                    <div>
+                        <button
+                            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
+                            onClick={startApp}
+                        >
+                            Start
+                        </button>
+                        <button
+                            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
+                            onClick={startAppDev}
+                        >
+                            Start dev
+                        </button>
+                    </div>
+                ) || (
+                    <button
+                        className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
+                        onClick={stopApp}
+                    >Stop</button>
+                )}
             </div>
             
             {/* Other actions */}
