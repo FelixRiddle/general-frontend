@@ -5,9 +5,9 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 
 import AppData from '@/types/AppData';
-import SimpleAppViewV2 from './SimpleAppViewV2';
 import Apps from '@/lib/apps/Apps';
 import appManagerSocket from '@/lib/connection/appManagerSocket';
+import AppAccordion from './AppAccordion';
 
 function createAppManager(apps: AppData[]) {
     const appsManager = new Apps(apps, appManagerSocket());
@@ -19,7 +19,7 @@ function createAppManager(apps: AppData[]) {
 /**
  * Show apps
  */
-export default function ShowAppsV2({
+export default function AppsAccordion({
     apps,
     socket,
     appsHandler,
@@ -36,12 +36,12 @@ export default function ShowAppsV2({
             {/* Show all apps */}
             {appsView.map(app => {
                 return (
-                    <SimpleAppViewV2
+                    <AppAccordion
                         key={uuidv4()}
                         app={app}
                         socket={socket}
                         appsHandler={appsHandler}
-                    ></SimpleAppViewV2>
+                    ></AppAccordion>
                 );
             })}
         </div>

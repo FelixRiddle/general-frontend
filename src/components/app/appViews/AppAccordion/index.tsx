@@ -1,12 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import { SlArrowDown, SlArrowUp } from "react-icons/sl";
 
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
-import TerminalView from "@/components/terminalView/TerminalView";
-import SimpleAppActionsV2 from "./actions/SimpleAppActionsV2";
 import AppViewContent from "./AppViewContent";
 import AppNameToggle from "./AppNameToggle";
 import RunningState from "./RunningState";
@@ -14,7 +11,7 @@ import RunningState from "./RunningState";
 /**
  * Simple app view
  */
-export default function SimpleAppViewV2({
+export default function AppAccordion({
     app,
     selectClickCb,
     socket,

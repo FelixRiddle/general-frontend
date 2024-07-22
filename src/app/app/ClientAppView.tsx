@@ -3,11 +3,11 @@
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 import { socket } from "@/socket";
-import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
-import { Suspense, useEffect } from "react";
+import { Suspense } from "react";
 import Lobby from "@/components/app/input/queryAppSelector/Lobby";
 import Search from "@/app/ui/search";
 import QueryPagination from "@/components/app/input/queryAppSelector/QueryPagination";
+import AppsAccordion from "@/components/app/appViews/AppsAccordion";
 
 /**
  * App but client side
@@ -50,8 +50,7 @@ export default function ClientAppView({
 				key={appWindowManager.queryInfo.query + appWindowManager.queryInfo.page}
 				fallback={<Lobby />}
 			>
-                {/* TODO: This one is different than the one for groups, check how the data is handled */}
-                <ShowAppsV2
+                <AppsAccordion
                     apps={appWindowManager.apps}
                     socket={socket}
                     appsHandler={AppsHandler}
