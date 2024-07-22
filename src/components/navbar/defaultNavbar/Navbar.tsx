@@ -13,15 +13,27 @@ export default function Navbar() {
     const pathname = usePathname();
     
     return (
-        <ul className={navbarContainer.container}>
-            <li>
-                <Link className={`${navbarStyles.navbar} mr-2 ${pathname === "/" ? navbarStyles.navbarActive : ""}`}
-                    href="/">Home</Link>
-            </li>
-            <li>
-                <Link className={`${navbarStyles.navbar} ${pathname === "/app" ? navbarStyles.navbarActive : ""}`}
-                    href="/app">App</Link>
-            </li>
-        </ul>
+		<nav>
+			<ul className={navbarContainer.container}>
+				<li>
+					<Link className={`${navbarStyles.navbar} mr-2 ${
+						pathname === "/" ? navbarStyles.navbarActive : ""
+					}`}
+						href="/">Home</Link>
+				</li>
+				<li>
+					<Link className={`${navbarStyles.navbar} mr-2 ${
+						pathname === "/app" ? navbarStyles.navbarActive : ""
+					}`}
+						href="/app">App</Link>
+				</li>
+				<li>
+					<Link className={`${navbarStyles.navbar} mr-2 ${
+						pathname === "/settings" ? navbarStyles.navbarActive : ""
+					}`}
+						href="/settings">Settings</Link>
+				</li>
+			</ul>
+		</nav>
     );
 }

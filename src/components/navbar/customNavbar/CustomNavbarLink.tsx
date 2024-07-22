@@ -21,7 +21,9 @@ export default function CustomNavbarLink({
             <Link
                 href={pageInfo.href}
                 // FIXME: I need to fix this later on, it's activating when it should
-                className={`${navbarStyles.navbar} mr-2 ${pathname === pageInfo.href ? navbarStyles.navbarActive : ""}`}
+                className={`${navbarStyles.navbar} mr-2 ${
+					pathname === pageInfo.href ? navbarStyles.navbarActive : ""
+				}`}
             >
                 {children}
             </Link>
