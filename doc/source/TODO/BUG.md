@@ -6,7 +6,7 @@
 
 - [x] Am able to run two different apps without sockets.
 
-- [ ] Can't get output of apps that use any of these:
+- [x] Can't get output of apps that use any of these:
 
 * 'concurrently' package
 * Any nextjs app

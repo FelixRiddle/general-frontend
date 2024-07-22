@@ -122,7 +122,7 @@ export default class AppWindowManager {
         
         // Pro debugging methods
         // console.log(`Items window info: `, itemsWindowInfo);
-        console.log(`Window apps name: `, windowAppsName);
+        // console.log(`Window apps name: `, windowAppsName);
         // console.log(`Window apps information: `, windowAppsInfo);
         
         return windowAppsInfo;

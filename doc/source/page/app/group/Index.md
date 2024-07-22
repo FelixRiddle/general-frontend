@@ -4,6 +4,11 @@
 
 Group apps together and run them all with a click.
 
+- [ ] Run all option
+- [ ] Listing page app groups have these options
+	- [x] Delete icon
+	- [ ] 
+
 ## Run group of apps
 
 There are many ways to implement this, these are two ideas that I thought, one is to simply run the scripts with a specific name and the other are custom scripts / commands organization.

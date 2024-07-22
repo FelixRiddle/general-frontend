@@ -10,7 +10,7 @@ import { updateAppInfo } from "felixriddle.pid-discovery";
     }
 })();
 
-// /** @type {import('next').NextConfig} */
+/** @type {import('next').NextConfig} */
 const nextConfig = {
 };
 

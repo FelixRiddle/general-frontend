@@ -20,7 +20,8 @@ export default async function App({
     await appWindowManager.update();
     
     // Data here is correctly shown but it's not updated on the frontend
-    console.log(`Apps in window: `, appWindowManager.apps.map((app) => app.packageJson && app.packageJson.name));
+	// const appsInWindow = appWindowManager.apps.map((app) => app.packageJson && app.packageJson.name);
+    // console.log(`Apps in window: `, appsInWindow);
     
     return(
         <div>

@@ -24,25 +24,22 @@ export default function CreateGroupForm({
         clickToggleAppsSelectionCb,
         clickDeselectAppCb
     } = useSelectedApps({ apps: appWindowManager.apps });
-    
-    // const createGroupApps = createGroup.bind(null, groupApps);
-    
-    // On submit
-    const onSubmit = () => {
-        if(formRef && formRef.current) {
-            const formData = new FormData(formRef.current);
-            createGroup(formData, groupApps);
-        }
-    }
+	
+	/**
+	 * Create group
+	 */
+	async function handleCreateGroup(e: any) {
+		if(!formRef || !formRef.current) {
+			return;
+		}
+		
+		const formData = new FormData(formRef.current);
+		const response = await createGroup(formData, groupApps);
+	}
     
     return (
         <div>
             <form
-                action={async (formData) => {
-                    console.log(`Run server action`);
-                    
-                    await createGroup(formData, groupApps);
-                }}
                 ref={formRef}
                 id="createAppGroupForm"
             >
@@ -53,6 +50,7 @@ export default function CreateGroupForm({
                         id="name"
                         name="name"
                         className="m-1 border rounded border-gray-900 p-1"
+						// required={true}
                     />
                 </div>
                 <div>
@@ -73,7 +71,10 @@ export default function CreateGroupForm({
                     clickToggleAppsSelectionCb={clickToggleAppsSelectionCb}
                 />
                 
-                <Button type={"submit"} onClick={onSubmit}>Create group</Button>
+                <Button
+					type={"submit"}
+					onClick={handleCreateGroup}
+				>Create group</Button>
             </form>
         </div>
     );
