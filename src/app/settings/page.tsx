@@ -1,5 +1,8 @@
 "use server";
 
+// FIXME: Not working for some reason
+// import SettingsClient from "./SettingsClient";
+
 /**
  * Settings page
  */
@@ -15,6 +18,7 @@ export default async function SettingsPage() {
             <p className={paragraphClasses}>
 				Configure how app manager should behave
             </p>
+			{/* <SettingsClient /> */}
 		</div>
 	);
 }

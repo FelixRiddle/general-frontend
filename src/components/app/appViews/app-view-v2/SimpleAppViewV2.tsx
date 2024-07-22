@@ -7,6 +7,9 @@ import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 import TerminalView from "@/components/terminalView/TerminalView";
 import SimpleAppActionsV2 from "./actions/SimpleAppActionsV2";
+import AppViewContent from "./AppViewContent";
+import AppNameToggle from "./AppNameToggle";
+import RunningState from "./RunningState";
 
 /**
  * Simple app view
@@ -49,11 +52,6 @@ export default function SimpleAppViewV2({
         }
     }
     
-    const titleClasses = "m-1 p-1 text-xs font-extrabold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
-    const subtitleClasses = "m-1 p-1 text-xs font-bold leading-none tracking-tight text-gray-900 md:text-2xl lg:text-3xl";
-    const linkClasses = "p-1 m-1 font-medium text-blue-600 dark:text-blue-500 hover:underline";
-    const paragraphClasses = "p-1 m-1 text-gray-900";
-    
     return (
         <div
             className={`rounded border-2 p-2 m-2 ${appColor} hover:border-emerald-400 hover:bg-emerald-300 hover:cursor-pointer`}
@@ -70,66 +68,21 @@ export default function SimpleAppViewV2({
                 <div>
                     <div className="flex">
                         {/* Name and toggle */}
-                        <div className="flex flex-1">
-                            {showMore ? (
-                                <SlArrowUp
-                                    className={arrowClasses}
-                                    onClick={onElementClick}
-                                />
-                            ) : (
-                                <SlArrowDown
-                                    className={arrowClasses}
-                                    onClick={onElementClick}
-                                />
-                            )}
-                            <h1
-                                className={`cursor-pointer`}
-                                onClick={onElementClick}
-                            >{app.name ? app.name : app.packageJson.name}</h1>
-                        </div>
+						<AppNameToggle
+							showMore={showMore}
+							app={app}
+							onElementClick={onElementClick}
+						/>
                         
                         {/* Is it running */}
-                        <div className="ml-auto flex-1">
-                            {isRunning ? (
-                                <span className="text-green-500">
-                                    <strong>Running</strong>
-                                </span>
-                            ) : (
-                                <span className="text-gray-500">
-                                    Not running
-                                </span>
-                            )}
-                        </div>
-                        
-                        <div className="flex-1"></div>
+						<RunningState isRunning={isRunning} />
                     </div>
                     {showMore && (
-                        <div>
-                            {/* Show description */}
-                            {app.packageJson.description && (
-                                <div>
-                                    <h3 className={subtitleClasses}>Description</h3>
-                                    <p className={paragraphClasses}>{app.packageJson.description}</p>
-                                </div>
-                            ) || (
-                                <div>
-                                    No description
-                                </div>
-                            )}
-                            
-                            {/* Actions */}
-                            <SimpleAppActionsV2
-                                app={app}
-                                socket={socket}
-                                appsHandler={appsHandler}
-                            />
-                            
-                            {/* Output */}
-                            {/* If the app is running show the output */}
-                            <div>
-                                <TerminalView output={app.out ? app.out : ""} />
-                            </div>
-                        </div>
+						<AppViewContent
+							app={app}
+							socket={socket}
+							appsHandler={appsHandler}
+						/>
                     )}
                 </div>
             ) || (
