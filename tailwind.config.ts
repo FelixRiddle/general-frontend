@@ -1,22 +1,25 @@
 import type { Config } from "tailwindcss";
+import { nextui } from '@nextui-org/theme'
 
 const allBelow = "**/*.{js,ts,jsx,tsx,mdx}";
 const config: Config = {
     content: [
-        `./src/pages/${allBelow}`,
-        `./src/components/${allBelow}`,
-        `./src/app/${allBelow}`,
-        `./src/tailwindStyles/${allBelow}`
+		`./src/pages/${allBelow}`,
+        // `./src/pages/${allBelow}`,
+        // `./src/components/${allBelow}`,
+        // `./src/app/${allBelow}`,
+        // `./src/tailwindStyles/${allBelow}`,
+		`./node_modules/@nextui-org/theme/dist/${allBelow}`,
+		// single component styles
+		"./node_modules/@nextui-org/theme/dist/components/button.js",
+		// or you can use a glob pattern (multiple component styles)
+		'./node_modules/@nextui-org/theme/dist/components/(button|snippet|code|input).js'
     ],
-    theme: {
-        extend: {
-            backgroundImage: {
-                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
-                "gradient-conic": "conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))",
-            },
-        },
-    },
-    plugins: [],
+	theme: {
+		extend: {},
+	},
+	darkMode: "class",
+	plugins: [nextui()],
 };
 
 export default config;

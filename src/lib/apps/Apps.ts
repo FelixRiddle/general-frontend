@@ -165,9 +165,9 @@ export default class Apps {
      * Create default apps view
      */
     defaultAppsView() {
-        const operationName = "[Transform array]";
+        // const operationName = "[Transform array]";
         
-        console.log(`${operationName} Sort alphabetically`);
+        // console.log(`${operationName} Sort alphabetically`);
         
         // Sort alphabetically
         this.sortAlphabetically();

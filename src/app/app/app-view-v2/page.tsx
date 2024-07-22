@@ -1,3 +1,5 @@
+"use server";
+
 import { getAppsData } from "@/api/appManager/app";
 import ClientAppV2 from "./ClientAppV2";
 

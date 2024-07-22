@@ -5,6 +5,7 @@
         "allowJs": true,
         "skipLibCheck": true,
         "strict": true,
+		"forceConsistentCasingInFileNames": true,
         "noEmit": true,
         "esModuleInterop": true,
         "module": "esnext",
@@ -14,7 +15,7 @@
         "jsx": "preserve",
         "incremental": true,
         "plugins": [{
-                "name": "next"
+			"name": "next"
         }],
         "paths": {
             "@/*": ["./src/*"]
@@ -22,9 +23,6 @@
     },
     "include": [
         "next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts",
-        // I couldn't make it work because I forgot to put *
-        // WARNING: This doesn't work, the project was built and then published to npm
-        "node_modules/good-roots-ts-api/**/*.ts"
     ],
     "exclude": ["node_modules"]
 }

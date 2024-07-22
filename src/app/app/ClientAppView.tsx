@@ -46,10 +46,12 @@ export default function ClientAppView({
             {/* Search and select an app */}
             <Search placeholder="Search apps" />
             
-            <Suspense key={appWindowManager.queryInfo.query + appWindowManager.queryInfo.page} fallback={<Lobby />}>
+            <Suspense
+				key={appWindowManager.queryInfo.query + appWindowManager.queryInfo.page}
+				fallback={<Lobby />}
+			>
                 {/* TODO: This one is different than the one for groups, check how the data is handled */}
                 <ShowAppsV2
-                    // apps={AppsHandler.apps}
                     apps={appWindowManager.apps}
                     socket={socket}
                     appsHandler={AppsHandler}
