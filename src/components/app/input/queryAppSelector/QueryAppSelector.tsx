@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 
-import Search from "@/app/ui/search";
+import Search from "@/components/ui/search";
 import { AppWindowManagerType } from "@/lib/apps/index/AppWindowManager";
 import AppData from "@/types/AppData";
 import QueryPagination from "./QueryPagination";

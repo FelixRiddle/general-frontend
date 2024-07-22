@@ -3,7 +3,7 @@
 import { runAppGroup } from "@/api/appManager/app/runAppGroup";
 import { stopAppGroup } from "@/api/appManager/app/stopAppGroup";
 import { AppGroup } from "@/api/appManager/group/group";
-import ShowAppsV2 from "@/components/app/appViews/app-view-v2/ShowApps";
+import AppsAccordion from "@/components/app/appViews/AppsAccordion";
 import Button from "@/components/button/Button";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 import { socket } from "@/socket";
@@ -48,12 +48,10 @@ export default function Group({
                 onClick={stopApps}
             >Stop all apps</Button>
             
-            {/* TODO: Show if an app has a missing dev script */}
-            
             <div
                 className={`rounded border-2 p-2 m-2`}
             >
-                <ShowAppsV2
+                <AppsAccordion
                     apps={AppsHandler.apps}
                     socket={socket}
                     appsHandler={AppsHandler}
