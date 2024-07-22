@@ -1,4 +1,4 @@
-import AppCustomNavbar from "./AppCustomNavbar";
+import AppNavbar from "./AppNavbar";
 
 /**
  * App layout
@@ -10,7 +10,7 @@ export default function AppLayout({
 }) {
     return (
         <section>
-            <AppCustomNavbar />
+			<AppNavbar />
             
             {children}
         </section>
