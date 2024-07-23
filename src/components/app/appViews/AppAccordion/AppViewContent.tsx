@@ -2,6 +2,7 @@ import TerminalView from "@/components/terminalView/TerminalView";
 import SimpleAppActionsV2 from "./actions/SimpleAppActionsV2";
 import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
+import { CardHeader } from "@nextui-org/react";
 
 /**
  * App view content
@@ -33,11 +34,13 @@ export default function AppViewContent({
 			)}
 			
 			{/* Actions */}
-			<SimpleAppActionsV2
-				app={app}
-				socket={socket}
-				appsHandler={appsHandler}
-			/>
+			<div className="relative">
+				<SimpleAppActionsV2
+					app={app}
+					socket={socket}
+					appsHandler={appsHandler}
+				/>
+			</div>
 			
 			{/* Output */}
 			{/* If the app is running show the output */}

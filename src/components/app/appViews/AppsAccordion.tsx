@@ -8,6 +8,7 @@ import AppData from '@/types/AppData';
 import Apps from '@/lib/apps/Apps';
 import appManagerSocket from '@/lib/connection/appManagerSocket';
 import AppAccordion from './AppAccordion';
+import { Accordion, AccordionItem } from '@nextui-org/react';
 
 function createAppManager(apps: AppData[]) {
     const appsManager = new Apps(apps, appManagerSocket());
@@ -34,14 +35,23 @@ export default function AppsAccordion({
     return (
         <div>
             {/* Show all apps */}
-            {appsView.map(app => {
+            {appsView.map((app, index) => {
                 return (
-                    <AppAccordion
-                        key={uuidv4()}
-                        app={app}
-                        socket={socket}
-                        appsHandler={appsHandler}
-                    ></AppAccordion>
+					<Accordion variant="splitted">
+						<AccordionItem
+							key={index.toString()}
+							className="mt-1 mb-1"
+							aria-label={app.packageJson.name}
+							title={app.packageJson.name}
+						>
+							<AppAccordion
+								key={uuidv4()}
+								app={app}
+								socket={socket}
+								appsHandler={appsHandler}
+							></AppAccordion>
+						</AccordionItem>
+					</Accordion>
                 );
             })}
         </div>

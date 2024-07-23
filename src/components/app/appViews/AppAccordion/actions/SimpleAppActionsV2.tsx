@@ -84,12 +84,8 @@ export default function SimpleAppActionsV2({
         }
     }
     
-    // Classes
-    const disabledClasses = "disabled:bg-gray-500";
-    
     return (
         <div>
-            Actions
             <div className="flex justify-start">
                 {!isRunning && (
                     <div>
@@ -139,6 +135,6 @@ export default function SimpleAppActionsV2({
                 </div>
             ))}
         </div>
-    )
+    );
 }
 
