@@ -3,6 +3,7 @@ import { Socket } from "socket.io-client";
 import { RunAppInfo } from "../../../app-view-v1/actions/appScripts/AppAction";
 import runApp from "@/api/appManager/app/run";
 import { Button } from "@nextui-org/button";
+import { Snippet } from "@nextui-org/snippet";
 
 /**
  * App action
@@ -65,7 +66,11 @@ export default function AppActionV2({
         <div className="mt-2">
             {/* Show other commands */}
             <strong><h2>Script name: {scriptName}</h2></strong>
-            <p>Script: {command}</p>
+			
+			<Snippet
+				size="sm"
+				className="mt-2 mb-2"
+			>{command}</Snippet>
             
             <div>
                 {/* Run */}
