@@ -1,6 +1,7 @@
 import AppData from "@/types/AppData";
 import AppActionV2 from "./AppActionV2";
 import { Socket } from "socket.io-client";
+import { Card, CardBody } from "@nextui-org/react";
 
 /**
  * App scripts view
@@ -30,15 +31,19 @@ export default function AppScriptsViewV2({
         
         // Show app action
         return (
-            <AppActionV2
-                // Some scripts entries may repeat and indexes too between different components, I hope it doesn't matter for react
-                key={`${commandKey}_${index}`}
-                scriptName={commandKey}
-                command={command}
-                app={app}
-                socket={socket}
-                appsHandler={appsHandler}
-            />
+			<Card className="mt-2">
+				<CardBody>
+					<AppActionV2
+						// Some scripts entries may repeat and indexes too between different components, I hope it doesn't matter for react
+						key={`${commandKey}_${index}`}
+						scriptName={commandKey}
+						command={command}
+						app={app}
+						socket={socket}
+						appsHandler={appsHandler}
+					/>
+				</CardBody>
+			</Card>
         );
     });
 }

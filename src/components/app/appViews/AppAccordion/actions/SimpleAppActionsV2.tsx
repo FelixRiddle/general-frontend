@@ -123,20 +123,10 @@ export default function SimpleAppActionsV2({
                     });
                 }}
 			>
-				Show other actions
+				{showOtherActions && "Hide other actions" || "Show other actions"}
 			</Button>
-            {/* <button
-                className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-3 rounded ${disabledClasses}`}
-                onClick={() => {
-                    setShowOtherActions((prevState) => {
-                        return !prevState;
-                    });
-                }}
-            >
-                Show other actions
-            </button> */}
             
-            {showOtherActions && app.packageJson.scripts ? (
+			{showOtherActions && (app.packageJson.scripts ? (
                 <AppScriptsViewV2
                     scripts={app.packageJson.scripts}
                     app={app}
@@ -147,7 +137,7 @@ export default function SimpleAppActionsV2({
                 <div>
                     No scripts
                 </div>
-            )}
+            ))}
         </div>
     )
 }

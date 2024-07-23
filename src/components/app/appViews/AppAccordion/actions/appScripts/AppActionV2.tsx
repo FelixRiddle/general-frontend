@@ -27,8 +27,6 @@ export default function AppActionV2({
      * @param event '
      */
     const runAppRealtime = (event: any) => {
-        console.log(`Run app(Realtime): ${app.packageJson.name}`);
-        
         const appName = app.packageJson.name;
         const appInfo: RunAppInfo = {
             name: appName,
@@ -50,8 +48,6 @@ export default function AppActionV2({
      * @param event 
      */
     const runApp = async (event: any) => {
-        console.log(`Run app: ${app.packageJson.name}`);
-        
         const appName = app.packageJson.name;
         const appInfo: RunAppInfo = {
             name: appName,
@@ -65,15 +61,11 @@ export default function AppActionV2({
         window.location.reload();
     }
     
-    // Classes
-    const disabledClasses = "disabled:bg-gray-500";
-    const buttonClasses = `bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`;
-    
     return (
         <div className="mt-2">
             {/* Show other commands */}
-            <strong><h2>Command name: {scriptName}</h2></strong>
-            <p>Command: {command}</p>
+            <strong><h2>Script name: {scriptName}</h2></strong>
+            <p>Script: {command}</p>
             
             <div>
                 {/* Run */}
