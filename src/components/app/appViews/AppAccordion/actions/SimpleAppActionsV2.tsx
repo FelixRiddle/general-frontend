@@ -8,6 +8,7 @@ import { Socket } from "socket.io-client";
 import { RunAppInfo } from "../../app-view-v1/actions/appScripts/AppAction";
 import runApp from "@/api/appManager/app/run";
 import { stopAppByName } from "@/api/appManager/process/stopProcess";
+import { Button } from "@nextui-org/button";
 
 /**
  * Simple app actions
@@ -92,29 +93,39 @@ export default function SimpleAppActionsV2({
             <div className="flex justify-start">
                 {!isRunning && (
                     <div>
-                        <button
-                            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
-                            onClick={startApp}
-                        >
-                            Start
-                        </button>
-                        <button
-                            className={`bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded mr-3 ${disabledClasses}`}
+						<Button
+							className="mr-2"
+							color="success"
+							onClick={startApp}
+						>Start</Button>
+						<Button
+                            color="warning"
                             onClick={startAppDev}
-                        >
-                            Start dev
-                        </button>
+                        >Start dev</Button>
                     </div>
                 ) || (
-                    <button
-                        className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
-                        onClick={stopApp}
-                    >Stop</button>
+					<Button
+						color="danger"
+						onClick={stopApp}
+					>
+						Stop
+					</Button>
                 )}
             </div>
             
             {/* Other actions */}
-            <button
+			<Button
+				className="mt-2"
+				color="secondary"
+				onClick={() => {
+                    setShowOtherActions((prevState) => {
+                        return !prevState;
+                    });
+                }}
+			>
+				Show other actions
+			</Button>
+            {/* <button
                 className={`bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 mt-3 rounded ${disabledClasses}`}
                 onClick={() => {
                     setShowOtherActions((prevState) => {
@@ -123,7 +134,7 @@ export default function SimpleAppActionsV2({
                 }}
             >
                 Show other actions
-            </button>
+            </button> */}
             
             {showOtherActions && app.packageJson.scripts ? (
                 <AppScriptsViewV2

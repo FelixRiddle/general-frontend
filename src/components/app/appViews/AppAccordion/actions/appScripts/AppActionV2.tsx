@@ -2,6 +2,7 @@ import AppData from "@/types/AppData";
 import { Socket } from "socket.io-client";
 import { RunAppInfo } from "../../../app-view-v1/actions/appScripts/AppAction";
 import runApp from "@/api/appManager/app/run";
+import { Button } from "@nextui-org/button";
 
 /**
  * App action
@@ -48,7 +49,7 @@ export default function AppActionV2({
      * 
      * @param event 
      */
-    const runAppNotRealtime = async (event: any) => {
+    const runApp = async (event: any) => {
         console.log(`Run app: ${app.packageJson.name}`);
         
         const appName = app.packageJson.name;
@@ -76,26 +77,15 @@ export default function AppActionV2({
             
             <div>
                 {/* Run */}
-                <button
-                    className={buttonClasses}
-                    onClick={runAppRealtime}
-                >
-                    Run(Realtime)
-                </button>
-                
-                {/* Run without sockets */}
-                <button
-                    className={buttonClasses}
-                    onClick={runAppNotRealtime}
-                >
-                    Run
-                </button>
-                
-                {/* <button
-                    className={`bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded ${disabledClasses}`}
-                >
-                    Stop
-                </button> */}
+				<Button
+					className="mr-2"
+					color="success"
+					onClick={runApp}
+				>Run</Button>
+				<Button
+					color="warning"
+					onClick={runAppRealtime}
+				>Run(Realtime)</Button>
             </div>
         </div>
     );
