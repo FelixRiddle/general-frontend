@@ -44,7 +44,7 @@ export default function AppViewContent({
 			
 			{/* Output */}
 			{/* If the app is running show the output */}
-			<div>
+			<div style={{top: "10px"}}>
 				<TerminalView output={app.out ? app.out : ""} />
 			</div>
 		</div>

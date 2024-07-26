@@ -4,10 +4,10 @@ import { runAppGroup } from "@/api/appManager/app/runAppGroup";
 import { stopAppGroup } from "@/api/appManager/app/stopAppGroup";
 import { AppGroup } from "@/api/appManager/group/group";
 import AppsAccordion from "@/components/app/appViews/AppsAccordion";
-import Button from "@/components/button/Button";
 import useAppsV2 from "@/hooks/app/useAppsV2";
 import { socket } from "@/socket";
 import AppData from "@/types/AppData";
+import { Button } from "@nextui-org/button";
 
 /**
  * App group
@@ -40,16 +40,22 @@ export default function Group({
                 {group.description}
             </p>
             
-            <Button
-                onClick={runAppsDevMode}
-            >Run all dev mode</Button>
-            
-            <Button
-                onClick={stopApps}
-            >Stop all apps</Button>
+			{/* Run all and stop all */}
+			<div>
+				<Button
+					color="success"
+					onClick={runAppsDevMode}
+				>Run all dev mode</Button>
+				
+				<Button
+					color="danger"
+					onClick={stopApps}
+					style={{left: "10px"}}
+				>Stop all apps</Button>
+			</div>
             
             <div
-                className={`rounded border-2 p-2 m-2`}
+                className={`m-2 pt-4`}
             >
                 <AppsAccordion
                     apps={AppsHandler.apps}

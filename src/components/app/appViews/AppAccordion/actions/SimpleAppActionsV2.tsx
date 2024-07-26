@@ -88,7 +88,7 @@ export default function SimpleAppActionsV2({
         <div>
             <div className="flex justify-start">
                 {!isRunning && (
-                    <div>
+                    <span>
 						<Button
 							className="mr-2"
 							color="success"
@@ -98,7 +98,7 @@ export default function SimpleAppActionsV2({
                             color="warning"
                             onClick={startAppDev}
                         >Start dev</Button>
-                    </div>
+                    </span>
                 ) || (
 					<Button
 						color="danger"
@@ -107,20 +107,20 @@ export default function SimpleAppActionsV2({
 						Stop
 					</Button>
                 )}
-            </div>
             
-            {/* Other actions */}
-			<Button
-				className="mt-2"
-				color="secondary"
-				onClick={() => {
-                    setShowOtherActions((prevState) => {
-                        return !prevState;
-                    });
-                }}
-			>
-				{showOtherActions && "Hide other actions" || "Show other actions"}
-			</Button>
+				{/* Other actions */}
+				<Button
+					className="mt-2"
+					color="secondary"
+					onClick={() => {
+						setShowOtherActions((prevState) => {
+							return !prevState;
+						});
+					}}
+				>
+					{showOtherActions && "Hide other actions" || "Show other actions"}
+				</Button>
+            </div>
             
 			{showOtherActions && (app.packageJson.scripts ? (
                 <AppScriptsViewV2
