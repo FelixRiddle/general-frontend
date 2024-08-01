@@ -1,7 +1,7 @@
 import { getApps } from "@/api/appManager/apps";
 import { fetchAppsData } from "@/api/appManager/repositories";
 import appsInPaginationWindow from "@/lib/app/appsWindow";
-import { ItemsWindowInfo, itemsWindow, totalPages } from "@/lib/pagination";
+import { itemsWindow, totalPages } from "@/lib/pagination";
 import AppData from "@/types/AppData";
 
 /**
